@@ -235,7 +235,8 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			double xnum = 0;
 			String xfileLocation;
 			
-			xfileLocation = "C:\\Users\\Katrin\\workworkwork\\CropPestModel\\WeatherFin_NEU.csv";
+			xfileLocation = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\WeatherFin_NEU.csv";
+					// "C:\\Users\\Katrin\\workworkwork\\CropPestModel\\WeatherFin_NEU.csv";
 					//"C:\\Users\\Kokusnuss\\Documents\\M.Sc.Agrarwissenschaften\\Forschungsprojekt_Gerullis\\Witterung\\WeatherFin_NEU.csv";
 			
 			System.out.println("--------Setup Array Weather ------- ");

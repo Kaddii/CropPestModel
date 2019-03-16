@@ -431,12 +431,10 @@ public class Data {
 		                    //ab ec71 können sich die pilze nicht mehr vermehren/wachsen
 			if(gelbrost.size() > 0){
 				for(Pest pest : gelbrost){
+					if(pest.isAlive){
 					pest.start();
-					if(pest.isDone == true){
-						System.out.println("ich bin fertig");
-						continue;
-						
 					}
+
 				}
 
 
@@ -449,18 +447,25 @@ public class Data {
 			
 
 			
-
+			//Boolean septoriaIsDone = true; 
+			//Boolean septoriaSporeIsDone = true;
+			//Boolean pestSporeIsDone = true;
+			
 			if(septoria.size() > 0){
+				//septoriaIsDone = false;
 				for(int i = 0; i < septoria.size(); i++){
+					
 					septoria.get(i).start();
 				}
 			}
 			if(septoriaSpore.isEmpty() == false){
+				//septoriaSporeIsDone = false;
 				for(int i = 0; i < septoriaSpore.size(); i++){
 					septoriaSpore.get(i).start();
 				}
 			}
 			if(pestSpore.isEmpty() == false){
+				//pestSporeIsDone = false; 
 				for(int i = 0; i < pestSpore.size(); i++){
 					pestSpore.get(i).start();
 				}

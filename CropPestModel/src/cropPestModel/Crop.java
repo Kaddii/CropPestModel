@@ -254,6 +254,9 @@ public class Crop {
 				befallGRErtrag++;
 				
 			}
+			
+				pest.sterbe();
+			
 		}
 		/*if(gelbS.size() > 0){
 			System.out.println("gelbs.size" + bef.toString());
@@ -262,6 +265,7 @@ public class Crop {
 		System.out.println("befallsicht" + bef.toString());
 		}
 		bef.clear();*/
+		
 		
 		
 		

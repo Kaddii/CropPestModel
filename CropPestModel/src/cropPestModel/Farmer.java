@@ -151,6 +151,10 @@ public class Farmer {
 	public double gettoxi() {
 		return toxi;
 	}
+	//TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDERN!!!!!!!!!!!!!!!!!!!!
+	public double getIntegralBHGRErtrag(){
+		return toxi;
+	}
 	
 	public static int getInDays() {
 		return inDays;

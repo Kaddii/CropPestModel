@@ -43,6 +43,7 @@ public class Pest {
 	private boolean anfaelligkeit = true; //gibt an ob pest pflanze gerade befallen kann oder ob diese durch ein fungizid geschützt ist
 	private static boolean sichtbar = false; //pest wird für landwirt erst sichtbar, wenn latenzzeit abgelaufen ist
 	int a; //gibt an, an welcher crop die Pest sitzt
+	public boolean isAlive;
 	
 	private int blatt; //Angabe auf welchem Blatt sich GR befindet
 	private int geburt;
@@ -82,6 +83,7 @@ public class Pest {
 		this.grid = grid;
 		this.inkubation = vermehrung;
 		this.resistenz = resistance;
+		this.isAlive = true;
 		//this.birth = birth;
 		//this.leaf = leaf;
 		this.zeit = zeit;
@@ -358,12 +360,13 @@ public class Pest {
 		
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
-		if(agenten.get(a).gelb.size() > 0){
+		isAlive = false;
+		/*if(agenten.get(a).gelb.size() > 0){
 		agenten.get(a).gelb.remove(this); 
 		agenten.get(a).gelbS.remove(this);
 		agenten.get(a).gelbfbf2.remove(this);
 		System.out.println("ich sterbe");
-		}
+		}*/
 		
 		isDone = true;
 		//System.out.println("gelb");
