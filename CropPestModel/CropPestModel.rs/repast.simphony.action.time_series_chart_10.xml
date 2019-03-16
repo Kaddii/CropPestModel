@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>BefallST</name>
-  <dataSet>BefallST</dataSet>
+  <name>ErtragsCount</name>
+  <dataSet>All_Data</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
-  <chartTitle>BefallST</chartTitle>
+  <chartTitle>Ertrag</chartTitle>
   <type>TIME_SERIES</type>
   <background>
     <red>192</red>
@@ -21,37 +21,13 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>BefallsichtST</string>
+      <string>Ertrag</string>
       <SeriesData>
-        <label>BefallsichtST</label>
-        <color>
-          <red>255</red>
-          <green>0</green>
-          <blue>0</blue>
-          <alpha>255</alpha>
-        </color>
-      </SeriesData>
-    </entry>
-    <entry>
-      <string>BefallErtragST</string>
-      <SeriesData>
-        <label>BefallErtragST</label>
+        <label>Ertrag</label>
         <color>
           <red>0</red>
           <green>255</green>
           <blue>0</blue>
-          <alpha>255</alpha>
-        </color>
-      </SeriesData>
-    </entry>
-    <entry>
-      <string>befallST</string>
-      <SeriesData>
-        <label>befallST</label>
-        <color>
-          <red>0</red>
-          <green>0</green>
-          <blue>255</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>
