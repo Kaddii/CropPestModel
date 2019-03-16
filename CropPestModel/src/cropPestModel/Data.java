@@ -432,7 +432,6 @@ public class Data {
 			if(gelbrost.size() > 0){
 				for(Pest pest : gelbrost){
 					pest.start();
-					System.out.println("ich bin dran");
 					if(pest.isDone == true){
 						System.out.println("ich bin fertig");
 						continue;
