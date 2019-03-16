@@ -1,0 +1,64 @@
+<repast.simphony.data2.engine.DataSetDescriptor>
+  <name>All_Data</name>
+  <type>AGGREGATE</type>
+  <inclTick>true</inclTick>
+  <inclBatchRun>false</inclBatchRun>
+  <inclRandomSeed>false</inclRandomSeed>
+  <scheduleParams>
+    <start>1.0</start>
+    <interval>1.0</interval>
+    <priority>-Infinity</priority>
+    <pType>LAST</pType>
+    <duration>-1.0</duration>
+    <frequency>REPEAT</frequency>
+    <hashCode>-1297979264</hashCode>
+  </scheduleParams>
+  <atEnd>false</atEnd>
+  <methodDataSources class="linked-hash-map">
+    <entry>
+      <string>Ertrag</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Ertrag</id>
+        <className>cropPestModel.Crop</className>
+        <methodName>getErtrag</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Gewinn</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Gewinn</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getGewinn</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Spritzwiederholung</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Spritzwiederholung</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getSpritzwiederholung</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+  </methodDataSources>
+  <countSources class="linked-hash-map">
+    <entry>
+      <string>cropCount</string>
+      <repast.simphony.data2.engine.CountSourceDefinition>
+        <typeName>cropPestModel.Crop</typeName>
+        <id>cropCount</id>
+      </repast.simphony.data2.engine.CountSourceDefinition>
+    </entry>
+    <entry>
+      <string>pestCount</string>
+      <repast.simphony.data2.engine.CountSourceDefinition>
+        <typeName>cropPestModel.Pest</typeName>
+        <id>pestCount</id>
+      </repast.simphony.data2.engine.CountSourceDefinition>
+    </entry>
+  </countSources>
+  <customNADataSources class="linked-hash-map"/>
+  <customAggDataSources class="linked-hash-map"/>
+</repast.simphony.data2.engine.DataSetDescriptor>

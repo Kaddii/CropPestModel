@@ -1,0 +1,2 @@
+"tick","Ertrag","befallGR","befallGRsicht","befallGRertrag","befallST","befallSTsicht","befallSTertrag","ResistenzPflanze","behaviour","pestCount","GRsichtCount","GRertragCount","septoriaCount","STsichtCount","STertragCount"
+1.0,5150000.0,0.9708737864077669,0.0,0.0,32.23300970873787,0.0,0.0,1.0,0.0,6,0.0,0.0,501,0.0,0.0

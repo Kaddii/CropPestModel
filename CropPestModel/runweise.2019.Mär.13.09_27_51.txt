@@ -1,0 +1,2 @@
+"run","tick","IntegralBHGR","IntegralBHGRErtrag","IntegralBHGRSicht","IntegralBHST","IntegralBHSTErtrag","IntegralBHSTSicht","IntegralGRCount","IntegralGRErtragCount","IntegralGRSichtCount","IntegralSTCount","IntegralSTErtragCount","IntegralSTSichtCount"
+1,166.0,7211.0,4925.0,5429.0,10900.0,8248.0,10120.0,2056194.0,618068.0,646294.0,10148.0,1603.0,6280.0

@@ -1,0 +1,2 @@
+"run","tick","GRCount","STCount"
+1,166.0,10842.0,3.226287E7
