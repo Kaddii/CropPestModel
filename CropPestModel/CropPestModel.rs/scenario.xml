@@ -8,12 +8,13 @@
 <repast.simphony.action.data_set context="CropPestModel" file="repast.simphony.action.data_set_5.xml" />
 <repast.simphony.action.data_set context="CropPestModel" file="repast.simphony.action.data_set_6.xml" />
 <repast.simphony.action.data_set context="CropPestModel" file="repast.simphony.action.data_set_7.xml" />
-<repast.simphony.action.display context="CropPestModel" file="repast.simphony.action.display_8.xml" />
-<repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_9.xml" />
+<repast.simphony.action.data_set context="CropPestModel" file="repast.simphony.action.data_set_8.xml" />
+<repast.simphony.action.file_sink context="CropPestModel" file="repast.simphony.action.file_sink_9.xml" />
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_10.xml" />
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_11.xml" />
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_12.xml" />
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_13.xml" />
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_14.xml" />
-<repast.simphony.action.file_sink context="CropPestModel" file="repast.simphony.action.file_sink_15.xml" />
+<repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_15.xml" />
+<repast.simphony.action.display context="CropPestModel" file="repast.simphony.action.display_16.xml" />
 </Scenario>

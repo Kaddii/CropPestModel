@@ -30,7 +30,7 @@ public class Crop {
 	private ContinuousSpace<Object> space; // Ort der Pflanze
 	private Grid<Object> grid; // Koordinaten der Pflanze
 	private double ertragspot; // Ertragspotential der Pflanze zu entsprechendem tick
-	private int zeit; // gibt den tick an (1 tick = 1 Tag)
+
 	
 	private int anzahlGR; // ist 1 sobald Crop von Schädling befallen wird (Info für Farmer)
 	private int anzahlST; //s. oben
@@ -40,10 +40,10 @@ public class Crop {
 	
 	private int a;     //Hilfe um Ertragsmindernde Pilzsporen zu ermitteln
 	
-	private int befallsichtbarST; //ist 1 sobald Crop von sichtbarem ST befallen
+	private int visibleInfestationST; //ist 1 sobald Crop von sichtbarem ST befallen
 	private int befallsichtbarGR; //ist 1 sobald Crop von sichtbarem GR befallen
 	
-	private int befallfSechsST;
+	private int visibleInfestationFSixST;
 	
 	private int befallGREr; //sichtbarer ertragsrelevanter Befall (entspricht bonituren in Feldversuchen..)
 	private int befallSTEr;
@@ -67,12 +67,12 @@ public class Crop {
 	//List<Pest> gelbS = new ArrayList<Pest>();
 	//List<Pest> gelbfbf2 = new ArrayList<Pest>();
 	
-	List<Septoria> sept = new ArrayList<Septoria>();
-	List<Septoria> septS = new ArrayList<Septoria>();
-	List<Septoria> septfSechs = new ArrayList<Septoria>();
+	List<Septoria> ST = new ArrayList<Septoria>();
+	//List<Septoria> septS = new ArrayList<Septoria>();
+	//List<Septoria> septfSechs = new ArrayList<Septoria>();
 	
 	
-	List<Pest> sicht = new ArrayList<Pest>();
+	//List<Pest> sicht = new ArrayList<Pest>();
 
 
 	// ------------------------------------------- Aufrufe
@@ -99,11 +99,11 @@ public class Crop {
 	}
 	
 	public int getAnzahlSTsicht(){
-		return befallsichtbarST;
+		return visibleInfestationST;
 	}
 	
 	public int getAnzahlSTfSechs(){
-		return befallfSechsST;
+		return visibleInfestationFSixST;
 	}
 
 	
@@ -156,44 +156,43 @@ public class Crop {
 
 
 
-	public Crop(ContinuousSpace<Object> space, Grid<Object> grid, double ertragspot, int zeit) {
+	public Crop(ContinuousSpace<Object> space, Grid<Object> grid, double ertragspot) {
 		// TODO Auto-generated constructor stub
 		this.space = space;
 		this.grid = grid;
 		this.ertragspot = ertragspot;
-		this.zeit = zeit;
+
 	}
 
 	// ------------------------------------ Beginn des "täglichen" Ablaufs
 	// ----------------------------------------------------------------------\\
 	//@ScheduledMethod(start = 1, interval = 2)
-	public void befall() {
-		sicht.clear();
-		
-		zeit++;
+	public void start() {
+		//sicht.clear();
+
 		//Werte null setzen, damit in diesem tick aktueller wert dafür eingesetzt wird
 		befallsichtbarGR = 0;
 		befallbFbF2 = 0;
-		befallsichtbarST = 0; 
-		befallfSechsST = 0;
+		visibleInfestationST = 0; 
+		visibleInfestationFSixST = 0;
 		befallGRE = 0; 
 		befallFGR = 0; 
 		befallSTE = 0; 
 		befallFST = 0;
 		befallGREr = 0;
 		befallSTEr = 0;
-		//System.out.println("Crop");
+
 		
 		
 		//------------------------------- Momentanes Ec Stadium ermitteln und dementsprechend Ertragsmindernde Blätter----------------
 		
-		if (zeit < Data.getEc30()){
+		if (Data.getZeit() < Data.getEc30()){
 			a = 12;
-		} else if (zeit < Data.getEc31()){
+		} else if (Data.getZeit() < Data.getEc31()){
 			a = 5; //f-5
-		} else if (zeit < Data.getEc32()){
+		} else if (Data.getZeit() < Data.getEc32()){
 			a = 4; //f-4
-		} else if (zeit < Data.getEc37()){
+		} else if (Data.getZeit() < Data.getEc37()){
 			a = 3; //f-3
 		} else {
 			a = 2; //f-2
@@ -215,19 +214,16 @@ public class Crop {
 		List<Pest> fTof2GR = new ArrayList<Pest>();
 		
 		for (Pest pest : GR){
-			//System.out.println("Crop.getLeaf   " + pest.getLeaf() + "   Crop.getGeburt" + pest.getBirth());
 			if(pest.isAlive == true){
 				allGR.add(pest);
 				
 				if(pest.getLeaf() <= a){             
 					befallGR++;
-					//b.add(pest.getLeaf());
 				}
 				if(pest.getLeaf() <= 2){
 					fTof2GR.add(pest);
 				}
 				if (pest.getLeaf() <= 0){		
-					//System.out.println("Halloooooo");
 					// TODO: noch benötigt??
 					befallFahnenblatt++;	
 				}
@@ -281,80 +277,81 @@ public class Crop {
 		// -------------------------------- Anzahl ST in Umfeld der Pflanze
 		// ----------------------------------------------------------------------\\
 
-		int befallSichtbarST = 0;
+
 		int befallFahnenblattST = 0;
 		int befallST = 0;
 		int befallSTErtrag = 0;
+		List<Septoria> allST = new ArrayList<Septoria>();
+		List<Septoria> fSixST = new ArrayList<Septoria>();
+		List<Septoria> visibleST = new ArrayList<Septoria>();
 		
 		//alle ST
-		for (Septoria septoria : sept){
-			//System.out.println("Crop.getLeaf   " + pest.getLeaf() + "   Crop.getGeburt" + pest.getBirth());
-			if(septoria.getLeaf() <= a){             
-				//System.out.println("Halloooooo"); 
-				befallST++;
-			}
-			if (septoria.getLeaf() <= 0){
-				//System.out.println("Halloooooo");
-				befallFahnenblattST++;	
-			}
-			/*if (septoria.getSichtbar() == true){
-				befallSichtbarST++;
-				//System.out.println("befallsichtbar  " + befallSichtbar);
-			}*/
-		}
-		
-		//List<Integer> befallster = new ArrayList<Integer>();
-		
-		//Auswertung der sichtbaren ST
-		for(Septoria septoria : septS){
-			if(septoria.getLeaf() <= a){
-				befallSTErtrag++;
-				//befallster.add(septoria.getLeaf());
+		for (Septoria septoria : ST){
+			if(septoria.isAlive == true){
+				allST.add(septoria);
+				
+				if(septoria.getLeaf() <= a){             
+					befallST++;
+				}
+				if(septoria.getLeaf() == 6){
+					fSixST.add(septoria);
+				}
+					/*TODO: noch benötigt???if (septoria.getLeaf() <= 0){
+						//System.out.println("Halloooooo");
+						befallFahnenblattST++;	
+					}*/
+				if (septoria.isVisible == true){
+					visibleST.add(septoria);
+					if(septoria.getLeaf() <= a){
+						befallSTErtrag++;
+					}
+				}
 			}
 		}
 		
-		
-		/*if(befallster.size() > 0){
-		System.out.println("befallSTertrag" + befallster.toString());
-		}*/
-		
-		
-		
+
 		// zählt, wenn Schädling an Crop ist
 		// damit kann Farmer die Anzahl der befallenen Haupttriebe ermitteln
 
-		if (sept.size() > 0) {
+		if (allST.size() > 0) {
 			//System.out.println(gelb.toString());
 			anzahlST = 1;
 			
-		}
-		if (septS.size() > 0) {
-			befallsichtbarST = 1;
+		}else {
+			anzahlST = 0;
 		}
 		
-		if (septfSechs.size() > 0) {
-			befallfSechsST = 1;
+		if (visibleST.size() > 0) {
+			visibleInfestationST = 1;
+		} else {
+			visibleInfestationST = 0;
+		}
+		
+		if (fSixST.size() > 0) {
+			visibleInfestationFSixST = 1;
+		} else {
+			visibleInfestationFSixST = 0;
 		}
 		
 		if (befallSTErtrag > 0){
 			befallSTEr = 1;
-			//System.out.println("befallErtraganz " + befallSTEr);
-			//System.out.println("befallErtrag " + befallGRErtrag);
+		} else {
+			befallSTEr = 0;
 		}
 
-		septoriaAnzahl = sept.size(); // Schädlingsanzahl(gesamt) auf private variable übertragen
+		septoriaAnzahl = allST.size(); // Schädlingsanzahl(gesamt) auf private variable übertragen
 		befallSTE = befallST;            //Schädlingsanzahl die ertrag beeinflusst
 		befallFST = befallFahnenblattST;   //Schädlinge auf Fahnenblatt
 		
 		//----FÜR AUSWERTUNG: Ermittleln der Anzahl an Pathogenen im jew. Stadium der Simulation
 		//-----------------------------------------
 	
-		GRsichtCount = visibleGR.size();
-		GRertragCount = befallGRErtrag;
-		STsichtCount += septS.size();
-		STertragCount = befallSTErtrag;
-		GRCount = allGR.size();
-		STCount += sept.size();
+		GRsichtCount += visibleGR.size();
+		GRertragCount += befallGRErtrag;
+		STsichtCount += visibleST.size();
+		STertragCount += befallSTErtrag;
+		GRCount += allGR.size();
+		STCount += allST.size();
 		
 		
 		
@@ -364,7 +361,7 @@ public class Crop {
 	//---------------------Veränderung ERTRAGSPOTENTIAL----------------------------------------
 	//--------------------------------------------------------
 		
-		if (zeit >= Data.getEc30() && zeit < Data.getEc37()) {
+		if (Data.getZeit() >= Data.getEc30() && Data.getZeit() < Data.getEc37()) {
 
 			ertragspot = ertragspot - ((befallGRE + befallSTE) * 0.23);
 				//bei zu hoher Anzahl an Schädlingen eine feste Abhnahme einfügen (s. "Anhang")
@@ -372,13 +369,13 @@ public class Crop {
 			if (ertragspot < 0) {
 				ertragspot = 0;
 			}
-		} else if (zeit >= Data.getEc37() && zeit <= Data.getEc61()){
+		} else if (Data.getZeit() >= Data.getEc37() && Data.getZeit() <= Data.getEc61()){
 			ertragspot = ertragspot - ((befallGRE * 0.3) + (befallFGR * 0.7) * 0.23) - ((befallSTE * 0.3) + (befallFST * 0.7) * 0.23);
 			
 			//bei zu hoher Anzahl an Schädlingen eine feste Abhnahme einfügen (s. "Anhang")
 			//das gleiche bei zu hoher Anzahl an Pilzbefall auf Fahnenblatt
 
-		} else if (zeit > Data.getEc61()) {               //Nach Blüte nimmt Einfluss von Schädlingen zu??????????????!!!
+		} else if (Data.getZeit() > Data.getEc61()) {               //Nach Blüte nimmt Einfluss von Schädlingen zu??????????????!!!
 				                                               // Fehlt noch!!!!
 				
 			ertragspot = ertragspot - ((befallGRE * 0.3) + (befallFGR * 0.7) * 0.23) - ((befallSTE * 0.3) + (befallFST * 0.7) * 0.23);
@@ -393,10 +390,15 @@ public class Crop {
 		if (ertragspot == 0) {
 			Context<Object> context = ContextUtils.getContext(this); // PFLANZE KANN NUR BIS ZUR BLÜTE ABSTERBEN
 			context.remove(this);
-			//alle Pests an Crop sterben auch ab
+			//alle Pests & ST an Crop sterben auch ab
 			for(Pest pest : GR){
 				if(pest.isAlive == true){
-				pest.sterbe();
+				pest.die();
+				}
+			}
+			for(Septoria septoria : ST){
+				if(septoria.isAlive == true){
+					septoria.die();
 				}
 			}
 		}

@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>STundSTSpore</name>
-  <dataSet>Data_ALL</dataSet>
+  <name>BefallST</name>
+  <dataSet>BefallST</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
-  <chartTitle>Septoria und Septoriaspore</chartTitle>
+  <chartTitle>BefallST</chartTitle>
   <type>TIME_SERIES</type>
   <background>
     <red>192</red>
@@ -21,24 +21,36 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>septoriaSporeCount</string>
+      <string>BefallsichtST</string>
       <SeriesData>
-        <label>septoriaSporeCount</label>
+        <label>BefallsichtST</label>
         <color>
-          <red>0</red>
-          <green>255</green>
-          <blue>255</blue>
+          <red>255</red>
+          <green>0</green>
+          <blue>0</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>
     </entry>
     <entry>
-      <string>septoriaCount</string>
+      <string>BefallErtragST</string>
       <SeriesData>
-        <label>septoriaCount</label>
+        <label>BefallErtragST</label>
         <color>
           <red>0</red>
-          <green>51</green>
+          <green>255</green>
+          <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>befallST</string>
+      <SeriesData>
+        <label>befallST</label>
+        <color>
+          <red>0</red>
+          <green>0</green>
           <blue>255</blue>
           <alpha>255</alpha>
         </color>

@@ -47,9 +47,9 @@ public class PestSpore {
 
 	
 	public void start() {
+		zaehler++;
 		
 		if(zaehler <=1){
-
 			// Anzahl Weizenpflanzen im Umfeld (21x21) des Schädlings detektieren
 			// (schaut 10 zellen nach links und 10 nach rechts, ausgehend von seiner)
 

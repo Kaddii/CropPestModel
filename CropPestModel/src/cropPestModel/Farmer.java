@@ -194,7 +194,7 @@ public class Farmer {
 	// -------------------------------------------------------------------------\\
 	
 	//@ScheduledMethod(start = 2, interval = 2)
-	public void starte() {
+	public void start() {
 		//System.out.println("Farmer");
 		j++;
 		pestSpore.clear();
@@ -494,11 +494,11 @@ public class Farmer {
 	// -------------------------------------------------------------------------------\\
 	
 	public void faulerLandwirt() {
-		//System.out.println("ich bin faul" + proS1);
+		
 		if (Data.getZeit() <= Data.getEc33() & Data.getZeit() >= Data.getEc31()){
-			//System.out.println("ich muss spritzen" + " regen" + Data.getRegen() + " luft" + Data.getLuft() + " feucht" + Data.getFeucht());
+			
 			if(Data.getZeit() < s1 & Data.getRegen() >=3 & Data.getLuft() >= 75 & Data.getFeucht() >= 75) {
-				//System.out.println("gibt es zu viel ST?");
+
 				grund = 2;
 				anzahlSpritzungen += 1;
 				spritzvorgang();
@@ -522,12 +522,6 @@ public class Farmer {
 			anzahlSpritzungen += 1;
 			spritzvorgang();
 		}
-		/*if (zaehler >= abstand) { // alle 23 ticks wird gespritzt
-			anzahlSpritzungen += 1; // wenn gespritzt wird erhoeht sich die Anzahl der Spritzvorguenge um 1
-			spritzvorgang();
-			zaehler = 0; // zuehler nach spritzvorgang auf 0 zuruecksetzen, damit er wieder von vorne
-							// anfuengt zu zuehlen
-		}*/
 	}
 
 	// ----------------------------Spritzverhalten fleissiger
@@ -608,10 +602,7 @@ public class Farmer {
 			gp = (int) Math.round(kur.nextGaussian() * 3.16 + 27.57);//Protektivleistung 23-32 Tage
 			sk = (int) Math.round(kur.nextGaussian() * 0.55 + 5.86); //Kurativleistung 6-7 Tage
 			sp = (int) Math.round(kur.nextGaussian() * 1.47 + 24); //Protektivleistung 24 - 28 Tage
-			/*gk = kur.nextInt(2) + 8; //Kurativleistung 8-9 Tage
-			gp = kur.nextInt(9) + 23; //Protektivleistung 23-32 Tage
-			sk = kur.nextInt(2) + 6; //Kurativleistung 6-7 Tage
-			sp = kur.nextInt(4) + 24; //Protektivleistung 24 - 28 Tage*/
+	
 			System.out.println(sk + "Carboxamid" + sp);
 		}else {
 			//Azol
@@ -620,11 +611,7 @@ public class Farmer {
 			sk = (int) Math.round(kur.nextGaussian() * 0.75 + 2.83); //Kurativleistung 2-4 Tage
 			sp = (int) Math.round(kur.nextGaussian() * 4.04 + 11.5); //Protektivleistung 6 -16 Tage
 			System.out.println(sk + "Azol + kur + prot" + sp);
-			/*gk = kur.nextInt(4) + 5; //Kurativleistung 5-9 Tage
-			gp = kur.nextInt(10) + 12; //Protektivleistung 12 - 22 Tage
-			sk = kur.nextInt(2) + 2; //Kurativleistung 2-4 Tage
-			sp = kur.nextInt(10) + 6; //Protektivleistung 6 -16 Tage
-			System.out.println(sk + "Azol + kur + prot" + sp);*/
+	
 		}
 		
 		//System.out.println("es wird gespritzt" + anzahlSpritzungen);
@@ -634,13 +621,13 @@ public class Farmer {
 		//Kurativleistung
 		for(Pest pest : blattlauszahl) {
 			if(pest.getBirth() >= (Data.getZeit() - gk)) {
-				pest.sterbe();
+				pest.die();
 				//System.out.println("ich sterbe wegen der kurativlesit" + pest.getBirth());
 			}
 		}
 		for(Septoria septoria : septoriaanzahl) {
 			if(septoria.getBirth() >= (Data.getZeit() - sk)) {
-				septoria.sterbe();
+				septoria.die();
 			}
 		}
 		

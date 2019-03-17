@@ -50,8 +50,6 @@ public class Pest {
 	private double latenttime = 0;
 	
 	
-	public boolean isDone; ///wird true, wenn agent sich fertig verhalten hat
-	
 	List<Crop> agenten = new ArrayList<Crop>();
 	
 	
@@ -96,12 +94,11 @@ public class Pest {
 		zaehler++; 		//Zählt die Tage seit der Geburt
 
 		if(zaehler <= 1){
-			
-			isVisible = false;
+			isVisible = false; //TODO: Wird wirklich gebraucht?? auch bei ST
 			geburt = Data.getZeit() - 1;
 			
-             //Pilzen wird Ort hier zugewiesen
-	
+			 //Pilzen wird Ort hier zugewiesen
+			
 			Random ort = new Random();
  
 			if (Data.getZeit() < Data.getEc31()){
@@ -126,8 +123,6 @@ public class Pest {
 			} else {
 				blatt = ort.nextInt(3);
 			}
-	
-		
 		
 			// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
 			GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
@@ -160,15 +155,15 @@ public class Pest {
 				agenten.get(a).GR.add(this);             //einem der crops in der umgebung gespeichert
 				
 			}else {
-				sterbe();
-				System.out.println("ich bin falsch zugeordnet");
+				allocation();
 			}
 		}
-			
+		
+
+
 		//Pest überprüft, ob Sie sich weiterentwickeln kann	
 		if (Data.getZeit() > Farmer.getInDays() | Farmer.getInDays() == 0) {    // erst wenn Wirkzeit Fungizid abgelaufen ist, kann sich Pilz weiter vermehren
 			canInfect = true;
-
 		}else{
 			canInfect = false;
 		}
@@ -268,8 +263,7 @@ public class Pest {
 				
 				NdPoint spacePt = space.getLocation(this);
 				Context<Object> context = ContextUtils.getContext(this);
-
-				int geburt = Data.getZeit();				
+			
 				
 				PestSpore pestSpore = new PestSpore(space, grid, inkubation, resistenz);
 				context.add(pestSpore);
@@ -286,7 +280,7 @@ public class Pest {
 	// -------------------------------------------- Absterben Pest
 	// -----------------------------------------------------------------------------\\
 
-	public void sterbe() {
+	public void die() {
 		
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
@@ -297,53 +291,10 @@ public class Pest {
 	// ---------------------------------------- Bewegung zu neuer Pflanze
 	// ----------------------------------------------------------------------\\
 
-	/*public void step() {
 
-		// Anzahl Weizenpflanzen im Umfeld (21x21) des Schädlings detektieren
-		// (schaut 10 zellen nach links und 10 nach rechts, ausgehend von seiner)
-
-		GridPoint pt = grid.getLocation(this);
-
-		// Crops in der Nachbarschaft bestimmen
-		GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 10, 10); //alt 10,10
-		List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true);
-
-		// speichert diese Crops in ArrayList
-		List<Object> weizen = new ArrayList<Object>();
-		for (GridCell<Crop> cell : gridCells) {
-			if (cell.size() > 0) {
-				Iterator<Crop> iterator = cell.items().iterator();
-				while (iterator.hasNext())
-					weizen.add(iterator.next());
-			}
-
-		}
-
-		// zufällig eine Crop aus der liste auswählen
-		int index = RandomHelper.nextIntFromTo(0, weizen.size() - 1);
-		Object wei = weizen.get(index);
-		GridPoint Point = grid.getLocation(wei); // Standort der ausgewählten Crop bestimmen
-
-		// Spore bewegt sich zu Zielpflanze (zielgerichtet)
-		if (!Point.equals(grid.getLocation(this))) { // Bewegung findet nur statt, wenn sich Schädling nicht
-														// schon an diesem Ort befindet
-			NdPoint myPoint = space.getLocation(this); // aktueller Standort der Pest bestimmen
-
-			NdPoint otherPoint = new NdPoint(Point.getX(), Point.getY()); // Koordinaten der Pflanze bestimmen
-			double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint); // Winkel für Bewegung
-																							// bestimmen
-			double distance = space.getDistance(myPoint, otherPoint); // Entfernung von Schädling zu Crop bestimmen
-
-			space.moveByVector(this, distance, angle, 0); // Bewegung des Schädling auf Space
-			myPoint = space.getLocation(this);
-			grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
-		}
-		
-	
-	}*/
 	
 	public void allocation() {
-
+		System.out.println("Zuordnung");
 		// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
 		GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
 
@@ -359,24 +310,13 @@ public class Pest {
 			}
 		}
 
-		if (agents.size() <= 0){
-
-			// Anzahl Weizenpflanzen im Umfeld (21x21) des Schädlings detektieren
-			// (schaut 10 zellen nach links und 10 nach rechts, ausgehend von seiner)
-
-			//sucht zufälliuge Weizenpflanze aus
-			List<Object> wheat = new ArrayList<Object>();
-			for (Object obj : grid.getObjects()) { 
-				if (obj instanceof Crop) {
-					wheat.add(obj);
-				}
-			}
-
+		if (agents.size() > 0){
+			//Eine der Crops in Umgebung wird ausgewählt
 			// zufällig eine Crop aus der liste auswählen
-			int index = RandomHelper.nextIntFromTo(0, wheat.size() - 1);
-			Object wei = wheat.get(index);
+			int index = RandomHelper.nextIntFromTo(0, agents.size() - 1);
+			Object wei = agents.get(index);
 			GridPoint Point = grid.getLocation(wei); // Standort der ausgewählten Crop bestimmen
-
+		
 			// Spore bewegt sich zu Zielpflanze (zielgerichtet)
 			if (!Point.equals(grid.getLocation(this))) { // Bewegung findet nur statt, wenn sich Schädling nicht
 																		// schon an diesem Ort befindet
@@ -391,10 +331,84 @@ public class Pest {
 				myPoint = space.getLocation(this);
 				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
 			}
-		}
+			
+		} else {
+			// Beliebige Crop auf dem Grid wird ausgewählt
+
+			//sucht zufälliuge Weizenpflanze aus
+			List<Object> wheat = new ArrayList<Object>();
+			for (Object obj : grid.getObjects()) { 
+				if (obj instanceof Crop) {
+					wheat.add(obj);
+				}
+			}
+
+			// zufällig eine Crop aus der liste auswählen
+			int index = RandomHelper.nextIntFromTo(0, wheat.size() - 1);
+			Object wei = wheat.get(index);
+			GridPoint Point = grid.getLocation(wei); // Standort der ausgewählten Crop bestimmen
+		
+			// Spore bewegt sich zu Zielpflanze (zielgerichtet)
+			if (!Point.equals(grid.getLocation(this))) { // Bewegung findet nur statt, wenn sich Schädling nicht
+																		// schon an diesem Ort befindet
+				NdPoint myPoint = space.getLocation(this); // aktueller Standort der Pest bestimmen
+
+				NdPoint otherPoint = new NdPoint(Point.getX(), Point.getY()); // Koordinaten der Pflanze bestimmen
+				double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint); // Winkel für Bewegung
+																							// bestimmen
+				double distance = space.getDistance(myPoint, otherPoint); // Entfernung von Schädling zu Crop bestimmen
+
+				space.moveByVector(this, distance, angle, 0); // Bewegung des Schädling auf Space
+				myPoint = space.getLocation(this);
+				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
+			}
+		} 
 
 	}
-	
-	
 }
+
+/*public void step() {
+
+// Anzahl Weizenpflanzen im Umfeld (21x21) des Schädlings detektieren
+// (schaut 10 zellen nach links und 10 nach rechts, ausgehend von seiner)
+
+GridPoint pt = grid.getLocation(this);
+
+// Crops in der Nachbarschaft bestimmen
+GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 10, 10); //alt 10,10
+List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true);
+
+// speichert diese Crops in ArrayList
+List<Object> weizen = new ArrayList<Object>();
+for (GridCell<Crop> cell : gridCells) {
+	if (cell.size() > 0) {
+		Iterator<Crop> iterator = cell.items().iterator();
+		while (iterator.hasNext())
+			weizen.add(iterator.next());
+	}
+
+}
+
+// zufällig eine Crop aus der liste auswählen
+int index = RandomHelper.nextIntFromTo(0, weizen.size() - 1);
+Object wei = weizen.get(index);
+GridPoint Point = grid.getLocation(wei); // Standort der ausgewählten Crop bestimmen
+
+// Spore bewegt sich zu Zielpflanze (zielgerichtet)
+if (!Point.equals(grid.getLocation(this))) { // Bewegung findet nur statt, wenn sich Schädling nicht
+												// schon an diesem Ort befindet
+	NdPoint myPoint = space.getLocation(this); // aktueller Standort der Pest bestimmen
+
+	NdPoint otherPoint = new NdPoint(Point.getX(), Point.getY()); // Koordinaten der Pflanze bestimmen
+	double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint); // Winkel für Bewegung
+																					// bestimmen
+	double distance = space.getDistance(myPoint, otherPoint); // Entfernung von Schädling zu Crop bestimmen
+
+	space.moveByVector(this, distance, angle, 0); // Bewegung des Schädling auf Space
+	myPoint = space.getLocation(this);
+	grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
+}
+
+
+}*/
 

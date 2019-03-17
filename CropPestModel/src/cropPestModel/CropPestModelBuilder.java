@@ -131,7 +131,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			for (int i = 0; i < septoriaCount; i++) {
 				// variable die bestimmt wann sich die Laus vermehrt
 				
-				Septoria septoria = new Septoria(space, grid, vermehrungST, resistance, birthST, leafST, zeit);
+				Septoria septoria = new Septoria(space, grid, vermehrungST, resistance);
 				context.add(septoria);
 
 			}
@@ -139,7 +139,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			// ---------------------------------- SeptoriaSpore
 			// -----------------------------------------------------
 			
-			SeptoriaSpore septoriaSpore = new SeptoriaSpore(space, grid, vermehrungST, resistance, birthST, leafST, sichtbar, zeit);
+			SeptoriaSpore septoriaSpore = new SeptoriaSpore(space, grid, vermehrungST, resistance);
 			context.add(septoriaSpore);
 
 			// --------------------------------- Crop
@@ -149,7 +149,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 
 
 			for (int i = 0; i < cropCount; i++) {
-				context.add(new Crop(space, grid, ertragspot, zeit));
+				context.add(new Crop(space, grid, ertragspot));
 			}
 			
 

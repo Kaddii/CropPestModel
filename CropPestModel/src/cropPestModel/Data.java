@@ -167,9 +167,9 @@ public class Data {
 			
 			//Pests den Pflanzen zuordnen
 			for (Object obj : grid.getObjects()) { 
-				if (obj instanceof Pest) {
+				/*if (obj instanceof Pest) {
 					((Pest) obj).allocation();
-				}
+				}*/
 			}
 			
 		
@@ -263,8 +263,7 @@ public class Data {
 		List<Object> fDrei = new ArrayList<Object>();
 		List<Object> fZwei = new ArrayList<Object>();
 		List<Object> fEins = new ArrayList<Object>();*/
-		List<Object> s = new ArrayList<Object>();
-		List<Object> sterbe = new ArrayList<Object>();
+
 		
 		if(zeit == (ec37 + 3) | zeit == (ec47 + 3) | zeit == (ec59 + 3) | zeit == (ec71 + 3)){
 			int z = 0;
@@ -282,89 +281,21 @@ public class Data {
 			}
 			for (Object obj : grid.getObjects()) { 
 				if (obj instanceof Pest) {
-					/*if(((Pest) obj).getLeaf() >= z){
-						s.add(obj);
-						/*Context<Object> context = ContextUtils.getContext(obj);
-						context.remove(obj);
-						
-					}*///funkt NIcht!!
+	
 				ge.add((Pest) obj);
 				}
 			}
-			//System.out.println("PestCount  " + ge.size());
+
 		
 			for(Pest pest : ge){
 				if(pest.getLeaf() > z){            //Fässt alle Blätter zusammen die in Modell zsm. bei EC37 absterben
-					//System.out.println("ich werde aufgerufen");
-					pest.sterbe();
-					//sterbe.add(pest); 
-				} 
-				/*if (pest.getLeaf() == 5){
-					fFuenf.add(pest);
-				} 
-				if (pest.getLeaf() == 4){
-					fVier.add(pest);
-				} 
-				if (pest.getLeaf() == 3){
-					fDrei.add(pest);
-				} 
-				if (pest.getLeaf() == 2){
-					fZwei.add(pest);
-				} 
-				if (pest.getLeaf() == 1){
-					fEins.add(pest);
-				} if (pest.getLeaf() == 0){
-					fahnenblatt.add(pest);
-				}*/
-		}
-		
 
-		
-			
-		//System.out.println("Ich werde aufgerufen!!!!!!!!!!!!  " + sterbe.size() + "variante2" + s.size());
-		//System.out.println("Allg Blatt   " + allgBlatt.size());
-		//System.out.println("Blatt5   " + fFuenf.size());
-		//System.out.println("Ballt4   " + fVier.size());
-		//System.out.println("Blatt3   " + fDrei.size());
-		//System.out.println("Blatt2   " + fZwei.size());
-		//System.out.println("Ballt1   " + fEins.size());
-		//System.out.println("Blatt0   " + fahnenblatt.size());
-		
-		/*if(zeit == (ec37 + 3) | zeit == (ec47 + 3) | zeit == (ec59 + 3) | zeit == (ec73 + 3)){
-			for(Object obj : sterbe){
+					pest.die();
+					pest.isAlive = false;
+				} 
 				
-				//System.out.println("Ich sterbe!!!!!");
-				((Pest) obj).sterbe();
-				
-				Context<Object> context = ContextUtils.getContext(obj);
-				context.remove(obj);
-				
-				
-			}
-			sterbe.clear();
-			//System.out.println("ich auch!!!!!!!!!!!!!!!" + allgBlatt.size());
-		} */
-		/*if (zeit == ec47){
-				for(Object obj : fFuenf){
-					Context<Object> context = ContextUtils.getContext(obj);
-					context.remove(obj);
-				}
-				fFuenf.clear();
-		} 
-		if (zeit == ec59){
-			for(Object obj : fVier){
-				Context<Object> context = ContextUtils.getContext(obj);
-				context.remove(obj);
-			}
-			fVier.clear();
-		} 
-		if (zeit == ec71){
-			for(Object obj : fDrei){
-				Context<Object> context = ContextUtils.getContext(obj);
-				context.remove(obj);
-			}	
-			fDrei.clear();
-		}*/
+		}
+
 		}
 		
 		pflanzen.clear();
@@ -375,7 +306,7 @@ public class Data {
 		farmer.clear();
 		septneu.clear();
 		
-		List<Integer> gebl = new ArrayList<Integer>();
+
 
 		
 		for (Object obj : grid.getObjects()) { // befüllen der Listen
@@ -385,7 +316,6 @@ public class Data {
 			} 
 			if (obj instanceof Pest) {
 				gelbrost.add((Pest) obj);
-				((Pest) obj).isDone = false;
 				
 			}
 			if (obj instanceof PestSpore) {
@@ -403,14 +333,6 @@ public class Data {
 		}
 		
 		
-		//KANN MAN LÖSCHEN!!!!!!!!!!!!!!!!!!!!!!!!
-		/*for(Pest pest : gelbrost){
-			if(pest.getLeaf() ==0){
-			gebl.add(pest.getLeaf());
-		}
-		}
-		
-		System.out.println("Blattpest       " + gebl.size());*/
 		for (Septoria septoria : septoria){
 			if(septoria.getBirth() > Farmer.getInDaysST()){
 				septSchwelle2 += 1;
@@ -420,55 +342,47 @@ public class Data {
 		
 		//AUFRUF DER AGENTEN
 		
-		
+		//ab ec71 können sich die pilze nicht mehr vermehren/wachsen
 		if (zeit < (ec71 +3)){
-			for(Crop crop : pflanzen){
-				//crop.gelb.clear();
-				//crop.gelbS.clear();
-				crop.septfSechs.clear();
-				//crop.gelbfbf2.clear();
-			}
-		                    //ab ec71 können sich die pilze nicht mehr vermehren/wachsen
+		                 
 			if(gelbrost.size() > 0){
 				for(Pest pest : gelbrost){
 					if(pest.isAlive){
 					pest.start();
 					}
-
 				}
-
 			}
 	
 			if(septoria.size() > 0){
 				for(Septoria septoria : septoria){
-					
-					septoria.start();
+					if(septoria.isAlive){
+						septoria.start();
+					}
 				}
 			}
+			
 			if(septoriaSpore.isEmpty() == false){
-				//septoriaSporeIsDone = false;
-				for(int i = 0; i < septoriaSpore.size(); i++){
-					septoriaSpore.get(i).start();
+				for(SeptoriaSpore septoriaSpore : septoriaSpore){
+					septoriaSpore.start();
 				}
 			}
 			if(pestSpore.isEmpty() == false){
-				//pestSporeIsDone = false; 
-				for(int i = 0; i < pestSpore.size(); i++){
-					pestSpore.get(i).start();
+				for(PestSpore pestSpore : pestSpore){
+					pestSpore.start();
 				}
 			}
 
 			
 		}
 		if(pflanzen.size() > 0){
-			for(int i = 0; i < pflanzen.size(); i++){
-				pflanzen.get(i).befall();
+			for(Crop crop : pflanzen){
+				crop.start();
 			}
 		}
 		
 		if(farmer.size() > 0) {
-			for(int i = 0; i < farmer.size(); i++){
-			farmer.get(i).starte();
+			for(Farmer farmer : farmer){
+			farmer.start();
 			}
 		}
 
@@ -480,7 +394,21 @@ public class Data {
 
 
 
-		
+/*public void weather(){
+//wetter
+
+/*DREECKSVERTEILUNG mit a = min; b = max; c =modalwert
+* public double Dreiecksverteilung(double a, double b, double c) {
+* double F = (c - a) / (b - a);
+* double rand = Math.random();
+* if (rand < F) {
+* return a + Math.sqrt(rand * (b - a) * (c - a));
+* } else {
+* return b - Math.sqrt((1-rand) * (b - a) * (b - c));
+* }
+* }
+
+entscheidungf();*/	
 
 		
 		
