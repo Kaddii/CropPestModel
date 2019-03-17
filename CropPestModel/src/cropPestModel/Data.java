@@ -424,7 +424,7 @@ public class Data {
 		if (zeit < (ec71 +3)){
 			for(Crop crop : pflanzen){
 				//crop.gelb.clear();
-				crop.gelbS.clear();
+				//crop.gelbS.clear();
 				crop.septfSechs.clear();
 				//crop.gelbfbf2.clear();
 			}
@@ -437,25 +437,12 @@ public class Data {
 
 				}
 
-
-				
-				/*for(int i = 0; i < gelbrost.size(); i++){
-					gelbrost.get(i).start();
-					
-				}*/
 			}
-			
-
-			
-			//Boolean septoriaIsDone = true; 
-			//Boolean septoriaSporeIsDone = true;
-			//Boolean pestSporeIsDone = true;
-			
+	
 			if(septoria.size() > 0){
-				//septoriaIsDone = false;
-				for(int i = 0; i < septoria.size(); i++){
+				for(Septoria septoria : septoria){
 					
-					septoria.get(i).start();
+					septoria.start();
 				}
 			}
 			if(septoriaSpore.isEmpty() == false){

@@ -35,7 +35,7 @@ public class PestSpore {
 	
 	
 	public PestSpore(ContinuousSpace<Object> space, Grid<Object> grid, int vermehrung,
-			int resistance, int birth, int leaf, int zeit) {
+			int resistance, int birth, int zeit) {
 		this.space = space;
 		this.grid = grid;
 		this.inkubation = vermehrung;
@@ -45,6 +45,8 @@ public class PestSpore {
 		this.zeit = zeit;
 		// TODO Auto-generated constructor stub
 	}
+	
+
 
 	//@ScheduledMethod(start = 1, interval = 2)
 	public void start() {
@@ -161,7 +163,7 @@ public class PestSpore {
 			Context<Object> context = ContextUtils.getContext(this);
 			context.remove(this);
 			//Pilz hinzufügen
-			Pest pest = new Pest(space, grid, inkubation, resistenz, birth, blatt, zeit);
+			Pest pest = new Pest(space, grid, inkubation, resistenz, birth);
 			context.add(pest);
 
 			space.moveTo(pest, spacePt.getX(), spacePt.getY());

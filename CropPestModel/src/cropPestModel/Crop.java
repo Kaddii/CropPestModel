@@ -63,9 +63,9 @@ public class Crop {
 	private int STCount;
 	private int sichtb;
 	
-	List<Pest> gelb = new ArrayList<Pest>();
-	List<Pest> gelbS = new ArrayList<Pest>();
-	List<Pest> gelbfbf2 = new ArrayList<Pest>();
+	List<Pest> GR = new ArrayList<Pest>();
+	//List<Pest> gelbS = new ArrayList<Pest>();
+	//List<Pest> gelbfbf2 = new ArrayList<Pest>();
 	
 	List<Septoria> sept = new ArrayList<Septoria>();
 	List<Septoria> septS = new ArrayList<Septoria>();
@@ -209,110 +209,71 @@ public class Crop {
 		int befallGR = 0;
 		int befallGRErtrag = 0;
 		List<Integer> bef = new ArrayList<Integer>();
-		List<Integer> b = new ArrayList<Integer>();
-
+		//List<Integer> b = new ArrayList<Integer>();
+		List<Pest> visibleGR = new ArrayList<Pest>();
+		List<Pest> allGR = new ArrayList<Pest>();
+		List<Pest> fTof2GR = new ArrayList<Pest>();
 		
-		for (Pest pest : gelb){
+		for (Pest pest : GR){
 			//System.out.println("Crop.getLeaf   " + pest.getLeaf() + "   Crop.getGeburt" + pest.getBirth());
-			if(pest.getLeaf() <= a){             
-				//System.out.println("Halloooooo"); 
-				befallGR++;
-				b.add(pest.getLeaf());
+			if(pest.isAlive == true){
+				allGR.add(pest);
 				
+				if(pest.getLeaf() <= a){             
+					befallGR++;
+					//b.add(pest.getLeaf());
+				}
+				if(pest.getLeaf() <= 2){
+					fTof2GR.add(pest);
+				}
+				if (pest.getLeaf() <= 0){		
+					//System.out.println("Halloooooo");
+					// TODO: noch benötigt??
+					befallFahnenblatt++;	
+				}
+				if (pest.isVisible == true){
+					visibleGR.add(pest);
+					if(pest.getLeaf() <= a){
+						befallGRErtrag++;
+					}
+				}
 			}
-			if (pest.getLeaf() <= 0){
-				//System.out.println("Halloooooo");
-				befallFahnenblatt++;	
-			}
-			/*if(pest.getSichtbar() == true){
-				sicht.add(pest);
-			}
-			/*if(Data.getZeit() == 100){
-				bef.add(pest.getLeaf());
-			}*/
-			/*if (pest.getSichtbar() == true){ //LÖSCHEN???? (+ bei ST auch??)
-				befallSichtbar++;
-				//System.out.println("befallsichtbar  " + befallSichtbar);
-			}*/
 		}
 		
-		/*sichtb = sicht.size();
-		if(sicht.size() > 0){
-		System.out.println("scihtbar" + sicht.size());
-		}*/
-		/*if(b.size() > 0) {
-		System.out.println("befallertrag" + b.toString());
-		}*/
-		/*if(zeit == 100){
-		System.out.println("leaf  " + bef.toString());
-		}*/
-		
-		
-		for(Pest pest : gelbS){
-			bef.add(pest.getLeaf());
-			if(pest.getLeaf() <= a){
-				befallGRErtrag++;
-				
-			}
-			
-				pest.sterbe();
-			
-		}
-		/*if(gelbS.size() > 0){
-			System.out.println("gelbs.size" + bef.toString());
-			}*/
-		/*if(bef.size() > 0){
-		System.out.println("befallsicht" + bef.toString());
-		}
-		bef.clear();*/
-		
-		
-		
-		
+
 		
 		// zählt, wenn Schädling an Crop ist
 		// damit kann Farmer die Anzahl der befallenen Haupttriebe ermitteln
 	
 
-		if (gelb.size() > 0) {
-			//System.out.println(gelb.toString());
+		if (allGR.size() > 0) {
 			anzahlGR = 1;
 			
+		} else {
+			anzahlGR = 0;
 		}
-		if (gelbS.size() > 0) {
-			befallsichtbarGR = 1;
-			/*for(Pest pest : gelbS){
-				b.add(pest.getLeaf());
-			}*/
-			
+		if (visibleGR.size() > 0) {
+			befallsichtbarGR = 1;	
 		}else{
 			befallsichtbarGR = 0;
 		}
 		
-		if (gelbfbf2.size() >0) {
+		if (fTof2GR.size() > 0) {
 			befallbFbF2 = 1;
+		}else {
+			befallbFbF2 = 0;
 		}
 		if (befallGRErtrag > 0){
 			befallGREr = 1;
-			//System.out.println("befallErtraganz " + befallGREr);
-			//System.out.println("befallErtrag " + befallGRErtrag);
+		} else {
+			befallGREr = 0;
 		}
-		/*if (befallSichtbar > 0) {
-			befallsichtbarGR = 1;
-			//System.out.println("Sichtbare GR" + befallsichtbarGR);
-		}*/
-		//System.out.println(befallGRErtrag + "  BefallGRErtrag(sicht  +  BefallGRE " + befallGR);
-		
-		schaedlingsAnzahl = gelb.size(); // Schädlingsanzahl(gesamt) auf private variable übertragen
-		befallGRE = befallGR;            //Schädlingsanzahl die ertrag beeinflusst
-		befallFGR = befallFahnenblatt;   //Schädlinge auf Fahnenblatt
-		if(gelb.size() > 0){
-		//System.out.println("Befallsichtbar  " + befallsichtbarGR);
-		}
-		
 
 		
-		
+		schaedlingsAnzahl = allGR.size(); // Schädlingsanzahl(gesamt) auf private variable übertragen
+		befallGRE = befallGR;            //Schädlingsanzahl die ertrag beeinflusst
+		befallFGR = befallFahnenblatt;   //Schädlinge auf Fahnenblatt
+	
 		
 		
 	
@@ -388,11 +349,11 @@ public class Crop {
 		//----FÜR AUSWERTUNG: Ermittleln der Anzahl an Pathogenen im jew. Stadium der Simulation
 		//-----------------------------------------
 	
-		GRsichtCount = gelbS.size();
+		GRsichtCount = visibleGR.size();
 		GRertragCount = befallGRErtrag;
 		STsichtCount += septS.size();
 		STertragCount = befallSTErtrag;
-		GRCount = gelb.size();
+		GRCount = allGR.size();
 		STCount += sept.size();
 		
 		

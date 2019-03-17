@@ -95,19 +95,19 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			int pestCount = (Integer) params.getValue("PestCount");
 
 			int birth = 1;
-			int leaf = 11;
+
 			
 			for (int i = 0; i < pestCount; i++) {
 				// variable die bestimmt wann sich die Laus vermehrt
 				int vermehrungGR = inkubation.nextInt(4) + 12; // Inkubationszeit 12 bis 15 Tage für GR
-				Pest pest = new Pest(space, grid, vermehrungGR, resistance, birth, leaf, zeit);
+				Pest pest = new Pest(space, grid, vermehrungGR, resistance, birth);
 				context.add(pest);
 
 			}
 			
 			// -------------------------- PestSpore -------------------
 			int vermehrungGR = inkubation.nextInt(4) + 12;
-			PestSpore pestSpore = new PestSpore(space, grid, vermehrungGR, resistance, birth, leaf, zeit);
+			PestSpore pestSpore = new PestSpore(space, grid, vermehrungGR, resistance, birth, zeit);
 			context.add(pestSpore);
 			
 			// ---------------------------------- Septoria

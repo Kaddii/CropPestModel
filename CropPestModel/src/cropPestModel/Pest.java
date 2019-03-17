@@ -41,7 +41,7 @@ public class Pest {
 	private static int birth; // tick bei der Schädling geboren wurde
 	private static int leaf; //Angabe auf welchem Blatt sich GR befindet//LÖSCHNE!!!
 	private boolean anfaelligkeit = true; //gibt an ob pest pflanze gerade befallen kann oder ob diese durch ein fungizid geschützt ist
-	private static boolean sichtbar = false; //pest wird für landwirt erst sichtbar, wenn latenzzeit abgelaufen ist
+	public boolean isVisible = false; //pest wird für landwirt erst sichtbar, wenn latenzzeit abgelaufen ist
 	int a; //gibt an, an welcher crop die Pest sitzt
 	public boolean isAlive;
 	
@@ -67,9 +67,9 @@ public class Pest {
 	public int getLeaf(){
 		return blatt;
 	}
-	public static boolean getSichtbar(){
+	/*public static boolean getSichtbar(){
 		return sichtbar;
-	}
+	}*/
 
 
 	
@@ -78,15 +78,14 @@ public class Pest {
 
 	// Daten werden von CropPestModelBuilder auf einzelne Pest übertragen
 	public Pest(ContinuousSpace<Object> space, Grid<Object> grid, int vermehrung,
-			int resistance, int birth, int leaf, int zeit) {
+			int resistance, int birth) {
 		this.space = space;
 		this.grid = grid;
 		this.inkubation = vermehrung;
 		this.resistenz = resistance;
 		this.isAlive = true;
-		//this.birth = birth;
-		//this.leaf = leaf;
-		this.zeit = zeit;
+		this.isVisible = false;
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -129,7 +128,7 @@ public class Pest {
 		
 		if(zaehler <= 1){
 			
-			sichtbar = false;
+			isVisible = false;
 			geburt = Data.getZeit() - 1;
 			
                //ersten Pilzen wird Ort hier zugewiesen, Rest als Spore
@@ -161,29 +160,25 @@ public class Pest {
 			} else {
 				blatt = ort.nextInt(3);
 			}
-			//System.out.println("PestSpore.blatt" + leaf);
-			//System.out.println("geburtGR  " + geburt + "   blattgr  " + blatt);
-		//}
-		
-		//System.out.println("geburtGR  " + geburt);
+	
 		
 		
-		// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
-		GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
-
-		GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
-				Crop.class, 1, 1);
-		List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
-																			// Umgebung der Pest in einer Liste
-		//List<Crop> agenten = new ArrayList<Crop>();
-		agenten.clear();
-		int anzahlCrop = 0; // AnzahlCrops in Umgebung des Schädlings
-		for (GridCell<Crop> cell : gridCells) { // summiert Liste mit Crops auf
-			anzahlCrop += cell.size();
-			for(Crop crop : cell.items()){
-				agenten.add(crop);
+			// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
+			GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
+	
+			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
+					Crop.class, 1, 1);
+			List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
+																				// Umgebung der Pest in einer Liste
+			//List<Crop> agenten = new ArrayList<Crop>();
+			agenten.clear();
+			//int anzahlCrop = 0; // AnzahlCrops in Umgebung des Schädlings
+			for (GridCell<Crop> cell : gridCells) { // summiert Liste mit Crops auf
+				//anzahlCrop += cell.size();
+				for(Crop crop : cell.items()){
+					agenten.add(crop);
+				}
 			}
-		}
 
 		
 		// wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
@@ -196,52 +191,29 @@ public class Pest {
 		if (agenten.size() > 0){
 			Random ag = new Random();
 			a = ag.nextInt(agenten.size());        // wenn Crop vorhanden, Inkubationszeit nicht abgelaufen, dann wird pest in arraylist von 
-			agenten.get(a).gelb.add(this);             //einem der crops in der umgebung gespeichert
-			//System.out.println(agenten.get(a).gelb.toString());
+			agenten.get(a).GR.add(this);             //einem der crops in der umgebung gespeichert
 			
-			if (blatt <=2) {
-				agenten.get(a).gelbfbf2.add(this);
-			}
 		}else {
 			sterbe();
+			System.out.println("ich bin falsch zugeordnet");
 		}
 	}
 
 
-		
-		
-			/*if (geburt < 1){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
-				agenten.get(a).gelbS.add(this);            // Schädling fort
-				sichtbar = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
-				if (sichtbar == true){
-				//System.out.println("Ich bin Sichtbar  " + sichtbar);
-					if(anfaelligkeit == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung	
-						
-						fortpflanzung1();
-						}
-				}
-			}*/
-		
 			
 		
 			if (latenttime > inkubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
-				agenten.get(a).gelbS.add(this);            // Schädling fort
-				sichtbar = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
-				if (sichtbar == true){
-				System.out.println("Ich bin Sichtbar  " + sichtbar);
-				}
+																// Schädling fort
+				isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
 				
-			
 			
 				if(anfaelligkeit == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung	
 								
 					fortpflanzung1();
 				}
 			} else {
-				isDone = true;
+				isVisible = false;
 			}
-			
-
 	}
 		
 		
@@ -254,15 +226,13 @@ public class Pest {
 		//es kommt nur zw. 5 und 20 grad zum sporenflug
 		if(Data.getTemp() > 5 & Data.getTemp() < 20){
 			fortpflanzung2();
-		} else{
-			isDone= true;
-		}
+		} 
 	}
 	
 	
 	
 	public void fortpflanzung2() {
-		//System.out.println("Pilz vermehrt sich !!!!!!!!!!!!!!!!!!!");
+		
 		GridPoint pt = grid.getLocation(this);
 
 		// Wahrscheinlichkeit, dass Schädling die Geburt überlebt ist je nach
@@ -270,28 +240,27 @@ public class Pest {
 		int j = 0; // j gibt die Wahrscheinlichkeit an mit der der neue Schädling die Geburt nicht
 					// überlebt (wenn j=80, dann sterben 80% der neuen Sporen ab)
 
-		if (resistenz == 1) {
-
-			// Annahme, dass bei Befallshäufigkeit über 80 % der Schädling schwerer einen
-			// Platz an einer Crop findet und somit die Wahrscheinlichkeit die Pflanze zu
-			// befallen sinkt
-			//j = 0;
-			if (Farmer.getSchaedenprozGR() < 85) { //alt 80,88
+		// Annahme, dass bei Befallshäufigkeit über 80 % der Schädling schwerer einen
+		// Platz an einer Crop findet und somit die Wahrscheinlichkeit die Pflanze zu
+		// befallen sinkt
+		
+		if (resistenz == 1) {							//geringer Resistenzstatus
+			if (Farmer.getSchaedenprozGR() < 85) { //alt 80,88 
 				j = 0; //alt 45
 			} else {
-				j = 88; // WAS IST PASSENDE ZAHL??
+				j = 88; 
 			}
 
-		} else if (resistenz == 2) {
+		} else if (resistenz == 2) {					//mittlerer Resistenzstatus
 			if (Farmer.getSchaedenprozGR() < 85) {
-				j = 90; // Simulation endet damit bei 40-70% BH
+				j = 90; 
 			} else {
 				j = 95;
 			}
 
-		} else if (resistenz == 3) {
+		} else if (resistenz == 3) {					//hoher Resistenzstatus
 			if (Farmer.getSchaedenprozGR() < 85) {
-				j = 93; // Simulation endet ca. bei 5 % BH, aber exponentielles Wachstum
+				j = 93; 
 			} else {
 				j = 97;
 			}
@@ -301,11 +270,11 @@ public class Pest {
 			throw new ArithmeticException("es sind nur Resistenzwerte zwischen 1 und 3 definiert");
 		}
 
-		// aus einem Schädling können max 3 neue entstehen, dh. am ende sind 4 da
+		// aus einem Schädling können max 2 neue PestSporen entstehen
 		// mit oben festgelegter Wahrscheinlichkeit (j) sterben diese jedoch vor der
 		// Geburt schon wieder ab
 		// Wahrscheinlichkeit, dass Pest überlebt hängt von Sorte ab
-		// Pest stirbt in Modell gleich hier wieder ab (wenn von Crop aus aufgerufen
+		// Pest stirbt in Modell gleich hier wieder ab (wenn von Crop aus aufgerufen werden würde
 		// wird irgendeine Pest getötet und nicht die neue! == nicht gewollt)
 		for (int i = 0; i < 2; i++) {
 			Random tot = new Random();
@@ -314,19 +283,6 @@ public class Pest {
 			// Wenn die Zufallszahl höher ist, als der oben festgelegte Wert für j, dann
 			// überlebt die neue Pest
 			if (wahrscheinlichkeit > j) {
-				//System.out.println("ich bin geboren");
-
-				// Abfrage der im Umfeld befindlichen Schädlinge um von diesen den context für
-				// den neuen Schädling zu übernehmen.
-
-				/*List<Object> pests = new ArrayList<Object>();
-				for (Object obj : grid.getObjectsAt(pt.getX(), pt.getY())) {
-
-					if (obj instanceof Pest) {
-						pests.add(obj);
-					}
-
-				}*/
 
 				// Erstelle zunächst Spore, welche sich unter geeigneten Witterungsbed zu schadorg. wird
 				
@@ -335,22 +291,16 @@ public class Pest {
 
 				int geburt = Data.getZeit();				
 				
-				
-				//Pest pest = new Pest(space, grid, inkubation, resistenz, geburt, blatt, zeit);
-				//context.add(pest);
-				PestSpore pestSpore = new PestSpore(space, grid, inkubation, resistenz, geburt, leaf, zeit);
+				PestSpore pestSpore = new PestSpore(space, grid, inkubation, resistenz, geburt, zeit);
 				context.add(pestSpore);
 
 				space.moveTo(pestSpore, spacePt.getX(), spacePt.getY());
 
 				grid.moveTo(pestSpore, pt.getX(), pt.getY());
 				
-				//step();
-				//System.out.println("ich habe sporen ausgeschleudert");
 			}
 		}
-		isDone = true;
-		}
+	}
 	
 
 	// -------------------------------------------- Absterben Pest
@@ -361,16 +311,7 @@ public class Pest {
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
 		isAlive = false;
-		/*if(agenten.get(a).gelb.size() > 0){
-		agenten.get(a).gelb.remove(this); 
-		agenten.get(a).gelbS.remove(this);
-		agenten.get(a).gelbfbf2.remove(this);
-		System.out.println("ich sterbe");
-		}*/
-		
-		isDone = true;
-		//System.out.println("gelb");
-		//System.out.println(agenten.get(a).gelb.toString());
+		System.out.println("ich bin tot" + isAlive);
 		
 	}
 
@@ -487,16 +428,3 @@ public class Pest {
 	}
 }
 
-//--------------------- Am Ende löschen----
-/*/Annahme, dass GR ein obligater Parasit ist, überlebt nur auf lebenden/vorhandenen Blätter
-// Wenn Blatt abstirbt, stirbt auch Pilz
-
-if(zeit > Data.getEc37() && leaf > 5){
-	sterbe();
-} else if(zeit > Data.getEc47() && leaf > 4){
-	sterbe();
-} else if (zeit > Data.getEc59() && leaf > 3){
-	sterbe();
-} else if (zeit > Data.getEc71() && leaf > 2){
-	sterbe();
-} */
