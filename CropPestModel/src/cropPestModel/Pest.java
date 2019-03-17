@@ -40,7 +40,7 @@ public class Pest {
 	private int zeit; // zählt die ticks
 	private static int birth; // tick bei der Schädling geboren wurde
 	private static int leaf; //Angabe auf welchem Blatt sich GR befindet//LÖSCHNE!!!
-	private boolean anfaelligkeit = true; //gibt an ob pest pflanze gerade befallen kann oder ob diese durch ein fungizid geschützt ist
+	private boolean canInfect = true; //gibt an ob pest pflanze gerade befallen kann oder ob diese durch ein fungizid geschützt ist
 	public boolean isVisible = false; //pest wird für landwirt erst sichtbar, wenn latenzzeit abgelaufen ist
 	int a; //gibt an, an welcher crop die Pest sitzt
 	public boolean isAlive;
@@ -67,9 +67,7 @@ public class Pest {
 	public int getLeaf(){
 		return blatt;
 	}
-	/*public static boolean getSichtbar(){
-		return sichtbar;
-	}*/
+	
 
 
 	
@@ -92,52 +90,20 @@ public class Pest {
 	// ---------------------------------- Beginn des "täglichen" Ablaufs
 	// --------------------------------------------------------------------------\\
 
-	//@ScheduledMethod(start = 1, interval = 2)
 	public void start() {
-		//System.out.println("Pest");
 		
-		zaehler++;
-		if (Data.getZeit() > Farmer.getInDays() | Farmer.getInDays() == 0) {    // erst wenn Wirkzeit Fungizid abgelaufen ist, kann sich Pilz weiter vermehren
-			anfaelligkeit = true;
-			//nur wenn keine wirkung psm kann sich pilz weiterentwickeln
-			//Latenzzeit des Pilzes ist Temperaturabhängig
-			//System.out.println("ich werde aufgerufen");
-			if (Data.getTemp() > 10 & Data.getTemp() < 20){       //zaehler zählt Tage bis Latenzzeit abgelaufen ist
-				latenttime++;
-			}else{
-				latenttime += 0.5;
-			}
-		}else{
-			anfaelligkeit = false;
-		}
 		
-		/*if (Data.getZeit() == 30){
-			sterbe();
-		}*/
-		
+		zaehler++; 		//Zählt die Tage seit der Geburt
 
-		
-		//System.out.println("Pest.blatt " + leaf);
-		
-
-		//latenttime++;
-		
-		//zeit++;
-		
-		
-		
 		if(zaehler <= 1){
 			
 			isVisible = false;
 			geburt = Data.getZeit() - 1;
 			
-               //ersten Pilzen wird Ort hier zugewiesen, Rest als Spore
-			//if(Data.getZeit() <= 1){
+             //Pilzen wird Ort hier zugewiesen
+	
 			Random ort = new Random();
-			/*if (Data.getZeit() < Data.getEc30()){
-				blatt = 6;
-
-			} else*/ 
+ 
 			if (Data.getZeit() < Data.getEc31()){
 				blatt = ort.nextInt(3)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
 												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
@@ -181,45 +147,59 @@ public class Pest {
 			}
 
 		
-		// wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
-		// Schädling fort
-		// wenn Crop vorhanden, Inkubationszeit nicht abgelaufen, dann wird pest in arraylist von 
-			//einem der crops in der umgebung gespeichert
-		// wenn keine Crop vorhanden, dann stirbt Schädling ab
-
-		
-		if (agenten.size() > 0){
-			Random ag = new Random();
-			a = ag.nextInt(agenten.size());        // wenn Crop vorhanden, Inkubationszeit nicht abgelaufen, dann wird pest in arraylist von 
-			agenten.get(a).GR.add(this);             //einem der crops in der umgebung gespeichert
+			// TODO: wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
+			// Schädling fort
+			// wenn Crop vorhanden, Inkubationszeit nicht abgelaufen, dann wird pest in arraylist von 
+				//einem der crops in der umgebung gespeichert
+			// wenn keine Crop vorhanden, dann stirbt Schädling ab  -->Erklärung löschen???
+	
 			
-		}else {
-			sterbe();
-			System.out.println("ich bin falsch zugeordnet");
+			if (agenten.size() > 0){
+				Random ag = new Random();
+				a = ag.nextInt(agenten.size());        // wenn Crop vorhanden, Inkubationszeit nicht abgelaufen, dann wird pest in arraylist von 
+				agenten.get(a).GR.add(this);             //einem der crops in der umgebung gespeichert
+				
+			}else {
+				sterbe();
+				System.out.println("ich bin falsch zugeordnet");
+			}
 		}
-	}
-
-
 			
+		//Pest überprüft, ob Sie sich weiterentwickeln kann	
+		if (Data.getZeit() > Farmer.getInDays() | Farmer.getInDays() == 0) {    // erst wenn Wirkzeit Fungizid abgelaufen ist, kann sich Pilz weiter vermehren
+			canInfect = true;
+
+		}else{
+			canInfect = false;
+		}
 		
-			if (latenttime > inkubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
-																// Schädling fort
-				isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
+		//Latenzzeit des Pilzes ist Temperaturabhängig
+		if (Data.getTemp() > 10 & Data.getTemp() < 20){       //zaehler zählt Tage bis Latenzzeit abgelaufen ist
+			latenttime++;
+		}else{
+			latenttime += 0.5;
+		}
+	
+	
 				
 			
-				if(anfaelligkeit == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung	
-								
-					fortpflanzung1();
-				}
-			} else {
-				isVisible = false;
+		if (latenttime > inkubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
+																	// Schädling fort
+			isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend		
+				
+			if(canInfect == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung						
+				fortpflanzung1();
 			}
+			
+		} else {
+			isVisible = false;
+		}
 	}
 		
 		
 	
 
-	// -------------------------------------- Fortpflanzung Schädling
+	// -------------------------------------- Fortpflanzung Pathogen
 	// ----------------------------------------------------------------------------\\
 
 	public void fortpflanzung1() {
@@ -291,7 +271,7 @@ public class Pest {
 
 				int geburt = Data.getZeit();				
 				
-				PestSpore pestSpore = new PestSpore(space, grid, inkubation, resistenz, geburt, zeit);
+				PestSpore pestSpore = new PestSpore(space, grid, inkubation, resistenz);
 				context.add(pestSpore);
 
 				space.moveTo(pestSpore, spacePt.getX(), spacePt.getY());
@@ -311,14 +291,13 @@ public class Pest {
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
 		isAlive = false;
-		System.out.println("ich bin tot" + isAlive);
 		
 	}
 
 	// ---------------------------------------- Bewegung zu neuer Pflanze
 	// ----------------------------------------------------------------------\\
 
-	public void step() {
+	/*public void step() {
 
 		// Anzahl Weizenpflanzen im Umfeld (21x21) des Schädlings detektieren
 		// (schaut 10 zellen nach links und 10 nach rechts, ausgehend von seiner)
@@ -361,70 +340,61 @@ public class Pest {
 		}
 		
 	
-	}
+	}*/
 	
-	public void zuordnung() {
+	public void allocation() {
 
 		// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
-				GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
+		GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
 
-				GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
-						Crop.class, 1, 1);
-				List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
+		GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
+				Crop.class, 1, 1);
+		List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
 																					// Umgebung der Pest in einer Liste
-				List<Crop> agents = new ArrayList<Crop>();
+		List<Crop> agents = new ArrayList<Crop>();
 				
-				int anzahlCrop = 0; // AnzahlCrops in Umgebung des Schädlings
-				for (GridCell<Crop> cell : gridCells) { // summiert Liste mit Crops auf
-					anzahlCrop += cell.size();
-					for(Crop crop : cell.items()){
-						agents.add(crop);
-					}
+		for (GridCell<Crop> cell : gridCells) { // summiert Liste mit Crops auf
+			for(Crop crop : cell.items()){
+				agents.add(crop);
+			}
+		}
+
+		if (agents.size() <= 0){
+
+			// Anzahl Weizenpflanzen im Umfeld (21x21) des Schädlings detektieren
+			// (schaut 10 zellen nach links und 10 nach rechts, ausgehend von seiner)
+
+			//sucht zufälliuge Weizenpflanze aus
+			List<Object> wheat = new ArrayList<Object>();
+			for (Object obj : grid.getObjects()) { 
+				if (obj instanceof Crop) {
+					wheat.add(obj);
 				}
+			}
 
+			// zufällig eine Crop aus der liste auswählen
+			int index = RandomHelper.nextIntFromTo(0, wheat.size() - 1);
+			Object wei = wheat.get(index);
+			GridPoint Point = grid.getLocation(wei); // Standort der ausgewählten Crop bestimmen
 
-
-				
-				if (agents.size() <= 0){
-
-					// Anzahl Weizenpflanzen im Umfeld (21x21) des Schädlings detektieren
-					// (schaut 10 zellen nach links und 10 nach rechts, ausgehend von seiner)
-
-
-		
-					//sucht zufälliuge Weizenpflanze aus
-					List<Object> wheat = new ArrayList<Object>();
-					for (Object obj : grid.getObjects()) { 
-						if (obj instanceof Crop) {
-							wheat.add(obj);
-						}
-					}
-
-					// zufällig eine Crop aus der liste auswählen
-					int index = RandomHelper.nextIntFromTo(0, wheat.size() - 1);
-					Object wei = wheat.get(index);
-					GridPoint Point = grid.getLocation(wei); // Standort der ausgewählten Crop bestimmen
-
-					// Spore bewegt sich zu Zielpflanze (zielgerichtet)
-					if (!Point.equals(grid.getLocation(this))) { // Bewegung findet nur statt, wenn sich Schädling nicht
+			// Spore bewegt sich zu Zielpflanze (zielgerichtet)
+			if (!Point.equals(grid.getLocation(this))) { // Bewegung findet nur statt, wenn sich Schädling nicht
 																		// schon an diesem Ort befindet
-						NdPoint myPoint = space.getLocation(this); // aktueller Standort der Pest bestimmen
+				NdPoint myPoint = space.getLocation(this); // aktueller Standort der Pest bestimmen
 
-						NdPoint otherPoint = new NdPoint(Point.getX(), Point.getY()); // Koordinaten der Pflanze bestimmen
-						double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint); // Winkel für Bewegung
+				NdPoint otherPoint = new NdPoint(Point.getX(), Point.getY()); // Koordinaten der Pflanze bestimmen
+				double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint); // Winkel für Bewegung
 																							// bestimmen
-						double distance = space.getDistance(myPoint, otherPoint); // Entfernung von Schädling zu Crop bestimmen
+				double distance = space.getDistance(myPoint, otherPoint); // Entfernung von Schädling zu Crop bestimmen
 
-						space.moveByVector(this, distance, angle, 0); // Bewegung des Schädling auf Space
-						myPoint = space.getLocation(this);
-						grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
-					}
-				}
-		
-	
-			
-
+				space.moveByVector(this, distance, angle, 0); // Bewegung des Schädling auf Space
+				myPoint = space.getLocation(this);
+				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
+			}
+		}
 
 	}
+	
+	
 }
 

@@ -168,7 +168,7 @@ public class Data {
 			//Pests den Pflanzen zuordnen
 			for (Object obj : grid.getObjects()) { 
 				if (obj instanceof Pest) {
-					((Pest) obj).zuordnung();
+					((Pest) obj).allocation();
 				}
 			}
 			

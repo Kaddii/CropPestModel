@@ -28,7 +28,7 @@ import repast.simphony.util.ContextUtils;
 import repast.simphony.util.SimUtilities;
 
 /**
- * @author Uli
+ * @author Katrin
  *
  */
 public class Septoria {
@@ -45,7 +45,7 @@ public class Septoria {
 
 	
 	//nach1811
-	private boolean anfaelligkeit; //gibt an ob pflanze durch spritzmittel geschützt ist
+	private boolean canInfect; //gibt an ob pflanze durch spritzmittel geschützt ist
 	private int blatt; //gibt an auf welchem blatt sich ST befindet
 	private int geburt;
 	private double latenttime =0;
@@ -90,44 +90,25 @@ public class Septoria {
 	// ---------------------------------- Beginn des "täglichen" Ablaufs
 	// --------------------------------------------------------------------------\\
 
-	//@ScheduledMethod(start = 1, interval = 2)
 	public void start() {
-		//ÜBERNOMMEN VON PEST!!!!!!!!! ANPASSEN!!!!!!!!!!!!!!!
-		
-		
+
 		if (Data.getZeit() > Farmer.getInDaysST() | Farmer.getInDaysST() == 0) {    // erst wenn Wirkzeit Fungizid abgelaufen ist, kann sich Pilz weiter vermehren
-			anfaelligkeit = true;  
-			/*/Latenzzeit des Pilzes ist Temperaturabhängig
-			latenttime += Data.getTemp() + 2.4;
-			zaehler++; //zählt tage seit geburt
-			//zeit++;*/
-
+			canInfect = true;  
 		}else{
-			anfaelligkeit = false;
+			canInfect = false;
 		}
+		
 		//Latenzzeit des Pilzes ist Temperaturabhängig
-		latenttime += Data.getTemp() + 2.4;
+		latenttime += (Data.getTemp() + 2.4);
 		zaehler++; //zählt tage seit geburt
-		//zeit++;
-		
-		//System.out.println("Pest.blatt " + leaf);
-		
 
-		
-		
 		
 		if(zaehler <= 1){
 			
 			geburt = Data.getZeit() - 1;
-			
-			//System.out.println("ich bin geboren" + geburt);
-               //zu Beginn immer auf sonst. Blättern
 
 			Random ort = new Random();
-			/*if (Data.getZeit() < Data.getEc30()){
-				blatt = 6;
 
-			} else */
 			if (Data.getZeit() < Data.getEc31()){
 				blatt = ort.nextInt(3)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
 												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
@@ -150,7 +131,6 @@ public class Septoria {
 			} else {
 				blatt = ort.nextInt(3);
 			}
-			//System.out.println("ST.blatt" + blatt);
 		}
 		
 		
@@ -197,7 +177,7 @@ public class Septoria {
 					}
 			
 			
-					if(anfaelligkeit == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung	
+					if(canInfect == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung	
 								
 						fortpflanzung1();
 					}

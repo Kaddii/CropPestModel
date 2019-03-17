@@ -107,7 +107,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			
 			// -------------------------- PestSpore -------------------
 			int vermehrungGR = inkubation.nextInt(4) + 12;
-			PestSpore pestSpore = new PestSpore(space, grid, vermehrungGR, resistance, birth, zeit);
+			PestSpore pestSpore = new PestSpore(space, grid, vermehrungGR, resistance);
 			context.add(pestSpore);
 			
 			// ---------------------------------- Septoria
