@@ -293,7 +293,7 @@ public class Septoria {
 		GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
 
 		GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
-				Crop.class, 1, 1);
+				Crop.class, 10, 10);
 		List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
 																					// Umgebung der Pest in einer Liste
 		List<Crop> agents = new ArrayList<Crop>();

@@ -85,7 +85,7 @@ public class SeptoriaSpore {
 		//System.out.println("stspore");
 		
 		if (zaehler > 2){
-			sterbe();
+			die();
 		} else{
 			keimung();
 		}
@@ -119,7 +119,7 @@ public class SeptoriaSpore {
 		}
 	}
 	
-	public void sterbe() {
+	public void die() {
 		//System.out.println("septoriaspore: Ich sterbe");
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);

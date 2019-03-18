@@ -294,12 +294,12 @@ public class Pest {
 
 	
 	public void allocation() {
-		System.out.println("Zuordnung");
+
 		// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
 		GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
 
 		GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
-				Crop.class, 1, 1);
+				Crop.class, 9, 9);
 		List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
 																					// Umgebung der Pest in einer Liste
 		List<Crop> agents = new ArrayList<Crop>();

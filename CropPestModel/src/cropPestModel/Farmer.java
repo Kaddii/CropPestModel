@@ -193,27 +193,24 @@ public class Farmer {
 // ------------------------------------ Beginn des "täglichen" Ablaufs
 	// -------------------------------------------------------------------------\\
 	
-	//@ScheduledMethod(start = 2, interval = 2)
+
 	public void start() {
-		//System.out.println("Farmer");
+
 		j++;
 		pestSpore.clear();
 		septoriaSpore.clear();
 		blattlauszahl.clear();
 		septoriaanzahl.clear();
-		//zeit++;
+		zaehler++;
+
 		
-		//System.out.println("Wetter" + CropPestModelBuilder.weatherArray[0][3]);
+
 		
 //----------Abstand Spritzungen für faulen Landwirt berechnen-----------------------
 		
 	    
 		if (Data.getZeit() <= 1){
-			/*double abst = (Data.getEc61() - Data.getEc30())*0.5;
-			abstand = (int) Math.floor(abst);
-			zaehler = abstand +1;*/
-			//das drüber löschen??? alter spritzabstand (3x)
-			
+
 			schadenSTBonitur = 0; //Sonst funktionieren BatchRuns nicht
 			proS1 = 0; //gibt an ob fauler LW schon gespritzt hat
 			proS2  = 0;
@@ -222,8 +219,6 @@ public class Farmer {
 			Random spritz = new Random();
 			int n = (Data.getEc33() + Data.getEc31()) / 2;
 			int m = (Data.getEc61() + Data.getEc59()) / 2; 
-			//s1 = spritz.nextInt(n)+ Data.getEc31();
-			//s2 = spritz.nextInt(m) + Data.getEc59();
 			s1 = (int) Math.round(spritz.nextGaussian() * 1 + n);
 			s2 = (int) Math.round(spritz.nextGaussian() * 1 + m);
 			
@@ -232,12 +227,10 @@ public class Farmer {
 			//ST
 			inDaysST = 0;
 		}
-		//if (Data.getZeit() >= Data.getEc30()) { // ab Ec30 wird gezählt wie viele Tage seit letzter Spritzung vergangen sind
-			zaehler++;
-		//}
+
+			
 		
-		//System.out.println("indays" + inDays);
-		bekommeinfo();
+		getInfo();
 	}
 	
 
@@ -248,7 +241,7 @@ public class Farmer {
 	// Werte stellen immmer Wert von Vortag dar, da die drei Agenten gleichzeitig
 	// agieren
 
-	public void bekommeinfo() {
+	public void getInfo() {
 		List<Double> ertragsPotentiale = new ArrayList<Double>(); // Liste der Ertragspotentiale der einzelnen Pflanzen
 		List<Object> weizenanzahl = new ArrayList<Object>(); // Liste aller Crops
 		List<Integer> schadenGR = new ArrayList<Integer>(); // Liste aller befallenen Triebe (GR)
@@ -285,7 +278,6 @@ public class Farmer {
 				schadenSTfSechs.add(((Crop) obj).getAnzahlSTfSechs()); //ist1, wenn Crop auf f-6 befallen ist, sonst 0
 				schadenGRbFbF2.add(((Crop) obj).getAnzahlGRbFbF2());
 				
-				//grErtrag.add(((Crop) obj).getBefallGREr()); löschen
 				
 				befallGR.add(((Crop) obj).getGelbrostAnzahl());
 				befallST.add(((Crop) obj).getSeptoriaAnzahl());
@@ -308,30 +300,12 @@ public class Farmer {
 			
 		}
 		
-		//int befallFGR =0;  LÖSCHEN??
-		
-		//KANN MAN LÖSCHEN!!!!!!!!!!!!
-		/*for(Crop crop : pflanzen){
-			befallFGR += crop.getBefallFGR();
-		}
-		
-		System.out.println("BefallFahnenbl(Crop)  " + befallFGR);;*/
 		
 		//damit Gesamtanzahl in Textfile gespeichert werden kann (Auswertung)
 		gesamtGRAnzahl = blattlauszahl.size();
 		gesamtSTAnzahl = septoriaanzahl.size();
 		
-		
-		
-       
-		// Infos für Schwelle bei Folgebehandlung
-		//STIMMT NICHT!!!!!!!!!!!!!!!
-		/*for( Object obj : blattlauszahl){             //neue Sporenlager GR auf oberen drei Blattetagen entdecken
-			if (Pest.getLeaf() <= 2 && Pest.getBirth() >= letzteBonitur){ //besser nur >???????????????????????????????                
-				schwelle2 += 1;
-			}
-		}*/
-		//BIS HIERHIN
+
 		
 		//bestimmen wie viele Pflanzen von sichtbaren GR befallen sind (absolut)
 		for(Crop crop : pflanzen){    //STIMMT
@@ -381,14 +355,7 @@ public class Farmer {
 			o += schadenGRbFbF2.get(i);
 		}
 		}
-		//if(Data.getZeit() <= Data.getEc37()){                  LÖSCHEN!!!!!!!!!!!!!!
-			/*for (int i = 0; i < grErtrag.size(); i++){
-				e += grErtrag.get(i);
-			}*/ 
-		
-		/*}else { //ab ec37 sind die letzten drei blätter ertragsrelevant
-			schaedenGRErtrag = o;
-		}*/
+
 		
 		
 		schaedenGR = (double) g; // zu double, damit später befallshäufigkeit berechnet werden kann
@@ -396,18 +363,14 @@ public class Farmer {
 		schadenGRF2bF = o;
 		schaedenGRErtrag = (double) grErtrag2.size();//(double) e; //
 		
-		//System.out.println(m + "  gr  + STEr2 " + schaedenGRErtrag);
-		//System.out.println("schadenGRert " + schaedenGRErtrag);
+
 		
 
 		// Befallshäufigkeit berechnen (%)
 		schaedenprozGR = (schaedenGR / pflanzenAnzahl) * 100;
 		schaedenprozGRsicht = (schaedenGRsicht /pflanzenAnzahl) * 100;
 		schaedenprozGRErtrag = (schaedenGRErtrag /pflanzenAnzahl) * 100;
-		//System.out.println("schaedenprozGR" + schaedenprozGR + "%");
-		//System.out.println("schaedenprozGRertr  " + schaedenprozGRErtrag + "%");
-		
-		//STIMMT bis hier her!!!!!!!!!!!!!!!!
+
 		
 		
 		//-------------Befallshäufigkeit SEPTORIA
@@ -431,14 +394,14 @@ public class Farmer {
 		schaedenSTfSechs = (double) f;
 		schaedenSTErtrag = (double) stErtrag.size();
 
-		//System.out.println("schadenSTErtrag" + schaedenSTErtrag);
+
 		
 		// Befallshäufigkeit berechnen (%)
 		schaedenprozST = (schaedenST / pflanzenAnzahl) * 100;
 		schaedenprozSTsicht = (schaedenSTsicht /pflanzenAnzahl) * 100;
 		schaedenprozSTfSechs = (schaedenSTfSechs / pflanzenAnzahl) * 100;
 		schaedenprozSTErtrag = (schaedenSTErtrag /pflanzenAnzahl) * 100;
-		//System.out.println("schaedenprozST" + schaedenprozST + "%");
+
 		
 			
 		
@@ -614,15 +577,14 @@ public class Farmer {
 	
 		}
 		
-		//System.out.println("es wird gespritzt" + anzahlSpritzungen);
+
 		//kurative Wirkung (bis zu 4 Tage)
-		
-		
+
 		//Kurativleistung
 		for(Pest pest : blattlauszahl) {
 			if(pest.getBirth() >= (Data.getZeit() - gk)) {
 				pest.die();
-				//System.out.println("ich sterbe wegen der kurativlesit" + pest.getBirth());
+
 			}
 		}
 		for(Septoria septoria : septoriaanzahl) {
@@ -635,10 +597,10 @@ public class Farmer {
 		
 		//ABSTERBEN aller SPOREN!!!!!!! (da lebenserwartung kürzer als fungizid + syst. wirkung fungizid)
 		for (PestSpore pestspore : pestSpore) {
-			pestspore.sterbe();
+			pestspore.die();
 		}
 		for (SeptoriaSpore septoriaspore : septoriaSpore) {
-			septoriaspore.sterbe();
+			septoriaspore.die();
 		}
 		
 		
@@ -649,19 +611,7 @@ public class Farmer {
 		//ST
 		inDaysST = Data.getZeit() + sp;
 		i = 0; //Damit nächster Spritzvorgang erst aufgerufen werden kann, wenn die Schwelle wieder überschritten ist
-		
-		/*int inhDays;
-		Random inhibition = new Random();
-		inhDays = inhibition.nextInt(19) + 12;*/ // Spritzmittel wirkt 12-31 Tage (Diskussion: man könnte Dreiecksverteilung annehmen?)
-			
-		//inDays = Data.getZeit() + inhDays;
-		//System.out.println("Inhibition PSM" + inDays);
-		
-		//Wirkdauer Septoria
-		
-		//int inhDaysST = inhibition.nextInt(21) + 7; // Spritzmittel wirkt 7-28 Tage
-		
-		//inDaysST = zeit + inhDaysST;
+
 		kostenberechnung();
 		
 	}

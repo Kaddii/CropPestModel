@@ -158,19 +158,14 @@ public class Data {
 
 	@ScheduledMethod(start = 1, interval = 1)
 	public void weather(){
-		//System.out.println("Hallooooooooooooooooooooooooooooooooooooooooo");
+
 		if(zeit <= 1){
 			
 			//Arrays erstellen, damit das Wetter über den Verlauf der Anbauperiode aufgezeichnet werden kann
 			niederschlag = new double[200];
 			luftfeuchte = new double[200];
 			
-			//Pests den Pflanzen zuordnen
-			for (Object obj : grid.getObjects()) { 
-				/*if (obj instanceof Pest) {
-					((Pest) obj).allocation();
-				}*/
-			}
+		
 			
 		
 		}
@@ -265,18 +260,19 @@ public class Data {
 		List<Object> fEins = new ArrayList<Object>();*/
 
 		
-		if(zeit == (ec37 + 3) | zeit == (ec47 + 3) | zeit == (ec59 + 3) | zeit == (ec71 + 3)){
+		//if(zeit == (ec37 + 3) | zeit == (ec47 + 3) | zeit == (ec59 + 3) | zeit == (ec73 + 3)){
+		if(zeit == (ec37 ) | zeit == (ec47 ) | zeit == (ec59 ) | zeit == (ec73 )){
 			int z = 0;
-			if(zeit == (ec37 + 3)){
+			if(zeit == (ec37 )){
 				z = 5;
 			}
-			if(zeit == (ec47 + 3)){
+			if(zeit == (ec47 )){
 				z = 4;
 			}
-			if(zeit == (ec59 + 3)){
+			if(zeit == (ec59 )){
 				z = 3;
 			}
-			if(zeit == (ec73 + 3)){
+			if(zeit == (ec73 )){
 				z = 2;
 			}
 			for (Object obj : grid.getObjects()) { 
@@ -343,7 +339,7 @@ public class Data {
 		//AUFRUF DER AGENTEN
 		
 		//ab ec71 können sich die pilze nicht mehr vermehren/wachsen
-		if (zeit < (ec71 +3)){
+		if (zeit <= ec73 ){
 		                 
 			if(gelbrost.size() > 0){
 				for(Pest pest : gelbrost){

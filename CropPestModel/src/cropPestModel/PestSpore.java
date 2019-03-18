@@ -27,7 +27,7 @@ public class PestSpore {
 	private int inkubation;    
 	private int resistenz; 
 	private int birth;
-	private int leaf;
+	private int l;
 
 	
 	private int zaehler = 0;
@@ -56,7 +56,7 @@ public class PestSpore {
 			GridPoint pt = grid.getLocation(this);
 
 			// Crops in der Nachbarschaft bestimmen
-			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 8, 8); //alt 10,10
+			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 9, 9); //alt 10,10
 			List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true);
 
 			// speichert diese Crops in ArrayList
@@ -89,15 +89,19 @@ public class PestSpore {
 				myPoint = space.getLocation(this);
 				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
 			}
+			
+			//Überlebensdauer der Sporen wird zufällig festgelegt
+			Random life = new Random();
+			l = life.nextInt(7) + 1;
 		}
 		
 		
 		
-		if (zaehler > 2){ 
+		if (zaehler > l){ 
 			//2 für 2017
 			//spore kann max. 7 tage überleben
 			//System.out.println("PestSpore.blatt" + leaf);
-			sterbe();
+			die();
 		} else{
 			//Keimung ist Temperaturabhängig
 			if(Data.getTemp() >= 0 & Data.getTemp() <= 25 & Data.getRain() >= 1.5){
@@ -138,7 +142,7 @@ public class PestSpore {
 		
 	}
 	
-	public void sterbe() {
+	public void die() {
 	
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
