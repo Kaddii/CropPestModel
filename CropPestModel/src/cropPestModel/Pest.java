@@ -37,7 +37,7 @@ public class Pest {
 	private int inkubation; // Zeitspanne zwischen Geburt und Vermehrung (Inkubationszeit)
 	private int zaehler = 0; // Latenzzeit
 	private int resistenz; // gibt Resistenzgrad der Crop an
-	private int zeit; // zählt die ticks
+
 	private static int birth; // tick bei der Schädling geboren wurde
 	private static int leaf; //Angabe auf welchem Blatt sich GR befindet//LÖSCHNE!!!
 	private boolean canInfect = true; //gibt an ob pest pflanze gerade befallen kann oder ob diese durch ein fungizid geschützt ist
