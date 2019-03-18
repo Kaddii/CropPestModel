@@ -763,3 +763,25 @@ INFO  [Thread-5] 2019-03-17 17:03:22,747 repast.simphony.batch.ssh.LocalSession 
 INFO  [SwingWorker-pool-2-thread-2] 2019-03-17 17:03:23,185 repast.simphony.batch.ssh.LocalSession - Running model on localhost ...
 INFO  [Thread-5] 2019-03-17 17:03:23,387 repast.simphony.batch.ssh.LocalSession - zeit108
 INFO  [Thread-5] 2019-03-17 17:03:25,126 repast.simphony.batch.ssh.LocalSession - zeit109
+FATAL [Thread-7] 2019-03-18 15:29:01,419 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cropPestModel.Data$$FastClassByCGLIB$$9b3de9d5.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at cropPestModel.PestSpore.start(PestSpore.java:75)
+	at cropPestModel.Data.weather(Data.java:367)
+	... 10 more
