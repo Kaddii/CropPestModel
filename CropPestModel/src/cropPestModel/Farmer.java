@@ -216,11 +216,19 @@ public class Farmer {
 			proS2  = 0;
 			
 			//Festlegen der Tage, an denen Fauler LW spritzt
+			//Annahme Gleichverteilung in jew. Zeiträumen
+	
 			Random spritz = new Random();
-			int n = (Data.getEc33() + Data.getEc31()) / 2;
-			int m = (Data.getEc61() + Data.getEc59()) / 2; 
-			s1 = (int) Math.round(spritz.nextGaussian() * 1 + n);
-			s2 = (int) Math.round(spritz.nextGaussian() * 1 + m);
+			int n = (Data.getEc33() - Data.getEc31());
+			int m = (Data.getEc61() - Data.getEc59()); 
+			s1 = spritz.nextInt(n) + Data.getEc31();
+			s2 = spritz.nextInt(m) + Data.getEc59();
+			
+			
+				//	int n = (Data.getEc33() + Data.getEc31()) / 2;
+			//int m = (Data.getEc61() + Data.getEc59()) / 2; 
+			//s1 = (int) Math.round(spritz.nextGaussian() * 1 + n);
+			//s2 = (int) Math.round(spritz.nextGaussian() * 1 + m);
 			
 			//"Wirkung des Fungizid aus letztem Jahr aufheben" -> nur aus programmiertechnischer sicht wichti
 			inDays = 0;

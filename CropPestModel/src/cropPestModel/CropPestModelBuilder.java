@@ -48,13 +48,13 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 					new RandomCartesianAdder<Object>(),
 					// repast.simphony.space.... legt die grenzen fest. Hier also 50 mal 50
 					// erstellt auch einen grid der "grid" heißt und verbindet ihn mit dem Context
-					new repast.simphony.space.continuous.WrapAroundBorders(), 100, 100);
+					new repast.simphony.space.continuous.WrapAroundBorders(), 1000000, 1000000);
 
 			GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 			Grid<Object> grid = gridFactory.createGrid("grid", context,
 					new GridBuilderParameters<Object>(new WrapAroundBorders(),
 							// der Adder legt fest wo im Grid oder space neue Objekte zu Beginn sind
-							new SimpleGridAdder<Object>(), true, 100, 100));
+							new SimpleGridAdder<Object>(), true, 1000000, 1000000));
 			// GridBuilderParameters mit dem Wert true = es ist möglich mehrere Objekte
 			// einen Grid-Punkt besetzen können
 
@@ -68,9 +68,13 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			Random inkubation = new Random();
 			
 			//int vermehrungGR = 12;
-			int vermehrungST = inkubation.nextInt(201) + 225;  //Inkubationszeit 225-425 Gradtage für ST
+			
 	  
+			
+			
 			int resistance = (Integer) params.getValue("resistance");
+			
+			
 			// ertragspot der unterschiedlichen weizensorten
 			double ertragspot; // Ertragspotenzial der Weizenpflanzen variiert mit Sorte
 			double saatgutk;
@@ -93,11 +97,27 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			// --------------------------------------------------------
 		
 			int pestCount = (Integer) params.getValue("PestCount");
+			int STCount = (Integer) params.getValue("septoria_count");
+			int septoriaCount;
+			int rustCount;
+			//Wenn Resistenz =3 (hoch) ist Ausgangsbefall nur 60% des der anderen Varianten
+			
+			if (resistance == 2){
+				septoriaCount = (int) Math.ceil(0.8*STCount);
+				rustCount = (int) Math.ceil(0.8*pestCount);
+			}
+			else if(resistance == 3) {
+				septoriaCount = (int) Math.ceil(0.6*STCount);
+				rustCount = (int) Math.ceil(0.6*pestCount);
+			}else{
+				septoriaCount = STCount;
+				rustCount = pestCount;
+			}
 
 			int birth = 1;
 
 			
-			for (int i = 0; i < pestCount; i++) {
+			for (int i = 0; i < rustCount; i++) {
 				// variable die bestimmt wann sich die Laus vermehrt
 				int vermehrungGR = inkubation.nextInt(4) + 12; // Inkubationszeit 12 bis 15 Tage für GR
 				Pest pest = new Pest(space, grid, vermehrungGR, resistance, birth);
@@ -113,39 +133,59 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			// ---------------------------------- Septoria
 			// --------------------------------------------------------
 
-			int STCount = (Integer) params.getValue("septoria_count");
+		
 			int birthST = 1;
 			int leafST = 7;
 			boolean sichtbar = true;
 			
-			int septoriaCount;
-			//Wenn Resistenz =3 (hoch) ist Ausgangsbefall nur 60% des der anderen Varianten
+	
 			
 			
-			if(resistance == 3) {
-				septoriaCount = (int) Math.ceil(0.6*STCount);
-			}else{
-				septoriaCount = STCount;
-			}
+			
+			// variable die bestimmt wann sich die Laus vermehrt
+			//DREECKSVERTEILUNG mit a = min; b = max; c =modalwert
+			int reproductionST;
+			double a = 175;
+			double b = 440;
+			double c = 280;
+			 
+			double F = (c - a) / (b - a);
+			double rand = Math.random();
 			
 			for (int i = 0; i < septoriaCount; i++) {
-				// variable die bestimmt wann sich die Laus vermehrt
+				//Bestimmt benötigte Temperatursumme
+				if (rand < F) {
+				 reproductionST = (int) (a + Math.sqrt(rand * (b - a) * (c - a)));
+				 } else {
+				 reproductionST = (int) (b - Math.sqrt((1-rand) * (b - a) * (b - c)));
+				 }
+				 
 				
-				Septoria septoria = new Septoria(space, grid, vermehrungST, resistance);
+				
+				//int vermehrungST = inkubation.nextInt(201) + 225;  //Inkubationszeit 225-425 Gradtage für ST
+				Septoria septoria = new Septoria(space, grid, reproductionST, resistance);
 				context.add(septoria);
 
 			}
 			
 			// ---------------------------------- SeptoriaSpore
 			// -----------------------------------------------------
+			//int vermehrungST = inkubation.nextInt(201) + 225;  //Inkubationszeit 225-425 Gradtage für ST
 			
-			SeptoriaSpore septoriaSpore = new SeptoriaSpore(space, grid, vermehrungST, resistance);
+			//Bestimmt benötigte Temperatursumme
+			if (rand < F) {
+			 reproductionST = (int) (a + Math.sqrt(rand * (b - a) * (c - a)));
+			 } else {
+			 reproductionST = (int) (b - Math.sqrt((1-rand) * (b - a) * (b - c)));
+			 }
+			
+			SeptoriaSpore septoriaSpore = new SeptoriaSpore(space, grid, reproductionST, resistance);
 			context.add(septoriaSpore);
 
 			// --------------------------------- Crop
 			// ---------------------------------------------
 			
-			int cropCount = (Integer) params.getValue("cropCount");
+			int cropCount = (520*10000); //(Integer) params.getValue("cropCount");
 
 
 			for (int i = 0; i < cropCount; i++) {
