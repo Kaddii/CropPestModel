@@ -1,0 +1,39 @@
+<repast.simphony.data2.engine.FileSinkDescriptor>
+  <name>runweise</name>
+  <dataSet>ALL_DATA_Yield</dataSet>
+  <delimiter>,</delimiter>
+  <format>TABULAR</format>
+  <sourceIds class="linked-hash-set">
+    <string>run</string>
+    <string>tick</string>
+    <string>IntegralBHGR</string>
+    <string>IntegralBHGR1</string>
+    <string>IntegralBHGR2</string>
+    <string>IntegralBHGRErtrag</string>
+    <string>IntegralBHGRErtrag1</string>
+    <string>IntegralBHGRErtrag2</string>
+    <string>IntegralBHGRsicht</string>
+    <string>IntegralBHGRsicht1</string>
+    <string>IntegralBHGRsicht2</string>
+    <string>IntegralBHST</string>
+    <string>IntegralBHST1</string>
+    <string>IntegralBHST2</string>
+    <string>IntegralBHSTertrag</string>
+    <string>IntegralBHSTertrag1</string>
+    <string>IntegralBHSTertrag2</string>
+    <string>IntegralBHSTsicht</string>
+    <string>IntegralBHSTsicht1</string>
+    <string>IntegralBHSTsicht2</string>
+    <string>GRCount</string>
+    <string>GRertragCount</string>
+    <string>GRsichtCount</string>
+    <string>STCount</string>
+    <string>STertragCount</string>
+    <string>STsichtCount</string>
+    <string>Resistance</string>
+    <string>Behaviour</string>
+    <string>Jahr</string>
+  </sourceIds>
+  <fileName>runweise.txt</fileName>
+  <addTimeStamp>true</addTimeStamp>
+</repast.simphony.data2.engine.FileSinkDescriptor>

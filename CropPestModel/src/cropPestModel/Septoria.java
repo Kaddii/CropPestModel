@@ -38,12 +38,10 @@ public class Septoria {
 	private int inkubation; // Zeitspanne zwischen Geburt und Vermehrung (Inkubationszeit)
 	private int zaehler = 0; // zählt die Tage seit der letzten "Geburt" neuer Schädlinge
 	private int resistenz; // gibt Resistenzgrad der Crop an
-	private int zeit; // zählt die ticks
-	private static int birth; // tick bei der Schädling geboren wurde
-	private static int leaf; //Angabe auf welchem Blatt sich GR befindet
 	public boolean isVisible; //bevor erste inkubationszeit abgelaufen ist, kann pilz nicht entdeckt werden
 	public boolean isAlive; 
 	int a; //gibt an, an welcher crop die Pest sitzt
+	private int leaf;
 	
 	
 	private boolean canInfect; //gibt an ob pflanze durch spritzmittel geschützt ist
@@ -74,16 +72,35 @@ public class Septoria {
 	// --------------------------------------------------------------------------------\\
 
 	// Daten werden von CropPestModelBuilder auf einzelne Pest übertragen
-	public Septoria(ContinuousSpace<Object> space, Grid<Object> grid, int vermehrungST,
-			int resistance) {
+	public Septoria(ContinuousSpace<Object> space, Grid<Object> grid,
+			int resistance, int leaf) {
 		this.space = space;
 		this.grid = grid;
-		this.inkubation = vermehrungST;
 		this.resistenz = resistance;
+		this.leaf = leaf;
 		this.isVisible = false;
 		this.isAlive = true;
-		// TODO Auto-generated constructor stub
+		//DREECKSVERTEILUNG mit a = min; b = max; c =modalwert
+		int reproductionST;
+		double a = 175;
+		double b = 440;
+		double c = 280;
+		 
+		double F = (c - a) / (b - a);
+		double rand = Math.random();
+	
+			//Bestimmt benötigte Temperatursumme
+			if (rand < F) {
+			 reproductionST = (int) (a + Math.sqrt(rand * (b - a) * (c - a)));
+			 } else {
+			 reproductionST = (int) (b - Math.sqrt((1-rand) * (b - a) * (b - c)));
+			 }
+		this.inkubation = reproductionST;
+		
+
 	}
+		// TODO Auto-generated constructor stub
+	
 
 	// ---------------------------------- Beginn des "täglichen" Ablaufs
 	// --------------------------------------------------------------------------\\
@@ -95,32 +112,38 @@ public class Septoria {
 		
 		if(zaehler <= 1){
 			
-			isVisible = false;
+				isVisible = false;
+			
 			geburt = Data.getZeit() - 1;
 
 			Random ort = new Random();
 
 			if (Data.getZeit() < Data.getEc31()){
-				blatt = ort.nextInt(3)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
+				blatt = ort.nextInt(4)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
 												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
 
 			} else if (Data.getZeit() < Data.getEc32()){
-				blatt = ort.nextInt(3) + 2;
+				blatt = ort.nextInt(4) + 2;
 
 			}else if (Data.getZeit() < Data.getEc37()){
-				blatt = ort.nextInt(3) + 1;
+				blatt = ort.nextInt(4) + 1;
 
 			} else if (Data.getZeit() < Data.getEc47()){
-				blatt = ort.nextInt(3);
+				blatt = ort.nextInt(4);
 
 			} else if (Data.getZeit() < Data.getEc59()){
-				blatt = ort.nextInt(3);
+				blatt = ort.nextInt(4);
 
 			} else if (Data.getZeit() < Data.getEc71()){
-				blatt = ort.nextInt(3);
+				blatt = ort.nextInt(4);
 
 			} else {
-				blatt = ort.nextInt(3);
+				blatt = ort.nextInt(4);
+			}
+			
+			if(blatt > leaf){
+				blatt = leaf - ort.nextInt(2);
+				System.out.println("neues Blatt nötig" + blatt + "leaf" + leaf);
 			}
 		
 		
@@ -225,14 +248,14 @@ public class Septoria {
 
 		} else if (resistenz == 2) {						//mittlerer Resistenzstatus
 			if (Farmer.getSchaedenprozST() < 85) {
-				j = 93; 
+				j = 72; 
 			} else {
 				j = 95;
 			}
 
 		} else if (resistenz == 3) {						//hoher Resistenzstatus
 			if (Farmer.getSchaedenprozST() < 85) {
-				j = 98; 
+				j = 97; 
 			} else {
 				j = 97;
 			}
@@ -262,7 +285,7 @@ public class Septoria {
 				NdPoint spacePt = space.getLocation(this);
 				Context<Object> context = ContextUtils.getContext(this);
 
-				SeptoriaSpore septoriaSpore = new SeptoriaSpore(space, grid, inkubation, resistenz);
+				SeptoriaSpore septoriaSpore = new SeptoriaSpore(space, grid, inkubation, resistenz, blatt);
 				context.add(septoriaSpore);
 
 				space.moveTo(septoriaSpore, spacePt.getX(), spacePt.getY());
@@ -288,11 +311,11 @@ public class Septoria {
 	// ----------------------------------------------------------------------\\
 
 	public void allocation() {
-		System.out.println("Zuordnung");
+	
 		// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
 		GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
 
-		GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
+		/*GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
 				Crop.class, 10, 10);
 		List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
 																					// Umgebung der Pest in einer Liste
@@ -327,7 +350,7 @@ public class Septoria {
 				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
 			}
 			
-		} else {
+		} else {*/
 			// Beliebige Crop auf dem Grid wird ausgewählt
 
 			//sucht zufälliuge Weizenpflanze aus
@@ -359,7 +382,7 @@ public class Septoria {
 			}
 		} 
 	}
-}
+//}
 
 		/*if (agents.size() <= 0){
 

@@ -104,17 +104,18 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 				rustCount = (int) Math.ceil(0.8*pestCount);
 			}
 			else if(resistance == 3) {
-				septoriaCount = (int) Math.ceil(0.6*STCount);
-				rustCount = (int) Math.ceil(0.6*pestCount);
+				septoriaCount = (int) Math.ceil(0.7*STCount);
+				rustCount = (int) Math.ceil(0.7*pestCount);
 			}else{
 				septoriaCount = STCount;
 				rustCount = pestCount;
 			}
 			
+			
 			for (int i = 0; i < rustCount; i++) {
 				// variable die bestimmt wann sich die Laus vermehrt
 				int vermehrungGR = inkubation.nextInt(4) + 12; // Inkubationszeit 12 bis 15 Tage für GR
-				Pest pest = new Pest(space, grid, vermehrungGR, resistance, birth);
+				Pest pest = new Pest(space, grid, vermehrungGR, resistance);
 				context.add(pest);
 
 			}
@@ -128,18 +129,17 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			// --------------------------------------------------------
 
 			
-			int birthST = 1;
-			int leafST = 7;
-			boolean sichtbar = true;
+
 			
 		
 		
-		
-			
+				Random ort = new Random();
+				int leaf = ort.nextInt(4)+3;
 			
 				// variable die bestimmt wann sich die Laus vermehrt
 	
 				//DREECKSVERTEILUNG mit a = min; b = max; c =modalwert
+				
 				int reproductionST;
 				double a = 175;
 				double b = 440;
@@ -155,7 +155,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 					 } else {
 					 reproductionST = (int) (b - Math.sqrt((1-rand) * (b - a) * (b - c)));
 					 }
-				Septoria septoria = new Septoria(space, grid, reproductionST, resistance);
+				Septoria septoria = new Septoria(space, grid, resistance, leaf);
 				context.add(septoria);
 
 			}
@@ -191,7 +191,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			///for (int i = 0; i < farmerCount; i++) {
 				// double preis = weizenPreis / 10000; //von dt/ha auf dt/m2 umrechnen
 
-				context.add(new Farmer(space, grid, preis, price, fpreis, tox, behaviour, resistance, zeit, risktox, resistance));
+				context.add(new Farmer(space, grid, preis, price, fpreis, tox, behaviour, resistance, risktox, resistance));
 			//}
 			for (Object obj : context) {
 				NdPoint pt = space.getLocation(obj);

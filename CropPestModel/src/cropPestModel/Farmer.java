@@ -15,7 +15,7 @@ import repast.simphony.util.ContextUtils;
 public class Farmer {
 	private ContinuousSpace<Object> space; // Standort des Farmers (hypothetisch, da nicht auf Feld angezeigt)
 	private Grid<Object> grid; // hypothetische Koordinaten des Farmers
-	private int zeit; // gibt tick/zeitpunkt an
+	//private int zeit; // gibt tick/zeitpunkt an
 	private double wpreis; // Erzeugerpreis Weizen (€/dt)
 	private double ausbringKosten; // Kosten für Überfahrt,Schlepper.. (€/ha)
 	private double fpreis; // Kosten für Fungizid (€/ha)
@@ -25,8 +25,8 @@ public class Farmer {
 											// (Ertragspotential pro qm)
 	private double pflanzenAnzahl; // Anzahl an Ähren/Triebe in der Simulation
 	
-	private int gesamtGRAnzahl; // Anzahl an GR in der Simulation
-	private int gesamtSTAnzahl; //Anzahl ST in der Simulation
+	//private int gesamtGRAnzahl; // Anzahl an GR in der Simulation
+	//private int gesamtSTAnzahl; //Anzahl ST in der Simulation
 	
 	
 	private double schaedenGR; // Anzahl der befallenen Ähren (GR)
@@ -55,11 +55,11 @@ public class Farmer {
 	private int grund; //Gibt Indikation aufgrund der gespritzt wird an (1:GR; 2:ST)
 	private int j = 0; // zählt Tage die seit letzter bonitur vergangen sind
 	private int i; //zählt Anzahl der Schwellenüberschreitungen und gibt Kommando für PSM
-	private int zaehler = 25; // zählt Tage seit dem letztem Spritzvorgang (für faulen Landwirt)
-    private int abstand;      // abstand zwischen zwei spritzungen bei faulem Landwirt
+	//private int zaehler = 25; // zählt Tage seit dem letztem Spritzvorgang (für faulen Landwirt)
+    //private int abstand;      // abstand zwischen zwei spritzungen bei faulem Landwirt
     int s1; //zeitpunkt 1. Spritzvorgan Fauler LW
     int s2; //zeitpunkt 2. Spritzvorgang Fauler LW
-    private boolean schwelleST = false; //wenn Anford erfüllt, dann wird Schwelle true
+    //private boolean schwelleST = false; //wenn Anford erfüllt, dann wird Schwelle true
 
     
 	//private int inhDays; //Wirkzeit des Fungizids für GR
@@ -84,14 +84,34 @@ public class Farmer {
 	private double schadenSTBonitur = 0;
 	private int letzteBonitur; //merkt sich tick der letzten Bonitur, damit farmer unterscheiden kann ob es zu neuen infektionen gekommen ist
 
-	private int r = 0; //zähler damit rain und humidity der letzten tage gespeichert werden
-	private int h = 0;
+	//private int r = 0; //zähler damit rain und humidity der letzten tage gespeichert werden
+	//private int h = 0;
 	
 	private int proS1;
 	private int proS2;
 	
+	private int integralBHST;
+	private int integralBHSTsicht;
+	private int integralBHSTertrag;
+	private int integralBHGR;
+	private int integralBHGRsicht;
+	private int integralBHGRertrag;
 	
-	private int gr;
+	private int integralBHST1;
+	private int integralBHSTsicht1;
+	private int integralBHSTertrag1;
+	private int integralBHGR1;
+	private int integralBHGRsicht1;
+	private int integralBHGRertrag1;
+	
+	private int integralBHST2;
+	private int integralBHSTsicht2;
+	private int integralBHSTertrag2;
+	private int integralBHGR2;
+	private int integralBHGRsicht2;
+	private int integralBHGRertrag2;
+	
+	//private int gr;
 	
 	// private int resistenz; --> wird benötigt, falls Saatgutkosten in
 	// profitfunktion eingehen sollen
@@ -144,18 +164,11 @@ public class Farmer {
 	public double getSchadenprozGRsicht() {
 		return schaedenprozGRsicht;
 	}
-	//public static double getSchaedenproz() {
-		//return schaedenprozGR;
-	//}
+
 
 	public double gettoxi() {
 		return toxi;
-	}
-	//TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ÄNDERN!!!!!!!!!!!!!!!!!!!!
-	public double getIntegralBHGRErtrag(){
-		return toxi;
-	}
-	
+	}	
 	public static int getInDays() {
 		return inDays;
 	}
@@ -171,12 +184,69 @@ public class Farmer {
 	public int getBehaviour() {
 		return verhalten;
 	}
+	public int getIntegralBHST(){
+		return integralBHST; 
+	}
+	public int getIntegralBHSTsicht(){
+		return integralBHSTsicht;
+	}
+	public int getIntegralBHSTertrag(){
+		return integralBHSTertrag;
+	}
+	public int getIntegralBHGR(){
+		return integralBHGR;
+	}
+	public int getintegralBHGR(){
+		return integralBHGR;
+	}
+	public int getIntegralBHGRsicht(){
+		return integralBHGRsicht;
+	}
+	public int getIntegralBHGRErtrag(){
+		return integralBHGRertrag;
+	}
+	public int getIntegralBHST1(){
+		return integralBHST1; 
+	}
+	public int getIntegralBHSTsicht1(){
+		return integralBHSTsicht1;
+	}
+	public int getIntegralBHSTertrag1(){
+		return integralBHSTertrag1;
+	}
+	public int getIntegralBHGR1(){
+		return integralBHGR1;
+	}
+	public int getIntegralBHGRsicht1(){
+		return integralBHGRsicht1;
+	}
+	public int getIntegralBHGRErtrag1(){
+		return integralBHGRertrag1;
+	}
+	public int getIntegralBHST2(){
+		return integralBHST2; 
+	}
+	public int getIntegralBHSTsicht2(){
+		return integralBHSTsicht2;
+	}
+	public int getIntegralBHSTertrag2(){
+		return integralBHSTertrag2;
+	}
+	public int getIntegralBHGR2(){
+		return integralBHGR2;
+	}
+	public int getIntegralBHGRsicht2(){
+		return integralBHGRsicht2;
+	}
+	public int getIntegralBHGRErtrag2(){
+		return integralBHGRertrag2;
+	}
 	
 	// ------------------------------------ Konstruktor für Farmer
 	// ------------------------------------------------------------------------------\\
 
 	public Farmer(ContinuousSpace<Object> space, Grid<Object> grid, double preis, double price, double fpreis,
-			double tox, int behaviour, int saatgutk, int zeit, int risktox, int resistance) {
+			double tox, int behaviour, int saatgutk, int risktox, int resistance) {
 		this.grid = grid;
 		this.space = space;
 		this.wpreis = price;
@@ -186,7 +256,6 @@ public class Farmer {
 		this.toxi = tox;
 		this.risktoxi =risktox;
 		this.saatgutk = saatgutk;
-		this.zeit = zeit;
 		this.resistance = resistance;
 	}
 
@@ -201,7 +270,7 @@ public class Farmer {
 		septoriaSpore.clear();
 		blattlauszahl.clear();
 		septoriaanzahl.clear();
-		zaehler++;
+		//zaehler++;
 
 		
 
@@ -243,7 +312,7 @@ public class Farmer {
 
 	public void getInfo() {
 		List<Double> ertragsPotentiale = new ArrayList<Double>(); // Liste der Ertragspotentiale der einzelnen Pflanzen
-		List<Object> weizenanzahl = new ArrayList<Object>(); // Liste aller Crops
+		//List<Object> weizenanzahl = new ArrayList<Object>(); // Liste aller Crops
 		List<Integer> schadenGR = new ArrayList<Integer>(); // Liste aller befallenen Triebe (GR)
 		List<Integer> schadensichtGR = new ArrayList<Integer>();
 		List<Integer> befallGR = new ArrayList<Integer>(); // Liste der GRanzahlen der einzelnen Crops
@@ -252,7 +321,7 @@ public class Farmer {
 		List<Integer> schadenSTfSechs = new ArrayList<Integer>();
 		List<Integer> schadensichtST = new ArrayList<Integer>();
 		List<Integer> schadenGRbFbF2 = new ArrayList<Integer>();
-		List<Pest> gelbrost = new ArrayList<Pest>();
+		//List<Pest> gelbrost = new ArrayList<Pest>();
 		List<Crop> grSicht = new ArrayList<Crop>();
 		List<Crop> pflanzen = new ArrayList<Crop>();
 		List<Crop> stErtrag = new ArrayList<Crop>();
@@ -266,8 +335,8 @@ public class Farmer {
 		for (Object obj : grid.getObjects()) { // befüllen der Listen
 			if (obj instanceof Crop) {
 				pflanzen.add((Crop) obj);
-				ertragsPotentiale.add(((Crop) obj).getErtrag());
-				weizenanzahl.add(obj);
+				ertragsPotentiale.add(((Crop) obj).getErtrag());		//-->ÜBER FOR EACH AUFRUFEN (NOCH MAVHEN)
+				//weizenanzahl.add(obj);
 				
 				schadenGR.add(((Crop) obj).getAnzahlGR());        // ist 1, wenn Crop befallen, sonst 0
 				schadenST.add(((Crop) obj).getAnzahlST());        //ist 1, wenn Crop befallen (ST), sonst 0
@@ -301,13 +370,13 @@ public class Farmer {
 		}
 		
 		
-		//damit Gesamtanzahl in Textfile gespeichert werden kann (Auswertung)
+		/*/damit Gesamtanzahl in Textfile gespeichert werden kann (Auswertung)
 		gesamtGRAnzahl = blattlauszahl.size();
-		gesamtSTAnzahl = septoriaanzahl.size();
+		gesamtSTAnzahl = septoriaanzahl.size();*/
 		
 
 		
-		//bestimmen wie viele Pflanzen von sichtbaren GR befallen sind (absolut)
+		//TODO: bestimmen wie viele Pflanzen von sichtbaren GR befallen sind (absolut) HIER WEITER!!!!!
 		for(Crop crop : pflanzen){    //STIMMT
 			if(crop.getAnzahlGRsicht() == 1){
 				grSicht.add(crop);
@@ -331,8 +400,8 @@ public class Farmer {
 		}
 
 		
-		int pflAnzahl;
-		pflAnzahl = weizenanzahl.size(); // Anzahl an Weizenflanzen in Simulation
+		
+		int pflAnzahl = pflanzen.size(); // Anzahl an Weizenflanzen in Simulation
 		pflanzenAnzahl = (double) pflAnzahl; // zu double casten, damit befallshäufigkeit berechnet werden kann
 
 		
@@ -342,7 +411,7 @@ public class Farmer {
 		int g = 0; // Anzahl an befallenen Trieben/Ähren
 		int m = 0; // Anzahl befallene Triebe (sichtbar)
 		int o = 0;
-		int e = 0;
+		//int e = 0;
 		
 		for (int i = 0; i < schadenGR.size(); i++) {
 			g += schadenGR.get(i);
@@ -401,6 +470,32 @@ public class Farmer {
 		schaedenprozSTsicht = (schaedenSTsicht /pflanzenAnzahl) * 100;
 		schaedenprozSTfSechs = (schaedenSTfSechs / pflanzenAnzahl) * 100;
 		schaedenprozSTErtrag = (schaedenSTErtrag /pflanzenAnzahl) * 100;
+		
+		//Berechnen des BH Integrals, evtl. für Ertragsabschätzung genutzt
+		if(Data.getZeit() > Data.getEc30()){
+			integralBHST += schaedenprozST;
+			integralBHSTsicht += schaedenprozSTsicht;
+			integralBHSTertrag += schaedenprozSTErtrag;
+			integralBHGR += schaedenprozGR;
+			integralBHGRsicht += schaedenprozGRsicht;
+			integralBHGRertrag += schaedenprozGRErtrag;
+			if (Data.getZeit() < Data.getEc61()){
+				integralBHST1 += schaedenprozST;
+				integralBHSTsicht1 += schaedenprozSTsicht;
+				integralBHSTertrag1 += schaedenprozSTErtrag;
+				integralBHGR1 += schaedenprozGR;
+				integralBHGRsicht1 += schaedenprozGRsicht;
+				integralBHGRertrag1 += schaedenprozGRErtrag;
+			} else{
+				integralBHST2 += schaedenprozST;
+				integralBHSTsicht2 += schaedenprozSTsicht;
+				integralBHSTertrag2 += schaedenprozSTErtrag;
+				integralBHGR2 += schaedenprozGR;
+				integralBHGRsicht2 += schaedenprozGRsicht;
+				integralBHGRertrag2 += schaedenprozGRErtrag;
+			}
+			
+		}
 
 		
 			
@@ -442,7 +537,7 @@ public class Farmer {
 			
 			
 		} else {
-			throw new ArithmeticException("es sind nur Vehalten 0 bis 2 definiert");
+			throw new ArithmeticException("es sind nur Vehalten 0 bis 3 definiert");
 		}
 
 		// am erntetag wird Gewinn/Profit berechnet

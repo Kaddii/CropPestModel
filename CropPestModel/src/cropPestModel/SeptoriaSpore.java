@@ -31,7 +31,8 @@ public class SeptoriaSpore {
 	private int zaehler;
 
 
-	public SeptoriaSpore(ContinuousSpace<Object> space, Grid<Object> grid, int vermehrungST, int resistance) {
+	public SeptoriaSpore(ContinuousSpace<Object> space, Grid<Object> grid, int vermehrungST, int resistance, int leaf) {
+		this.leaf = leaf;
 		this.space = space;
 		this.grid = grid;
 		this.inkubation = vermehrungST;
@@ -108,7 +109,7 @@ public class SeptoriaSpore {
 			Context<Object> context = ContextUtils.getContext(this);
 			context.remove(this);
 			//Pilz hinzufügen
-			Septoria septoria = new Septoria(space, grid, inkubation, resistenz);
+			Septoria septoria = new Septoria(space, grid, resistenz, leaf);
 			context.add(septoria);
 
 			space.moveTo(septoria, spacePt.getX(), spacePt.getY());

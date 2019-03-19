@@ -37,9 +37,6 @@ public class Pest {
 	private int inkubation; // Zeitspanne zwischen Geburt und Vermehrung (Inkubationszeit)
 	private int zaehler = 0; // Latenzzeit
 	private int resistenz; // gibt Resistenzgrad der Crop an
-
-	private static int birth; // tick bei der Schädling geboren wurde
-	private static int leaf; //Angabe auf welchem Blatt sich GR befindet//LÖSCHNE!!!
 	private boolean canInfect = true; //gibt an ob pest pflanze gerade befallen kann oder ob diese durch ein fungizid geschützt ist
 	public boolean isVisible = false; //pest wird für landwirt erst sichtbar, wenn latenzzeit abgelaufen ist
 	int a; //gibt an, an welcher crop die Pest sitzt
@@ -74,13 +71,15 @@ public class Pest {
 
 	// Daten werden von CropPestModelBuilder auf einzelne Pest übertragen
 	public Pest(ContinuousSpace<Object> space, Grid<Object> grid, int vermehrung,
-			int resistance, int birth) {
+			int resistance) {
 		this.space = space;
 		this.grid = grid;
-		this.inkubation = vermehrung;
+		Random inku = new Random();
+		this.inkubation = inku.nextInt(4) + 12; // Inkubationszeit 12 bis 15 Tage für GR
 		this.resistenz = resistance;
 		this.isAlive = true;
 		this.isVisible = false;
+
 
 		// TODO Auto-generated constructor stub
 	}
@@ -96,32 +95,32 @@ public class Pest {
 		if(zaehler <= 1){
 			isVisible = false; //TODO: Wird wirklich gebraucht?? auch bei ST
 			geburt = Data.getZeit() - 1;
-			
+
 			 //Pilzen wird Ort hier zugewiesen
 			
 			Random ort = new Random();
  
 			if (Data.getZeit() < Data.getEc31()){
-				blatt = ort.nextInt(3)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
+				blatt = ort.nextInt(4)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
 												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
 
-			} else if (Data.getZeit() < (Data.getEc32()+3)){
-				blatt = ort.nextInt(3) + 2;
+			} else if (Data.getZeit() < (Data.getEc32())){
+				blatt = ort.nextInt(4) + 2;
 
-			}else if (Data.getZeit() < (Data.getEc37()+3)){
-				blatt = ort.nextInt(3) + 1;
+			}else if (Data.getZeit() < (Data.getEc37())){
+				blatt = ort.nextInt(4) + 1;
 
-			} else if (Data.getZeit() < (Data.getEc47()+3)){
-				blatt = ort.nextInt(3);
+			} else if (Data.getZeit() < (Data.getEc47())){
+				blatt = ort.nextInt(4);
 
-			} else if (Data.getZeit() < (Data.getEc59()+3)){
-				blatt = ort.nextInt(3);
+			} else if (Data.getZeit() < (Data.getEc59())){
+				blatt = ort.nextInt(4);
 
-			} else if (Data.getZeit() < (Data.getEc71()+3)){
-				blatt = ort.nextInt(3);
+			} else if (Data.getZeit() < (Data.getEc71())){
+				blatt = ort.nextInt(4);
 
 			} else {
-				blatt = ort.nextInt(3);
+				blatt = ort.nextInt(4);
 			}
 		
 			// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
@@ -220,10 +219,11 @@ public class Pest {
 		// befallen sinkt
 		
 		if (resistenz == 1) {							//geringer Resistenzstatus
-			if (Farmer.getSchaedenprozGR() < 85) { //alt 80,88 
-				j = 0; //alt 45
+			if (Farmer.getSchaedenprozGR() < 80) { //alt 80,88 
+					j = 0;
+				
 			} else {
-				j = 88; 
+				j = 93;
 			}
 
 		} else if (resistenz == 2) {					//mittlerer Resistenzstatus
@@ -251,8 +251,9 @@ public class Pest {
 		// Wahrscheinlichkeit, dass Pest überlebt hängt von Sorte ab
 		// Pest stirbt in Modell gleich hier wieder ab (wenn von Crop aus aufgerufen werden würde
 		// wird irgendeine Pest getötet und nicht die neue! == nicht gewollt)
+		Random tot = new Random();
 		for (int i = 0; i < 2; i++) {
-			Random tot = new Random();
+
 			int wahrscheinlichkeit = tot.nextInt(99) + 1; // zufällige zahl zwischen 1 und 100 (entsprechen %)
 
 			// Wenn die Zufallszahl höher ist, als der oben festgelegte Wert für j, dann
@@ -298,8 +299,8 @@ public class Pest {
 		// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
 		GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
 
-		GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
-				Crop.class, 9, 9);
+		/*GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, // sucht Crops in Umgebung
+				Crop.class, 10, 10);
 		List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true); // speichert alle Crops in
 																					// Umgebung der Pest in einer Liste
 		List<Crop> agents = new ArrayList<Crop>();
@@ -332,7 +333,7 @@ public class Pest {
 				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
 			}
 			
-		} else {
+		} else {*/
 			// Beliebige Crop auf dem Grid wird ausgewählt
 
 			//sucht zufälliuge Weizenpflanze aus
@@ -365,7 +366,7 @@ public class Pest {
 		} 
 
 	}
-}
+//}
 
 /*public void step() {
 

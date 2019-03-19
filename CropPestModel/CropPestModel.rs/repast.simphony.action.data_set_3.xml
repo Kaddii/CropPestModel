@@ -1,5 +1,5 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>All_Data</name>
+  <name>PestSpore</name>
   <type>AGGREGATE</type>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
@@ -11,51 +11,23 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1297979264</hashCode>
+    <hashCode>-719498639</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
-  <methodDataSources class="linked-hash-map">
-    <entry>
-      <string>Ertrag</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Ertrag</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getErtrag</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>Gewinn</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Gewinn</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getGewinn</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>Spritzwiederholung</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Spritzwiederholung</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getSpritzwiederholung</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-  </methodDataSources>
+  <methodDataSources class="linked-hash-map"/>
   <countSources class="linked-hash-map">
-    <entry>
-      <string>cropCount</string>
-      <repast.simphony.data2.engine.CountSourceDefinition>
-        <typeName>cropPestModel.Crop</typeName>
-        <id>cropCount</id>
-      </repast.simphony.data2.engine.CountSourceDefinition>
-    </entry>
     <entry>
       <string>pestCount</string>
       <repast.simphony.data2.engine.CountSourceDefinition>
         <typeName>cropPestModel.Pest</typeName>
         <id>pestCount</id>
+      </repast.simphony.data2.engine.CountSourceDefinition>
+    </entry>
+    <entry>
+      <string>pestSporeCount</string>
+      <repast.simphony.data2.engine.CountSourceDefinition>
+        <typeName>cropPestModel.PestSpore</typeName>
+        <id>pestSporeCount</id>
       </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>
   </countSources>

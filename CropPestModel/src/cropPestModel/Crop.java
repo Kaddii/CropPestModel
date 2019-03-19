@@ -61,7 +61,7 @@ public class Crop {
 	private int STertragCount;
 	private int GRCount; 
 	private int STCount;
-	private int sichtb;
+
 	
 	List<Pest> GR = new ArrayList<Pest>();
 	//List<Pest> gelbS = new ArrayList<Pest>();
@@ -166,7 +166,7 @@ public class Crop {
 
 	// ------------------------------------ Beginn des "täglichen" Ablaufs
 	// ----------------------------------------------------------------------\\
-	//@ScheduledMethod(start = 1, interval = 2)
+
 	public void start() {
 		//sicht.clear();
 
@@ -203,12 +203,9 @@ public class Crop {
 		//---------------------------------------------------
 			
 
-		int befallSichtbar = 0;
 		int befallFahnenblatt = 0;
 		int befallGR = 0;
 		int befallGRErtrag = 0;
-		List<Integer> bef = new ArrayList<Integer>();
-		//List<Integer> b = new ArrayList<Integer>();
 		List<Pest> visibleGR = new ArrayList<Pest>();
 		List<Pest> allGR = new ArrayList<Pest>();
 		List<Pest> fTof2GR = new ArrayList<Pest>();
@@ -265,7 +262,7 @@ public class Crop {
 			befallGREr = 0;
 		}
 
-		
+		//DIESE BEEIFLUSSEN MOMENTAN DEN ERTRAG (WIRKLICH) vgl. ERtragsfkt.
 		schaedlingsAnzahl = allGR.size(); // Schädlingsanzahl(gesamt) auf private variable übertragen
 		befallGRE = befallGR;            //Schädlingsanzahl die ertrag beeinflusst
 		befallFGR = befallFahnenblatt;   //Schädlinge auf Fahnenblatt

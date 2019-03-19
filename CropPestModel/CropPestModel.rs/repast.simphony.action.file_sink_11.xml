@@ -1,0 +1,17 @@
+<repast.simphony.data2.engine.FileSinkDescriptor>
+  <name>Calibration</name>
+  <dataSet>All_Data</dataSet>
+  <delimiter>,</delimiter>
+  <format>TABULAR</format>
+  <sourceIds class="linked-hash-set">
+    <string>tick</string>
+    <string>SchadenprozGRsicht</string>
+    <string>SchaedenprozGR</string>
+    <string>SchaedenprozGRE</string>
+    <string>SchaedenprozST</string>
+    <string>SchaedenprozSTE</string>
+    <string>SchaedenprzSTsicht</string>
+  </sourceIds>
+  <fileName>Calibration.txt</fileName>
+  <addTimeStamp>true</addTimeStamp>
+</repast.simphony.data2.engine.FileSinkDescriptor>

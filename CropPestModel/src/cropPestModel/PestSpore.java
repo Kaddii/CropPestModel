@@ -56,7 +56,7 @@ public class PestSpore {
 			GridPoint pt = grid.getLocation(this);
 
 			// Crops in der Nachbarschaft bestimmen
-			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 9, 9); //alt 10,10
+			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 7, 7); //alt 10,10
 			List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true);
 
 			// speichert diese Crops in ArrayList
@@ -90,14 +90,14 @@ public class PestSpore {
 				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
 			}
 			
-			//Überlebensdauer der Sporen wird zufällig festgelegt
+			/*/Überlebensdauer der Sporen wird zufällig festgelegt
 			Random life = new Random();
-			l = life.nextInt(7) + 1;
+			l = life.nextInt(8);*/
 		}
 		
 		
 		
-		if (zaehler > l){ 
+		if (zaehler > 2){ 
 			//2 für 2017
 			//spore kann max. 7 tage überleben
 			//System.out.println("PestSpore.blatt" + leaf);
@@ -132,7 +132,7 @@ public class PestSpore {
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
 		//Pilz hinzufügen
-		Pest pest = new Pest(space, grid, inkubation, resistenz, birth);
+		Pest pest = new Pest(space, grid, inkubation, resistenz);
 		context.add(pest);
 
 		space.moveTo(pest, spacePt.getX(), spacePt.getY());

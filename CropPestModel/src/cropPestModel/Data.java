@@ -343,7 +343,7 @@ public class Data {
 		                 
 			if(gelbrost.size() > 0){
 				for(Pest pest : gelbrost){
-					if(pest.isAlive){
+					if(pest.isAlive == true){
 					pest.start();
 					}
 				}

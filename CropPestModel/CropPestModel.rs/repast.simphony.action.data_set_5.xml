@@ -1,5 +1,5 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>Befallshäufigkeiten</name>
+  <name>BefallGR</name>
   <type>AGGREGATE</type>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
@@ -11,7 +11,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-657313655</hashCode>
+    <hashCode>2110781354</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
@@ -25,29 +25,20 @@
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>BefallST</string>
+      <string>BefallGRsicht</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>BefallST</id>
+        <id>BefallGRsicht</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getSchaedenprozST</methodName>
+        <methodName>getSchadenprozGRsicht</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>BefallGREr</string>
+      <string>BefallGRertrag</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>BefallGREr</id>
+        <id>BefallGRertrag</id>
         <className>cropPestModel.Farmer</className>
         <methodName>getSchaedenprozGRE</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>BefallSTEr</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>BefallSTEr</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getSchaedenprozSTE</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>

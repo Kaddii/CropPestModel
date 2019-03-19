@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>Agents</name>
-  <dataSet>Agent_Count</dataSet>
+  <name>BefallGR</name>
+  <dataSet>BefallGR</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
-  <yAxisLabel></yAxisLabel>
-  <chartTitle>AgentCounts</chartTitle>
+  <yAxisLabel>100</yAxisLabel>
+  <chartTitle>BefallGR</chartTitle>
   <type>TIME_SERIES</type>
   <background>
     <red>192</red>
@@ -21,21 +21,21 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>GRCount</string>
+      <string>BefallGR</string>
       <SeriesData>
-        <label>GRCount</label>
+        <label>BefallGR</label>
         <color>
-          <red>255</red>
+          <red>0</red>
           <green>0</green>
-          <blue>0</blue>
+          <blue>255</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>
     </entry>
     <entry>
-      <string>cropCount</string>
+      <string>BefallGRertrag</string>
       <SeriesData>
-        <label>cropCount</label>
+        <label>BefallGRertrag</label>
         <color>
           <red>0</red>
           <green>255</green>
@@ -45,12 +45,12 @@
       </SeriesData>
     </entry>
     <entry>
-      <string>STCount</string>
+      <string>BefallGRsicht</string>
       <SeriesData>
-        <label>STCount</label>
+        <label>BefallGRsicht</label>
         <color>
           <red>255</red>
-          <green>255</green>
+          <green>0</green>
           <blue>0</blue>
           <alpha>255</alpha>
         </color>
