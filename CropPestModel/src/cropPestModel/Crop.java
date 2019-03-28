@@ -35,20 +35,34 @@ public class Crop {
 	private int anzahlGR; // ist 1 sobald Crop von Schädling befallen wird (Info für Farmer)
 	private int anzahlST; //s. oben
 	
+	public boolean fFourST;
+	public boolean visibleSeptoria = false;
+	public boolean yieldSeptoria = false;
+	public boolean allSeptoria = false;
+	public boolean infestationFsixST = false;
+	public boolean visibleGR = false;
+	public boolean yieldGR = false;
+	public boolean allGelbrost = false;
+	public boolean FtoF2GR = false;
+	
+	
+	
 	private int schaedlingsAnzahl; // Anzahl an GR an einer Pflanze
 	private int septoriaAnzahl;   //Anzahl ST an einer Pflanze
 	
 	private int a;     //Hilfe um Ertragsmindernde Pilzsporen zu ermitteln
 	
 	private int visibleInfestationST; //ist 1 sobald Crop von sichtbarem ST befallen
-	private int befallsichtbarGR; //ist 1 sobald Crop von sichtbarem GR befallen
+	//private int befallsichtbarGR; //ist 1 sobald Crop von sichtbarem GR befallen
 	
-	private int visibleInfestationFSixST;
+	//private int visibleInfestationFSixST;
 	
 	private int befallGREr; //sichtbarer ertragsrelevanter Befall (entspricht bonituren in Feldversuchen..)
 	private int befallSTEr;
 	
-	private int befallbFbF2;       // GR auf f-2 bis f
+	//private int befallbFbF2;       // GR auf f-2 bis f
+	private int infestationYieldST;
+	private int infestationVisibleST;
 	
 	private int befallGRE; //Ertragsrelevanter Befall Gelbrost
 	private int befallFGR; //Befall Fahnenblatt Gelbrost
@@ -61,18 +75,30 @@ public class Crop {
 	private int STertragCount;
 	private int GRCount; 
 	private int STCount;
+	
+	private int GRsichtCount1; 
+	private int GRertragCount1;
+	private int STsichtCount1;
+	private int STertragCount1; 
+	private int GRCount1;
+	private int STCount1;
+	
+	private int GRsichtCount2; 
+	private int GRertragCount2;
+	private int STsichtCount2;
+	private int STertragCount2; 
+	private int GRCount2;
+	private int STCount2;
 
 	
 	List<Pest> GR = new ArrayList<Pest>();
-	//List<Pest> gelbS = new ArrayList<Pest>();
-	//List<Pest> gelbfbf2 = new ArrayList<Pest>();
+	
 	
 	List<Septoria> ST = new ArrayList<Septoria>();
-	//List<Septoria> septS = new ArrayList<Septoria>();
-	//List<Septoria> septfSechs = new ArrayList<Septoria>();
+
 	
 	
-	//List<Pest> sicht = new ArrayList<Pest>();
+
 
 
 	// ------------------------------------------- Aufrufe
@@ -90,21 +116,19 @@ public class Crop {
 		return anzahlST;
 	}
 	
-	public int getAnzahlGRsicht() {
-		return befallsichtbarGR;
-	}
+
 	
-	public int getAnzahlGRbFbF2() {
-		return befallbFbF2;
+	public int getInfestationYieldST() {
+		return infestationYieldST;	
+	}
+	public int getInfestationVisibleST() {
+		return infestationVisibleST;	
 	}
 	
 	public int getAnzahlSTsicht(){
 		return visibleInfestationST;
 	}
 	
-	public int getAnzahlSTfSechs(){
-		return visibleInfestationFSixST;
-	}
 
 	
 	public int getGelbrostAnzahl() {
@@ -146,6 +170,44 @@ public class Crop {
 	public int getSTCount(){
 		return STCount;
 	}
+	
+	public int getGRsichtCount1(){
+		return GRsichtCount1;
+	}
+	public int getGRertragCount1(){
+		return GRertragCount1; 
+	}
+	public int getSTsichtCount1(){
+		return STsichtCount1;
+	}
+	public int getSTertragCount1(){
+		return STertragCount1;
+	}
+	public int getGRCount1(){
+		return GRCount1;
+	}
+	public int getSTCount1(){
+		return STCount1;
+	}
+	
+	public int getGRsichtCount2(){
+		return GRsichtCount2;
+	}
+	public int getGRertragCount2(){
+		return GRertragCount2; 
+	}
+	public int getSTsichtCount2(){
+		return STsichtCount2;
+	}
+	public int getSTertragCount2(){
+		return STertragCount2;
+	}
+	public int getGRCount2(){
+		return GRCount2;
+	}
+	public int getSTCount2(){
+		return STCount2;
+	}
 
 
 
@@ -161,6 +223,7 @@ public class Crop {
 		this.space = space;
 		this.grid = grid;
 		this.ertragspot = ertragspot;
+		this.fFourST = false;
 
 	}
 
@@ -171,17 +234,14 @@ public class Crop {
 		//sicht.clear();
 
 		//Werte null setzen, damit in diesem tick aktueller wert dafür eingesetzt wird
-		befallsichtbarGR = 0;
-		befallbFbF2 = 0;
-		visibleInfestationST = 0; 
-		visibleInfestationFSixST = 0;
+		
 		befallGRE = 0; 
 		befallFGR = 0; 
 		befallSTE = 0; 
 		befallFST = 0;
 		befallGREr = 0;
 		befallSTEr = 0;
-
+		infestationYieldST = 0;
 		
 		
 		//------------------------------- Momentanes Ec Stadium ermitteln und dementsprechend Ertragsmindernde Blätter----------------
@@ -198,6 +258,20 @@ public class Crop {
 			a = 2; //f-2
 		}
 		
+		//Booleans auf false setzen, damit neu detektiert werden kann, ob entsprechende Pathogene vorhanden
+		allSeptoria = false;
+		visibleSeptoria = false;
+		yieldSeptoria = false;
+		infestationFsixST = false;
+		
+		
+		allGelbrost = false;
+		visibleGR = false;
+		yieldGR = false;
+		FtoF2GR = false;
+		
+		
+		
 
 		//----Ermitteln der zu Crop gehörenden Pest/GR-------------
 		//---------------------------------------------------
@@ -206,66 +280,44 @@ public class Crop {
 		int befallFahnenblatt = 0;
 		int befallGR = 0;
 		int befallGRErtrag = 0;
-		List<Pest> visibleGR = new ArrayList<Pest>();
-		List<Pest> allGR = new ArrayList<Pest>();
-		List<Pest> fTof2GR = new ArrayList<Pest>();
+		int allGR = 0;
+		int befallGRsicht = 0;
+
 		
 		for (Pest pest : GR){
 			if(pest.isAlive == true){
-				allGR.add(pest);
+				allGelbrost = true;
+				allGR += 1;
 				
 				if(pest.getLeaf() <= a){             
 					befallGR++;
 				}
 				if(pest.getLeaf() <= 2){
-					fTof2GR.add(pest);
+					FtoF2GR = true;
 				}
 				if (pest.getLeaf() <= 0){		
 					// TODO: noch benötigt??
 					befallFahnenblatt++;	
 				}
 				if (pest.isVisible == true){
-					visibleGR.add(pest);
+					befallGRsicht += 1;
+					visibleGR = true;
 					if(pest.getLeaf() <= a){
 						befallGRErtrag++;
+						yieldGR = true;
 					}
 				}
 			}
 		}
 		
 
-		
-		// zählt, wenn Schädling an Crop ist
-		// damit kann Farmer die Anzahl der befallenen Haupttriebe ermitteln
-	
-
-		if (allGR.size() > 0) {
-			anzahlGR = 1;
-			
-		} else {
-			anzahlGR = 0;
-		}
-		if (visibleGR.size() > 0) {
-			befallsichtbarGR = 1;	
-		}else{
-			befallsichtbarGR = 0;
-		}
-		
-		if (fTof2GR.size() > 0) {
-			befallbFbF2 = 1;
-		}else {
-			befallbFbF2 = 0;
-		}
-		if (befallGRErtrag > 0){
-			befallGREr = 1;
-		} else {
-			befallGREr = 0;
-		}
 
 		//DIESE BEEIFLUSSEN MOMENTAN DEN ERTRAG (WIRKLICH) vgl. ERtragsfkt.
-		schaedlingsAnzahl = allGR.size(); // Schädlingsanzahl(gesamt) auf private variable übertragen
+		schaedlingsAnzahl = allGR; // Schädlingsanzahl(gesamt) auf private variable übertragen
 		befallGRE = befallGR;            //Schädlingsanzahl die ertrag beeinflusst
 		befallFGR = befallFahnenblatt;   //Schädlinge auf Fahnenblatt
+		
+	
 	
 		
 		
@@ -278,77 +330,82 @@ public class Crop {
 		int befallFahnenblattST = 0;
 		int befallST = 0;
 		int befallSTErtrag = 0;
-		List<Septoria> allST = new ArrayList<Septoria>();
+		int allST = 0;
+		int visibleST = 0;
+
 		List<Septoria> fSixST = new ArrayList<Septoria>();
-		List<Septoria> visibleST = new ArrayList<Septoria>();
 		
 		//alle ST
 		for (Septoria septoria : ST){
 			if(septoria.isAlive == true){
-				allST.add(septoria);
+				allST += 1;
+				allSeptoria = true;
+				
 				
 				if(septoria.getLeaf() <= a){             
 					befallST++;
 				}
-				if(septoria.getLeaf() == 6){
-					fSixST.add(septoria);
+				if(septoria.getLeaf() == 6){;
+					infestationFsixST = true;
+
 				}
+
 					/*TODO: noch benötigt???if (septoria.getLeaf() <= 0){
 						//System.out.println("Halloooooo");
 						befallFahnenblattST++;	
 					}*/
 				if (septoria.isVisible == true){
-					visibleST.add(septoria);
+					visibleST += 1;
+					visibleSeptoria = true;
 					if(septoria.getLeaf() <= a){
 						befallSTErtrag++;
+						yieldSeptoria = true;
 					}
+					
+					
+				}else {
+					//visibleSeptoria = false;
 				}
+			}else {
+				//allSeptoria = false;
 			}
 		}
 		
-
-		// zählt, wenn Schädling an Crop ist
-		// damit kann Farmer die Anzahl der befallenen Haupttriebe ermitteln
-
-		if (allST.size() > 0) {
-			//System.out.println(gelb.toString());
-			anzahlST = 1;
-			
-		}else {
-			anzahlST = 0;
-		}
 		
-		if (visibleST.size() > 0) {
-			visibleInfestationST = 1;
-		} else {
-			visibleInfestationST = 0;
-		}
-		
-		if (fSixST.size() > 0) {
-			visibleInfestationFSixST = 1;
-		} else {
-			visibleInfestationFSixST = 0;
-		}
-		
-		if (befallSTErtrag > 0){
-			befallSTEr = 1;
-		} else {
-			befallSTEr = 0;
-		}
 
-		septoriaAnzahl = allST.size(); // Schädlingsanzahl(gesamt) auf private variable übertragen
+		septoriaAnzahl = allST; // Schädlingsanzahl(gesamt) auf private variable übertragen
 		befallSTE = befallST;            //Schädlingsanzahl die ertrag beeinflusst
 		befallFST = befallFahnenblattST;   //Schädlinge auf Fahnenblatt
+		infestationYieldST = befallSTErtrag; //zur Übersicht während Kalibrierung genutzt
+		infestationVisibleST = visibleST;
+		
 		
 		//----FÜR AUSWERTUNG: Ermittleln der Anzahl an Pathogenen im jew. Stadium der Simulation
 		//-----------------------------------------
 	
-		GRsichtCount += visibleGR.size();
+		if(Data.getZeit() > Data.getEc30()){
+		GRsichtCount += befallGRsicht;
 		GRertragCount += befallGRErtrag;
-		STsichtCount += visibleST.size();
+		STsichtCount += visibleST;
 		STertragCount += befallSTErtrag;
-		GRCount += allGR.size();
-		STCount += allST.size();
+		GRCount += allGR;
+		STCount += allST;
+		if (Data.getZeit() < Data.getEc61()){
+			GRsichtCount1 += befallGRsicht;
+			GRertragCount1 += befallGRErtrag;
+			STsichtCount1 += visibleST;
+			STertragCount1 += befallSTErtrag;
+			GRCount1 += allGR;
+			STCount1 += allST;
+		} else {
+			GRsichtCount2 += befallGRsicht;
+			GRertragCount2 += befallGRErtrag;
+			STsichtCount2 += visibleST;
+			STertragCount2 += befallSTErtrag;
+			GRCount2 += allGR;
+			STCount2 += allST;
+		}
+		}
 		
 		
 		

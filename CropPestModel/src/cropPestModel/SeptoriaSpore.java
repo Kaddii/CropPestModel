@@ -29,6 +29,8 @@ public class SeptoriaSpore {
 	private int zeit;
 	
 	private int zaehler;
+	
+	public boolean isAlive;
 
 
 	public SeptoriaSpore(ContinuousSpace<Object> space, Grid<Object> grid, int vermehrungST, int resistance, int leaf) {
@@ -37,6 +39,7 @@ public class SeptoriaSpore {
 		this.grid = grid;
 		this.inkubation = vermehrungST;
 		this.resistenz = resistance;
+		this.isAlive = true;
 	}
 	
 	public void start() {
@@ -124,6 +127,7 @@ public class SeptoriaSpore {
 		//System.out.println("septoriaspore: Ich sterbe");
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
+		isAlive = false;
 
 	}
 }

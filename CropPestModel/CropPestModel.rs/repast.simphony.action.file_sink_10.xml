@@ -33,6 +33,12 @@
     <string>Resistance</string>
     <string>Behaviour</string>
     <string>Jahr</string>
+    <string>GRsichtCount2</string>
+    <string>GRCount1</string>
+    <string>GRCount2</string>
+    <string>GRertragCount1</string>
+    <string>GRertragCount2</string>
+    <string>GRsichtCount1</string>
   </sourceIds>
   <fileName>runweise.txt</fileName>
   <addTimeStamp>true</addTimeStamp>

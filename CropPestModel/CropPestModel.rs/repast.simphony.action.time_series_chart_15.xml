@@ -21,6 +21,18 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
+      <string>SeptoriaVisible</string>
+      <SeriesData>
+        <label>SeptoriaVisible</label>
+        <color>
+          <red>204</red>
+          <green>0</green>
+          <blue>204</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
       <string>pestCount</string>
       <SeriesData>
         <label>pestCount</label>
@@ -28,6 +40,54 @@
           <red>255</red>
           <green>0</green>
           <blue>51</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>SeptoriaSpore</string>
+      <SeriesData>
+        <label>SeptoriaSpore</label>
+        <color>
+          <red>102</red>
+          <green>255</green>
+          <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>SeptoriaYield</string>
+      <SeriesData>
+        <label>SeptoriaYield</label>
+        <color>
+          <red>51</red>
+          <green>255</green>
+          <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>Septoria</string>
+      <SeriesData>
+        <label>Septoria</label>
+        <color>
+          <red>51</red>
+          <green>51</green>
+          <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>SeptoriaSporeReal</string>
+      <SeriesData>
+        <label>SeptoriaSporeReal</label>
+        <color>
+          <red>255</red>
+          <green>255</green>
+          <blue>0</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>

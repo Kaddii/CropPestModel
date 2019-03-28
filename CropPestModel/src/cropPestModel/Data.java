@@ -17,23 +17,23 @@ import repast.simphony.util.ContextUtils;
 public class Data {
 	//Daten Ec Stadien
 	//Daten Dahnsdorf 2017 (ISIP)
-	private static int ec30 = 57;
-	private static int ec31 = 60;
-	private static int ec32 = 78;
-	private static int ec33 = 83;
-	private static int ec37 = 84;
-	private static int ec39 = 93;
-	private static int ec43 = 94;
-	private static int ec47 = 95;
-	private static int ec51 = 96;
-	private static int ec55 = 100;
-	private static int ec59 = 101;
-	private static int ec61 = 102;
-	private static int ec65 = 105;
-	private static int ec69 = 109;
-	private static int ec71 = 114;
-	private static int ec73 = 117;
-	private static int harvest = 166;
+	private static int ec30;// = 57;
+	private static int ec31; //= 60;
+	private static int ec32; //= 78;
+	private static int ec33; // = 83;
+	private static int ec37; // = 84;
+	private static int ec39; // = 93;
+	private static int ec43; // = 94;
+	private static int ec47; // = 95;
+	private static int ec51;// = 96;
+	private static int ec55; // = 100;
+	private static int ec59;// = 101;
+	private static int ec61;// = 102;
+	private static int ec65;// = 105;
+	private static int ec69;// = 109;
+	private static int ec71;// = 114;
+	private static int ec73;// = 117;
+	private static int harvest;// = 166;
 	
 	//allgemein
 	private ContinuousSpace<Object> space; // Standort des Farmers (hypothetisch, da nicht auf Feld angezeigt)
@@ -110,6 +110,9 @@ public class Data {
 		public static int getEc61(){
 			return ec61;
 		}
+		public static int getEc65(){
+			return ec65;
+		}
 		public static int getEc71(){
 			return ec71;
 		}
@@ -146,10 +149,29 @@ public class Data {
 		}
 
 
-	public Data(ContinuousSpace<Object> space, Grid<Object> grid, int zeit){
+	public Data(ContinuousSpace<Object> space, Grid<Object> grid, int zeit, int ec30, int ec31, int ec32, int ec33, int ec37, int ec39,	int ec43, int ec47,
+				int ec51, int ec55,	int ec59, int ec61,	int ec65, int ec69,	int ec71, int ec73,	int harvest){
 		this.grid = grid;
 		this.space = space;
 		this.zeit = zeit;
+		this.ec30 = ec30;
+		this.ec31 = ec31;
+		this.ec32 = ec32;
+		this.ec33 = ec33;
+		this.ec37 = ec37;
+		this.ec39 = ec39;
+		this.ec43 = ec43;
+		this.ec47 = ec47;
+		this.ec51 = ec51;
+		this.ec55 = ec55;
+		this.ec59 = ec59;
+		this.ec61 = ec61;
+		this.ec65 = ec65;
+		this.ec69 = ec69;
+		this.ec71 = ec71;
+		this.ec73 = ec73;
+		this.harvest = harvest;
+		
 		}
 
 
@@ -174,18 +196,33 @@ public class Data {
 		septSchwelle2 = 0;
 		System.out.println("zeit" + zeit);
 		
+		//System.out.println("Res" + CropPestModelBuilder.seedArray[1][0]);
+		//System.out.println("Saatgutk" + CropPestModelBuilder.seedArray[1][1]);
+		//System.out.println("Menge" + CropPestModelBuilder.seedArray[2][2]);
 
 		
 	
 		
 		
-		/*if(zeit == ec31){
+		if(zeit == ec31){
 			System.out.println("EC31!!!!!");
 		} else if (zeit == ec32){
 			System.out.println("EC32!!!!");
 		} else if (zeit == ec37){
 			System.out.println("EC37!!!");
-		}*/
+		} else if (zeit == ec43){
+			System.out.println("EC43!!!!");
+		} else if (zeit == ec55){
+			System.out.println("EC55!!!");
+		} else if (zeit == ec59){
+			System.out.println("EC59!!!!");
+		} else if (zeit == ec61){
+			System.out.println("EC61!!!");
+		} else if (zeit == ec73){
+			System.out.println("EC73!!!!");
+		} else if (zeit == harvest){
+			System.out.println("harvest!!!");
+		}
 		
 		//alle 10 Tage (i) wird ausgewählt aus welchem Jahr die Witterungsdaten stammen
 		/*if(i >= 10)

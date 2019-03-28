@@ -14,7 +14,35 @@
     <hashCode>-719498639</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
-  <methodDataSources class="linked-hash-map"/>
+  <methodDataSources class="linked-hash-map">
+    <entry>
+      <string>SeptoriaSpore</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>SeptoriaSpore</id>
+        <className>cropPestModel.Crop</className>
+        <methodName>getAnzahlGR</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>SeptoriaVisible</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>SeptoriaVisible</id>
+        <className>cropPestModel.Crop</className>
+        <methodName>getInfestationVisibleST</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>SeptoriaYield</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>SeptoriaYield</id>
+        <className>cropPestModel.Crop</className>
+        <methodName>getInfestationYieldST</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+  </methodDataSources>
   <countSources class="linked-hash-map">
     <entry>
       <string>pestCount</string>
@@ -28,6 +56,20 @@
       <repast.simphony.data2.engine.CountSourceDefinition>
         <typeName>cropPestModel.PestSpore</typeName>
         <id>pestSporeCount</id>
+      </repast.simphony.data2.engine.CountSourceDefinition>
+    </entry>
+    <entry>
+      <string>Septoria</string>
+      <repast.simphony.data2.engine.CountSourceDefinition>
+        <typeName>cropPestModel.Septoria</typeName>
+        <id>Septoria</id>
+      </repast.simphony.data2.engine.CountSourceDefinition>
+    </entry>
+    <entry>
+      <string>SeptoriaSporeReal</string>
+      <repast.simphony.data2.engine.CountSourceDefinition>
+        <typeName>cropPestModel.SeptoriaSpore</typeName>
+        <id>SeptoriaSporeReal</id>
       </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>
   </countSources>

@@ -28,6 +28,7 @@ public class PestSpore {
 	private int resistenz; 
 	private int birth;
 	private int l;
+	public boolean isAlive;
 
 	
 	private int zaehler = 0;
@@ -40,6 +41,7 @@ public class PestSpore {
 		this.grid = grid;
 		this.inkubation = vermehrung;
 		this.resistenz = resistance;
+		this.isAlive = true;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -56,7 +58,7 @@ public class PestSpore {
 			GridPoint pt = grid.getLocation(this);
 
 			// Crops in der Nachbarschaft bestimmen
-			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 7, 7); //alt 10,10
+			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 10, 10); //alt 7,7
 			List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true);
 
 			// speichert diese Crops in ArrayList
@@ -146,7 +148,7 @@ public class PestSpore {
 	
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
-
+		isAlive = false;
 	}
 }
 

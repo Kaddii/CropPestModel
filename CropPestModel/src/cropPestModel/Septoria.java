@@ -40,6 +40,7 @@ public class Septoria {
 	private int resistenz; // gibt Resistenzgrad der Crop an
 	public boolean isVisible; //bevor erste inkubationszeit abgelaufen ist, kann pilz nicht entdeckt werden
 	public boolean isAlive; 
+	private boolean hasInfected;
 	int a; //gibt an, an welcher crop die Pest sitzt
 	private int leaf;
 	
@@ -48,6 +49,7 @@ public class Septoria {
 	private int blatt; //gibt an auf welchem blatt sich ST befindet
 	private int geburt;
 	private double latenttime = 0;
+	
 	
 	List<Crop> agenten = new ArrayList<Crop>();
 	
@@ -80,6 +82,7 @@ public class Septoria {
 		this.leaf = leaf;
 		this.isVisible = false;
 		this.isAlive = true;
+		this.hasInfected = false;
 		//DREECKSVERTEILUNG mit a = min; b = max; c =modalwert
 		int reproductionST;
 		double a = 175;
@@ -109,16 +112,24 @@ public class Septoria {
 
 		zaehler++; //zählt tage seit geburt
 
+
+		
 		
 		if(zaehler <= 1){
 			
-				isVisible = false;
+			//isVisible = false;
+			//System.out.println("hasInfected " + hasInfected);	
+				
 			
 			geburt = Data.getZeit() - 1;
 
 			Random ort = new Random();
-
-			if (Data.getZeit() < Data.getEc31()){
+			
+			if (Data.getZeit() < 3){ //erste Infektionen (überwintert) befinden sich auf f-6
+				blatt = ort.nextInt(2) + 5;
+				isVisible = true;
+				//System.out.println("ich werde aufgerufen" + blatt);
+			}else if (Data.getZeit() < Data.getEc31()){
 				blatt = ort.nextInt(4)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
 												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
 
@@ -140,11 +151,10 @@ public class Septoria {
 			} else {
 				blatt = ort.nextInt(4);
 			}
-			
-			if(blatt > leaf){
+			//leaf = blatt;
+			/*if(blatt > leaf){
 				blatt = leaf - ort.nextInt(2);
-				System.out.println("neues Blatt nötig" + blatt + "leaf" + leaf);
-			}
+			}*/
 		
 		
 		
@@ -183,6 +193,8 @@ public class Septoria {
 				allocation();
 			}
 		}
+		
+		
 
 		//ST überprüft, ob Sie sich weiterentwickeln kann
 		if (Data.getZeit() > Farmer.getInDaysST() | Farmer.getInDaysST() == 0) {    // erst wenn Wirkzeit Fungizid abgelaufen ist, kann sich Pilz weiter vermehren
@@ -194,18 +206,33 @@ public class Septoria {
 		//Latenzzeit des Pilzes ist Temperaturabhängig
 		latenttime += (Data.getTemp() + 2.4);
 		
+		//Untere Septoria können nicht mehr zu neuen Infektionen führen (Annahme: Weg ist zu weit)
+		if (Data.getZeit() >= Data.getEc37()){
+			if (leaf > 4){
+				canInfect = false;
+			}
+		} else if (Data.getZeit() >= Data.getEc32()){
+			if(leaf > 5){
+				canInfect = false;
+			}
+		}else if(Data.getZeit() >= Data.getEc31()){
+			if (leaf > 6){
+				canInfect = false;
+			}
+		}
 		
-		
-		if (latenttime > inkubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
+		if(Data.getZeit() >= (geburt + 14)){
+			if (latenttime > inkubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
 														// Schädling fort
-			isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
+				isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
 	
 				if(canInfect == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung				
 					fortpflanzung1();
 				}
-		}else {
-			isVisible = false;
+			}
+	
 		}
+		
 	
 	}
 
@@ -227,6 +254,7 @@ public class Septoria {
 	
 	
 	public void fortpflanzung2() {
+		
 		GridPoint pt = grid.getLocation(this);
 
 		// Wahrscheinlichkeit, dass Schädling die Geburt überlebt ist je nach
@@ -240,38 +268,46 @@ public class Septoria {
 			// Platz an einer Crop findet und somit die Wahrscheinlichkeit die Pflanze zu
 			// befallen sinkt
 			//j = 0;
-			if (Farmer.getSchaedenprozST() < 85){//95)      //niedriger Resistenzstatus
+			if (Farmer.getSchaedenprozST() < 90){//95)      //niedriger Resistenzstatus
 				j = 0;
 			} else {
-				j = 90; 
+				j = 85; 
 			}
 
 		} else if (resistenz == 2) {						//mittlerer Resistenzstatus
-			if (Farmer.getSchaedenprozST() < 85) {
-				j = 72; 
+			if (Farmer.getSchaedenprozST() < 80) {
+				j = 60; 
 			} else {
-				j = 95;
+				j = 90;
 			}
 
 		} else if (resistenz == 3) {						//hoher Resistenzstatus
-			if (Farmer.getSchaedenprozST() < 85) {
-				j = 97; 
+			if (Farmer.getSchaedenprozST() < 80) {
+				j = 80; 
 			} else {
-				j = 97;
+				j = 96;
 			}
 
 			// Falls falsche Zahl in GUI Oberfläche eingegeben wird bricht die Simulation ab
 		} else {
 			throw new ArithmeticException("es sind nur Resistenzwerte zwischen 1 und 3 definiert");
 		}
+		
+		//Abfrage ob bereits Sporen ausgesoßen wurden
+		int s; //gibt Anzahl auszustoßender Sporen an
+		if (hasInfected){
+			s = 2;
+		}else{
+			s = 7;
+		}
 
-		// aus einem Schädling können max 6 neue entstehen, dh. am ende sind 4 da
+		// aus einem Schädling können max 6 neue entstehen, dh. am ende sind 6 da (wenn 1. Sporenaussotß), sonst weniger
 		// mit oben festgelegter Wahrscheinlichkeit (j) sterben diese jedoch vor der
 		// Geburt schon wieder ab
 		// Wahrscheinlichkeit, dass Pest überlebt hängt von Sorte ab
 		// Pest stirbt in Modell gleich hier wieder ab (wenn von Crop aus aufgerufen
 		// wird irgendeine Pest getötet und nicht die neue! == nicht gewollt)
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < s; i++) {
 			Random tot = new Random();
 			int wahrscheinlichkeit = tot.nextInt(99) + 1; // zufällige zahl zwischen 1 und 100 (entsprechen %)
 
@@ -294,6 +330,7 @@ public class Septoria {
 
 			}
 		}
+		hasInfected = true; //gibt an, dass ST bereits Sporen ausgestoßen hat; bei nächsten mal werden weniger ausgestoßen
 	}
 
 	// -------------------------------------------- Absterben Pest
@@ -304,6 +341,7 @@ public class Septoria {
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
 		isAlive = false;
+		
 
 	}
 
@@ -379,6 +417,10 @@ public class Septoria {
 				space.moveByVector(this, distance, angle, 0); // Bewegung des Schädling auf Space
 				myPoint = space.getLocation(this);
 				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
+				
+				
+				//Septoria noch dem ST Array zuordnen 
+				((Crop) wei).ST.add(this);
 			}
 		} 
 	}

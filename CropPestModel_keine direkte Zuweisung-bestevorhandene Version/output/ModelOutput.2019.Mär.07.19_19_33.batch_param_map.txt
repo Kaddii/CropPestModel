@@ -1,0 +1,2 @@
+"run","randomSeed","applicationcost","risktox","PestCount","erzeugerpreis","fungizid","septoria_count","behaviour","tox","cropCount","resistance"
+1,1499534429,5.14,1,50,23.34,72.09,50,0,7.5,515,1

@@ -362,6 +362,9 @@ public class Pest {
 				space.moveByVector(this, distance, angle, 0); // Bewegung des Schädling auf Space
 				myPoint = space.getLocation(this);
 				grid.moveTo(this, (int) otherPoint.getX(), (int) otherPoint.getY()); // Bewegung des Schädling auf Grid
+				
+				//Gelbrost noch dem ST Array zuordnen 
+				((Crop) wei).GR.add(this);
 			}
 		} 
 

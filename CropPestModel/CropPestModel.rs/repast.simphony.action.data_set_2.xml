@@ -69,6 +69,24 @@
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
+    <entry>
+      <string>Behaviour</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Behaviour</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getBehaviour</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Resistance</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Resistance</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getResistance</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
   </methodDataSources>
   <countSources class="linked-hash-map"/>
   <customNADataSources class="linked-hash-map"/>

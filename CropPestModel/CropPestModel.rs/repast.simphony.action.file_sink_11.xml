@@ -11,6 +11,8 @@
     <string>SchaedenprozST</string>
     <string>SchaedenprozSTE</string>
     <string>SchaedenprzSTsicht</string>
+    <string>Resistance</string>
+    <string>Behaviour</string>
   </sourceIds>
   <fileName>Calibration.txt</fileName>
   <addTimeStamp>true</addTimeStamp>

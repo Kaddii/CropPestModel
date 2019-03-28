@@ -1,0 +1,49 @@
+<repast.simphony.data2.engine.DataSetDescriptor>
+  <name>BefallGR</name>
+  <type>AGGREGATE</type>
+  <inclTick>true</inclTick>
+  <inclBatchRun>false</inclBatchRun>
+  <inclRandomSeed>false</inclRandomSeed>
+  <scheduleParams>
+    <start>1.0</start>
+    <interval>1.0</interval>
+    <priority>-Infinity</priority>
+    <pType>LAST</pType>
+    <duration>-1.0</duration>
+    <frequency>REPEAT</frequency>
+    <hashCode>2110781354</hashCode>
+  </scheduleParams>
+  <atEnd>false</atEnd>
+  <methodDataSources class="linked-hash-map">
+    <entry>
+      <string>BefallGR</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>BefallGR</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getSchaedenprozGR</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>BefallGRsicht</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>BefallGRsicht</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getSchadenprozGRsicht</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>BefallGRertrag</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>BefallGRertrag</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getSchaedenprozGRE</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+  </methodDataSources>
+  <countSources class="linked-hash-map"/>
+  <customNADataSources class="linked-hash-map"/>
+  <customAggDataSources class="linked-hash-map"/>
+</repast.simphony.data2.engine.DataSetDescriptor>

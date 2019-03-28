@@ -1,0 +1,3 @@
+"run","cropCount","GRCountAnCrop"
+1,515,2.0
+1,515,472.0

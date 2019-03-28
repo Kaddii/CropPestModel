@@ -1,0 +1,1 @@
+"tick","befallGR","befallGRsicht","befallGRertrag","befallST","befallSTsicht","befallSTertrag","Ertrag"

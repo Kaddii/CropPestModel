@@ -1,0 +1,3 @@
+"run","cropCount","GRCountAnCrop","tick"
+1,515,251.0,166.0
+1,515,251.0,166.0

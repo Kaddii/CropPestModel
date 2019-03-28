@@ -31,6 +31,10 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 		//Import Excel
 		static String xStrPath;
 		static double [][][] weatherArray;
+		static double [][] azoleArray;
+		static double [][] carboxamideArray;
+		static double [][] seedArray;
+	
 
 		@Override
 		public Context build(Context<Object> context) {
@@ -48,28 +52,147 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 					new RandomCartesianAdder<Object>(),
 					// repast.simphony.space.... legt die grenzen fest. Hier also 50 mal 50
 					// erstellt auch einen grid der "grid" heißt und verbindet ihn mit dem Context
-					new repast.simphony.space.continuous.WrapAroundBorders(), 100, 100);
+					new repast.simphony.space.continuous.WrapAroundBorders(), 300, 300);
 
 			GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 			Grid<Object> grid = gridFactory.createGrid("grid", context,
 					new GridBuilderParameters<Object>(new WrapAroundBorders(),
 							// der Adder legt fest wo im Grid oder space neue Objekte zu Beginn sind
-							new SimpleGridAdder<Object>(), true, 100, 100));
+							new SimpleGridAdder<Object>(), true, 300, 300));
 			// GridBuilderParameters mit dem Wert true = es ist möglich mehrere Objekte
 			// einen Grid-Punkt besetzen können
 
+			
+			
+			
+			
+			
+			//--------------Import Seed Array ---------------------//
+			//-------------------------------------------
+			
+			seedArray = new double[300][300];
+			
+			Scanner scanIn00 = null;
+			int Rowc00 = 0;
+			int Row00 = 0;
+			int Colc00 = 0;
+			int Col00 = 0;
+			String InputLine00 = "";
+			double xnum00 = 0;
+			String xfileLocation00;
+			
+			xfileLocation00 = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\Seeds.csv";
+					//"C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\activeIngredient.csv";
+					//"C:\\Users\\Kokusnuss\\Documents\\M.Sc.Agrarwissenschaften\\Forschungsprojekt_Gerullis\\Witterung\\WeatherFin_NEU.csv";
+			
+			System.out.println("-------- Seed Array ------- ");
+			
+			try
+			{
+				//Scanner setup
+				scanIn00 = new Scanner(new BufferedReader(new FileReader(xfileLocation00)));
+				
+				while (scanIn00.hasNextLine())
+				{
+					//Zeile auf Datei lesen
+					InputLine00 = scanIn00.nextLine();
+					//eingelesene Zellen in Array aufteilen anhand von Kommata
+					String [] InArray00 = InputLine00.split(";"); //InArray ist vorrübergehendes Array, um einkommende Zahlen zu speichern
+					
+					//Inhalt von inArray in weatherArray kopieren
+					int i = Integer.parseInt(InArray00[0]);
+					//int t = Integer.parseInt(InArray1[1]);
+					//System.out.println(i);
+					for (int x = 0; x < InArray00.length; x++)
+					{
+						seedArray[i][x] = Double.parseDouble(InArray00[x]); //Inhalt als double abspeichern
+					}
+					//Reihe dem Array hinzufügen
+					Rowc00++; //nächste Zeile einfügen
+				}
+			} catch (Exception e)
+			{
+				System.out.println(e);
+			}
+			
 			// ------------------ Parameter für Agenten
 			// -------------------------------------------
 
 			Parameters params = RunEnvironment.getInstance().getParameters();
 
+			int location = (Integer) params.getValue("location");
+			
+			int ec30;
+			int ec31;
+			int ec32;
+			int ec33;
+			int ec37;
+			int ec39;
+			int ec43;
+			int ec47;
+			int ec51;
+			int ec55;
+			int ec59;
+			int ec61;
+			int ec65;
+			int ec69;
+			int ec71;
+			int ec73;
+			int harvest;
+			
+			if (location == 1){
+				//EC Werte für Data (Standort 1 / DAH)
+				ec30 = 57;
+				ec31 = 60;
+				ec32 = 78;
+				ec33 = 83;
+				ec37 = 84;
+				ec39 = 93;
+				ec43 = 94;
+				ec47 = 95;
+				ec51 = 96;
+				ec55 = 100;
+				ec59 = 101;
+				ec61 = 102;
+				ec65 = 105;
+				ec69 = 109;
+				ec71 = 114;
+				ec73 = 117;
+				harvest = 166;
+			} else {
+				//EC Werte für Data (Standort 2 / SOL)
+				ec30 = 57;
+				ec31 = 60;
+				ec32 = 78;
+				ec33 = 83;
+				ec37 = 84;
+				ec39 = 93;
+				ec43 = 94;
+				ec47 = 95;
+				ec51 = 96;
+				ec55 = 100;
+				ec59 = 101;
+				ec61 = 102;
+				ec65 = 105;
+				ec69 = 109;
+				ec71 = 114;
+				ec73 = 117;
+				harvest = 166;
+			} 
+			
 			int zeit = 0;
+			
+			
+			context.add(new Data(space, grid, zeit, ec30, ec31, ec32, ec33, ec37, ec39, ec43, ec47, ec51, ec55, ec59, ec61, ec65, ec69, ec71, ec73, harvest));
+			
+			
 
 			Random inkubation = new Random();
 			
 			//int vermehrungGR = 12;
 			int vermehrungST = inkubation.nextInt(201) + 225;  //Inkubationszeit 225-425 Gradtage für ST
-	  
+
+			
 			int resistance = (Integer) params.getValue("resistance");
 			// ertragspot der unterschiedlichen weizensorten
 			double ertragspot; // Ertragspotenzial der Weizenpflanzen variiert mit Sorte
@@ -100,12 +223,12 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			
 			
 			if (resistance == 2){
-				septoriaCount = (int) Math.ceil(0.8*STCount);
-				rustCount = (int) Math.ceil(0.8*pestCount);
+				septoriaCount = (int) Math.ceil(0.9*STCount);
+				rustCount = (int) Math.ceil(0.9*pestCount);
 			}
 			else if(resistance == 3) {
-				septoriaCount = (int) Math.ceil(0.7*STCount);
-				rustCount = (int) Math.ceil(0.7*pestCount);
+				septoriaCount = (int) Math.ceil(0.8*STCount);
+				rustCount = (int) Math.ceil(0.8*pestCount);
 			}else{
 				septoriaCount = STCount;
 				rustCount = pestCount;
@@ -133,8 +256,8 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			
 		
 		
-				Random ort = new Random();
-				int leaf = ort.nextInt(4)+3;
+				
+				int leaf = 6;
 			
 				// variable die bestimmt wann sich die Laus vermehrt
 	
@@ -186,67 +309,192 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			double fpreis = (Double) params.getValue("fungizid");	
 			double tox = (Double) params.getValue("tox");
 			int risktox = (Integer) params.getValue("risktox");
+			int noAzole = (Integer) params.getValue("noAzole");
+			int noCarboxamide = (Integer) params.getValue("noCarboxamide");
 			
 			//int farmerCount = 1;
 			///for (int i = 0; i < farmerCount; i++) {
 				// double preis = weizenPreis / 10000; //von dt/ha auf dt/m2 umrechnen
 
-				context.add(new Farmer(space, grid, preis, price, fpreis, tox, behaviour, resistance, risktox, resistance));
+				context.add(new Farmer(space, grid, preis, price, fpreis, tox, behaviour, resistance, risktox, resistance, noAzole, noCarboxamide));
 			//}
 			for (Object obj : context) {
 				NdPoint pt = space.getLocation(obj);
 				grid.moveTo(obj, (int) pt.getX(), (int) pt.getY());
 			}
 			
-			/*fungicideArray = new double[30][3000][50];
 			
-			Scanner scanIn = null;
-			int Rowc = 0;
-			int Row = 0;
-			int Colc = 0;
-			int Col = 0;
-			String InputLine = "";
-			double xnum = 0;
-			String xfileLocation;
 			
-			xfileLocation = "C:\\Users\\Katrin\\workworkwork\\CropPestModel\\WeatherFin_NEU.csv";
+			
+			//--------------Import Azol Array ---------------------//
+			//-------------------------------------------
+			
+			azoleArray = new double[300][300];
+			
+			Scanner scanIn0 = null;
+			int Rowc0 = 0;
+			int Row0 = 0;
+			int Colc0 = 0;
+			int Col0 = 0;
+			String InputLine0 = "";
+			double xnum0 = 0;
+			String xfileLocation0;
+			
+			xfileLocation0 = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\Azole.csv";
+					//"C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\activeIngredient.csv";
 					//"C:\\Users\\Kokusnuss\\Documents\\M.Sc.Agrarwissenschaften\\Forschungsprojekt_Gerullis\\Witterung\\WeatherFin_NEU.csv";
 			
-			System.out.println("--------Setup Array Weather ------- ");
+			System.out.println("-------- Azole Array ------- ");
 			
 			try
 			{
 				//Scanner setup
-				scanIn = new Scanner(new BufferedReader(new FileReader(xfileLocation)));
+				scanIn0 = new Scanner(new BufferedReader(new FileReader(xfileLocation0)));
 				
-				while (scanIn.hasNextLine())
+				while (scanIn0.hasNextLine())
 				{
 					//Zeile auf Datei lesen
-					InputLine = scanIn.nextLine();
+					InputLine0 = scanIn0.nextLine();
 					//eingelesene Zellen in Array aufteilen anhand von Kommata
-					String [] InArray = InputLine.split(";"); //InArray ist vorrübergehendes Array, um einkommende Zahlen zu speichern
+					String [] InArray0 = InputLine0.split(";"); //InArray ist vorrübergehendes Array, um einkommende Zahlen zu speichern
 					
 					//Inhalt von inArray in weatherArray kopieren
-					int i = Integer.parseInt(InArray[0]);
-					int t = Integer.parseInt(InArray[1]);
+					int i = Integer.parseInt(InArray0[0]);
+					//int t = Integer.parseInt(InArray1[1]);
 					//System.out.println(i);
-					for (int x = 0; x < InArray.length; x++)
+					for (int x = 0; x < InArray0.length; x++)
 					{
-						weatherArray[i][t][x] = Double.parseDouble(InArray[x]); //Inhalt als double abspeichern
+						azoleArray[i][x] = Double.parseDouble(InArray0[x]); //Inhalt als double abspeichern
 					}
 					//Reihe dem Array hinzufügen
-					Rowc++; //nächste Zeile einfügen
+					Rowc0++; //nächste Zeile einfügen
 				}
 			} catch (Exception e)
 			{
 				System.out.println(e);
+			}
+			
+			//--------------Import Fungizid Array ---------------------//
+			//-------------------------------------------
+			
+			carboxamideArray = new double[300][300];
+			
+			Scanner scanIn1 = null;
+			int Rowc1 = 0;
+			int Row1 = 0;
+			int Colc1 = 0;
+			int Col1 = 0;
+			String InputLine1 = "";
+			double xnum1 = 0;
+			String xfileLocation1;
+			
+			xfileLocation1 = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\Carboxamide.csv";
+					//"C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\activeIngredient.csv";
+					//"C:\\Users\\Kokusnuss\\Documents\\M.Sc.Agrarwissenschaften\\Forschungsprojekt_Gerullis\\Witterung\\WeatherFin_NEU.csv";
+			
+			System.out.println("-------- Carboxamide Array ------- ");
+			
+			try
+			{
+				//Scanner setup
+				scanIn1 = new Scanner(new BufferedReader(new FileReader(xfileLocation1)));
+				
+				while (scanIn1.hasNextLine())
+				{
+					//Zeile auf Datei lesen
+					InputLine1 = scanIn1.nextLine();
+					//eingelesene Zellen in Array aufteilen anhand von Kommata
+					String [] InArray1 = InputLine1.split(";"); //InArray ist vorrübergehendes Array, um einkommende Zahlen zu speichern
+					
+					//Inhalt von inArray in weatherArray kopieren
+					int i = Integer.parseInt(InArray1[0]);
+					//int t = Integer.parseInt(InArray1[1]);
+					//System.out.println(i);
+					for (int x = 0; x < InArray1.length; x++)
+					{
+						carboxamideArray[i][x] = Double.parseDouble(InArray1[x]); //Inhalt als double abspeichern
+					}
+					//Reihe dem Array hinzufügen
+					Rowc1++; //nächste Zeile einfügen
+				}
+			} catch (Exception e)
+			{
+				System.out.println(e);
+			}
+			/*for (int i = 0; i < fungicideArray.length; i++){
+				for(int x = 1; x < seedArray[i].length; x++){
+				System.out.print(fungicideArray[i][x]);
+				System.out.print("  ");
+			}
+				System.out.println();
+			}*/
+		
+		
+			
+			
+			
+			
+			
+			/*/--------------Import Seed Array ---------------------//
+			//-------------------------------------------
+			
+			seedArray = new double[30][3000][50];
+			
+			Scanner scanIn2 = null;
+			int Rowc2 = 0;
+			int Row2 = 0;
+			int Colc2 = 0;
+			int Col2 = 0;
+			String InputLine2 = "";
+			double xnum2 = 0;
+			String xfileLocation2;
+			
+			xfileLocation2 = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\Seeds.csv";
+					//"C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\activeIngredient.csv";
+					//"C:\\Users\\Kokusnuss\\Documents\\M.Sc.Agrarwissenschaften\\Forschungsprojekt_Gerullis\\Witterung\\WeatherFin_NEU.csv";
+			
+			System.out.println("-------- Seed Array ------- ");
+			
+			try
+			{
+				//Scanner setup
+				scanIn2 = new Scanner(new BufferedReader(new FileReader(xfileLocation2)));
+				
+				while (scanIn2.hasNextLine())
+				{
+					//Zeile auf Datei lesen
+					InputLine2 = scanIn2.nextLine();
+					//eingelesene Zellen in Array aufteilen anhand von Kommata
+					String [] InArray2 = InputLine2.split(";"); //InArray ist vorrübergehendes Array, um einkommende Zahlen zu speichern
+					
+					//Inhalt von inArray in weatherArray kopieren
+					int l = Integer.parseInt(InArray2[0]);
+					int p = Integer.parseInt(InArray2[1]);
+					for (int x = 0; x < InArray2.length; x++)
+					{
+						seedArray[l][p][x] = Double.parseDouble(InArray2[x]); //Inhalt als double abspeichern
+					}
+					
+					//Reihe dem Array hinzufügen
+					Rowc2++; //nächste Zeile einfügen
+				}
+			} catch (Exception e)
+			{
+				System.out.println(e);
+			}
+			for (int i = 0; i < seedArray.length; i++){
+				for(int t = 0; t < seedArray[i].length; t++){
+				System.out.print(seedArray[i][t].toString());
+				System.out.print("  ");
+			}
+				System.out.println();
 			}*/
 			
 			
 			
 			//--------------------------- Weather ----------------------\\
 			
-			context.add(new Data(space, grid, zeit));
+			
 			
 			weatherArray = new double[30][3000][50];
 			
@@ -259,9 +507,17 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			double xnum = 0;
 			String xfileLocation;
 			
-			xfileLocation = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\WeatherFin_NEU.csv";
+			if (location == 1){
+				//File path Location 1 (DAH)
+				xfileLocation = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\WeatherFin_NEU.csv";
+			} else {
+				//File path Location 2 (SOL)
+				//NOCH ÄNDERN!!!!!!!!!!!!!!!!!!!!!
+				
+				xfileLocation = "C:\\Users\\Katrin\\git\\CropPestModel\\CropPestModel\\WeatherFin_NEU.csv";
 					// "C:\\Users\\Katrin\\workworkwork\\CropPestModel\\WeatherFin_NEU.csv";
 					//"C:\\Users\\Kokusnuss\\Documents\\M.Sc.Agrarwissenschaften\\Forschungsprojekt_Gerullis\\Witterung\\WeatherFin_NEU.csv";
+			} 
 			
 			System.out.println("--------Setup Array Weather ------- ");
 			
