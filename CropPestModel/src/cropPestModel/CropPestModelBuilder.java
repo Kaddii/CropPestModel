@@ -4,27 +4,27 @@ package cropPestModel;
 
 
 	import java.io.BufferedReader;
-	import java.io.FileReader;
-	/* ---------------- neue Version Fabian -----------------*/
+import java.io.FileReader;
+/* ---------------- neue Version Fabian -----------------*/
 	import java.util.Random;
-	import java.util.Scanner;
+import java.util.Scanner;
 
-	import repast.simphony.context.Context;
-	import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
-	import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
-	import repast.simphony.context.space.graph.NetworkBuilder;
-	import repast.simphony.context.space.grid.GridFactory;
-	import repast.simphony.context.space.grid.GridFactoryFinder;
-	import repast.simphony.dataLoader.ContextBuilder;
-	import repast.simphony.engine.environment.RunEnvironment;
-	import repast.simphony.parameter.Parameters;
-	import repast.simphony.space.continuous.ContinuousSpace;
-	import repast.simphony.space.continuous.NdPoint;
-	import repast.simphony.space.continuous.RandomCartesianAdder;
-	import repast.simphony.space.grid.Grid;
-	import repast.simphony.space.grid.GridBuilderParameters;
-	import repast.simphony.space.grid.SimpleGridAdder;
-	import repast.simphony.space.grid.WrapAroundBorders;
+import repast.simphony.context.Context;
+import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
+import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
+import repast.simphony.context.space.graph.NetworkBuilder;
+import repast.simphony.context.space.grid.GridFactory;
+import repast.simphony.context.space.grid.GridFactoryFinder;
+import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.parameter.Parameters;
+import repast.simphony.space.continuous.ContinuousSpace;
+import repast.simphony.space.continuous.NdPoint;
+import repast.simphony.space.continuous.RandomCartesianAdder;
+import repast.simphony.space.grid.Grid;
+import repast.simphony.space.grid.GridBuilderParameters;
+import repast.simphony.space.grid.SimpleGridAdder;
+import repast.simphony.space.grid.WrapAroundBorders;
 
 public class CropPestModelBuilder implements ContextBuilder<Object> {
 		
@@ -52,13 +52,13 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 					new RandomCartesianAdder<Object>(),
 					// repast.simphony.space.... legt die grenzen fest. Hier also 50 mal 50
 					// erstellt auch einen grid der "grid" heißt und verbindet ihn mit dem Context
-					new repast.simphony.space.continuous.WrapAroundBorders(), 300, 300);
+					new repast.simphony.space.continuous.WrapAroundBorders(), 200, 500);
 
 			GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 			Grid<Object> grid = gridFactory.createGrid("grid", context,
 					new GridBuilderParameters<Object>(new WrapAroundBorders(),
 							// der Adder legt fest wo im Grid oder space neue Objekte zu Beginn sind
-							new SimpleGridAdder<Object>(), true, 300, 300));
+							new SimpleGridAdder<Object>(), true, 200, 500));
 			// GridBuilderParameters mit dem Wert true = es ist möglich mehrere Objekte
 			// einen Grid-Punkt besetzen können
 
