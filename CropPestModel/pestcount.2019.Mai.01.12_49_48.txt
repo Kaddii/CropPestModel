@@ -1,0 +1,2 @@
+"tick","GRCount","STCount"
+1.0,200,7500

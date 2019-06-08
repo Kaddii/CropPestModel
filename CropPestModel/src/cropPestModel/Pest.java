@@ -34,17 +34,20 @@ public class Pest {
 
 	private ContinuousSpace<Object> space; // Ort des Schädling
 	private Grid<Object> grid; // Koordinaten des Schädling
-	private int inkubation; // Zeitspanne zwischen Geburt und Vermehrung (Inkubationszeit)
+	private int incubation; // Zeitspanne zwischen Geburt und Vermehrung (Inkubationszeit)
 	private int zaehler = 0; // Latenzzeit
 	private int resistenz; // gibt Resistenzgrad der Crop an
 	private boolean canInfect = true; //gibt an ob pest pflanze gerade befallen kann oder ob diese durch ein fungizid geschützt ist
+	private boolean noProtection = true; 
 	public boolean isVisible = false; //pest wird für landwirt erst sichtbar, wenn latenzzeit abgelaufen ist
 	int a; //gibt an, an welcher crop die Pest sitzt
 	public boolean isAlive;
+	public boolean isInactive = false;
 	
 	private int blatt; //Angabe auf welchem Blatt sich GR befindet
 	private int geburt;
 	private double latenttime = 0;
+	public int birthVisible = 0;
 	
 	
 	List<Crop> agenten = new ArrayList<Crop>();
@@ -63,6 +66,10 @@ public class Pest {
 		return blatt;
 	}
 	
+	public int getBirthVisible(){
+		return birthVisible;
+	}
+	
 
 
 	
@@ -75,10 +82,11 @@ public class Pest {
 		this.space = space;
 		this.grid = grid;
 		Random inku = new Random();
-		this.inkubation = inku.nextInt(4) + 12; // Inkubationszeit 12 bis 15 Tage für GR
+		this.incubation = inku.nextInt(4) + 12; // incubationszeit 12 bis 15 Tage für GR
 		this.resistenz = resistance;
 		this.isAlive = true;
 		this.isVisible = false;
+		this.birthVisible = 0;
 
 
 		// TODO Auto-generated constructor stub
@@ -89,6 +97,7 @@ public class Pest {
 
 	public void start() {
 		
+		//if(isInactive == false){
 		
 		zaehler++; 		//Zählt die Tage seit der Geburt
 
@@ -96,32 +105,7 @@ public class Pest {
 			isVisible = false; //TODO: Wird wirklich gebraucht?? auch bei ST
 			geburt = Data.getZeit() - 1;
 
-			 //Pilzen wird Ort hier zugewiesen
-			
-			Random ort = new Random();
- 
-			if (Data.getZeit() < Data.getEc31()){
-				blatt = ort.nextInt(4)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
-												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
 
-			} else if (Data.getZeit() < (Data.getEc32())){
-				blatt = ort.nextInt(4) + 2;
-
-			}else if (Data.getZeit() < (Data.getEc37())){
-				blatt = ort.nextInt(4) + 1;
-
-			} else if (Data.getZeit() < (Data.getEc47())){
-				blatt = ort.nextInt(4);
-
-			} else if (Data.getZeit() < (Data.getEc59())){
-				blatt = ort.nextInt(4);
-
-			} else if (Data.getZeit() < (Data.getEc71())){
-				blatt = ort.nextInt(4);
-
-			} else {
-				blatt = ort.nextInt(4);
-			}
 		
 			// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
 			GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
@@ -151,24 +135,85 @@ public class Pest {
 			if (agenten.size() > 0){
 				Random ag = new Random();
 				a = ag.nextInt(agenten.size());        // wenn Crop vorhanden, Inkubationszeit nicht abgelaufen, dann wird pest in arraylist von 
-				agenten.get(a).GR.add(this);             //einem der crops in der umgebung gespeichert
-				
+				agenten.get(a).GR.add(this); 	//einem der crops in der umgebung gespeichert
+				start2();
 			}else {
 				allocation();
 			}
+		} else{
+			start2();
 		}
 		
+	}
+			
+	public void start2(){
+			//Pilzen wird Ort hier zugewiesen
+		if(zaehler <= 1){
+			
+			Random ort = new Random();
+			
+			if (Data.getZeit() < 3){ //erste Infektionen (überwintert) befinden sich auf f-6
+				blatt = ort.nextInt(3) + 5; //5; Blatt F-7 abgeschafft (30.05.19
+			}else if (Data.getZeit() < Data.getEc31()){
+				blatt = ort.nextInt(4)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
+												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
 
+			} else if (Data.getZeit() < (Data.getEc32())){
+				blatt = ort.nextInt(4) + 2;
+
+			}else if (Data.getZeit() < (Data.getEc37())){
+				blatt = ort.nextInt(4) + 1;
+
+			} else if (Data.getZeit() < (Data.getEc47())){
+				blatt = ort.nextInt(4);
+
+			} else if (Data.getZeit() < (Data.getEc59())){
+				blatt = ort.nextInt(4);
+
+			} else if (Data.getZeit() < (Data.getEc71())){
+				blatt = ort.nextInt(4);
+
+			} else {
+				blatt = ort.nextInt(4);
+			}
+			 
+		}
+		
+		//sterbe ab in Abhängigkeit von EC Stadium
+		/*/if(Data.getZeit() == Data.getEc37() | Data.getZeit() == Data.getEc47() | Data.getZeit() == Data.getEc59() | Data.getZeit() == Data.getEc73()){
+			if(Data.getZeit() == Data.getEc37()){
+				if(blatt > 5){
+					die();
+					System.out.println("ich sterbe" + blatt);
+				}
+			}
+			if(Data.getZeit() == Data.getEc47()){
+				if(blatt > 4){
+					die();
+				}
+			}
+			if(Data.getZeit() == Data.getEc59()){
+				if(blatt > 3){
+					die();
+				}
+			}
+			if(Data.getZeit() == Data.getEc73()){
+				if(blatt > 2){
+					die();
+				}
+			}*/
+			
 
 		//Pest überprüft, ob Sie sich weiterentwickeln kann	
 		if (Data.getZeit() > Farmer.getInDays() | Farmer.getInDays() == 0) {    // erst wenn Wirkzeit Fungizid abgelaufen ist, kann sich Pilz weiter vermehren
-			canInfect = true;
+			noProtection = true;
 		}else{
-			canInfect = false;
+			noProtection = false;
 		}
+
 		
 		//Latenzzeit des Pilzes ist Temperaturabhängig
-		if (Data.getTemp() > 10 & Data.getTemp() < 20){       //zaehler zählt Tage bis Latenzzeit abgelaufen ist
+		if (Data.getTemp() >= 10 & Data.getTemp() <= 20){       //zaehler zählt Tage bis Latenzzeit abgelaufen ist
 			latenttime++;
 		}else{
 			latenttime += 0.5;
@@ -177,11 +222,20 @@ public class Pest {
 	
 				
 			
-		if (latenttime > inkubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
-																	// Schädling fort
+		if (latenttime > incubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
+			if (birthVisible == 0){
+				birthVisible = Data.getZeit();
+			}											// Schädling fort
 			isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend		
-				
-			if(canInfect == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung						
+			
+			//Spore kann sich nur weiterentwickeln, wenn weniger als 28 d seit Ablauf der Latenzzeit vergangen sind
+			if (Data.getZeit() >= (birthVisible + 30)){
+				canInfect = false;
+				die();
+				//System.out.println("ich sterbe birthVisible " + birthVisible);
+			}
+			
+			if(canInfect == true & noProtection == true & noProtection == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung						
 				fortpflanzung1();
 			}
 			
@@ -198,8 +252,10 @@ public class Pest {
 
 	public void fortpflanzung1() {
 		//es kommt nur zw. 5 und 20 grad zum sporenflug
-		if(Data.getTemp() > 5 & Data.getTemp() < 20){
+		if(Data.getTemp() >= 5 & Data.getTemp() <= 20){
+			if(Data.getRain() <= 25){
 			fortpflanzung2();
+			}
 		} 
 	}
 	
@@ -219,23 +275,24 @@ public class Pest {
 		// befallen sinkt
 		
 		if (resistenz == 1) {							//geringer Resistenzstatus
-			if (Farmer.getSchaedenprozGR() < 80) { //alt 80,88 
+			//j = 0;
+			if (Farmer.getSchaedenprozGRE() < 90) { //alt 80
 					j = 0;
 				
 			} else {
-				j = 93;
+				j = 50; //93
 			}
 
 		} else if (resistenz == 2) {					//mittlerer Resistenzstatus
-			if (Farmer.getSchaedenprozGR() < 85) {
-				j = 90; 
+			if (Farmer.getSchaedenprozGRE() < 90) {
+				j = 45; //75
 			} else {
 				j = 95;
 			}
 
 		} else if (resistenz == 3) {					//hoher Resistenzstatus
-			if (Farmer.getSchaedenprozGR() < 85) {
-				j = 93; 
+			if (Farmer.getSchaedenprozGRE() < 90) {
+				j = 68; //80//93
 			} else {
 				j = 97;
 			}
@@ -253,26 +310,67 @@ public class Pest {
 		// wird irgendeine Pest getötet und nicht die neue! == nicht gewollt)
 		Random tot = new Random();
 		for (int i = 0; i < 2; i++) {
-
-			int wahrscheinlichkeit = tot.nextInt(99) + 1; // zufällige zahl zwischen 1 und 100 (entsprechen %)
+			boolean canSurvive = false;
+			// Zusätzlich abhängig von Alter der Spore. (14 -21 Tage nach Inokulation am produktivsten) -> Annahme, dass dies 6 Tage nach Ablauf der Latenzzeicht ist
+			//wenn außerhalb dieser Zeit, wird Wahrscheinlichkeit der Infektion gesenkt
+			//Verhältnis 1:27 (1 Spore pro Tag (low) vs. 27 pro Tag (high))
+			if(Data.getZeit() <= (birthVisible + 6) | Data.getZeit() > (birthVisible + 13)){
+				
+				int wahrsch = tot.nextInt(100)+1;
+				if (wahrsch > 96){
+					canSurvive = true;
+				}else{
+					canSurvive = false;
+					//System.out.println("ich werde aufgerufen");
+				}
+			}else{
+				canSurvive = true; 
+			}
+			
+			int wahrscheinlichkeit = tot.nextInt(100) + 1; // zufällige zahl zwischen 1 und 100 (entsprechen %)
 
 			// Wenn die Zufallszahl höher ist, als der oben festgelegte Wert für j, dann
 			// überlebt die neue Pest
-			if (wahrscheinlichkeit > j) {
-
-				// Erstelle zunächst Spore, welche sich unter geeigneten Witterungsbed zu schadorg. wird
+			if (canSurvive = true){
+				if (wahrscheinlichkeit > j) {
 				
-				NdPoint spacePt = space.getLocation(this);
-				Context<Object> context = ContextUtils.getContext(this);
-			
 				
-				PestSpore pestSpore = new PestSpore(space, grid, inkubation, resistenz);
-				context.add(pestSpore);
-
-				space.moveTo(pestSpore, spacePt.getX(), spacePt.getY());
-
-				grid.moveTo(pestSpore, pt.getX(), pt.getY());
 				
+				/*/Zusätzlich zu dieser Zufallszahl entscheidet der Vegetationszeitpunkt über Überlebenswahrscheinlichkeit
+				//d.h. nach der Blüte nimmt mgl. dass Crop befallen werden kann ab, da Blatt anfängt 
+				int j2;
+				
+				if(Data.getZeit() < Data.getEc65()){
+					//100 % überleben
+					j2 = 100;
+				} else if(Data.getZeit() < Data.getEc69()){
+					//75% überleben
+					j2 = 75;
+				} else if(Data.getZeit() < Data.getEc71()){
+					//50% überleben
+					j2 = 50;
+				} else {
+					//25% überleben
+					j2 = 25;
+				}
+				
+				int wahrscheinlichkeit2 = tot.nextInt(99)+1;
+				
+				if(wahrscheinlichkeit2 <= j2){*/
+					// Erstelle zunächst Spore, welche sich unter geeigneten Witterungsbed zu schadorg. wird
+					
+					NdPoint spacePt = space.getLocation(this);
+					Context<Object> context = ContextUtils.getContext(this);
+				
+					
+					PestSpore pestSpore = new PestSpore(space, grid, incubation, resistenz);
+					context.add(pestSpore);
+	
+					space.moveTo(pestSpore, spacePt.getX(), spacePt.getY());
+	
+					grid.moveTo(pestSpore, pt.getX(), pt.getY());
+				//}
+			}
 			}
 		}
 	}
@@ -366,6 +464,7 @@ public class Pest {
 				//Gelbrost noch dem ST Array zuordnen 
 				((Crop) wei).GR.add(this);
 			}
+			start2();
 		} 
 
 	}

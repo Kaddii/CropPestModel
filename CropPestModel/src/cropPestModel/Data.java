@@ -17,6 +17,7 @@ import repast.simphony.util.ContextUtils;
 public class Data {
 	//Daten Ec Stadien
 	//Daten Dahnsdorf 2017 (ISIP)
+	private static int ec25;
 	private static int ec30;// = 57;
 	private static int ec31; //= 60;
 	private static int ec32; //= 78;
@@ -34,6 +35,7 @@ public class Data {
 	private static int ec71;// = 114;
 	private static int ec73;// = 117;
 	private static int harvest;// = 166;
+	public static int location;
 	
 	//allgemein
 	private ContinuousSpace<Object> space; // Standort des Farmers (hypothetisch, da nicht auf Feld angezeigt)
@@ -59,12 +61,15 @@ public class Data {
 	private static double temp;
 	private static double rain;
 	private static double humidity;
+	private int year;
 	
 	//VERSUCH121118
 	List<Crop> pflanzen = new ArrayList<Crop>();
 	List<Pest> gelbrost = new ArrayList<Pest>();
+	static List<Pest> gelbrostTot = new ArrayList<Pest>();
 	List<PestSpore> pestSpore = new ArrayList<PestSpore>();
 	List<Septoria> septoria = new ArrayList<Septoria>();
+	static List<Septoria> septoriaTot = new ArrayList<Septoria>();
 	List<SeptoriaSpore> septoriaSpore = new ArrayList<SeptoriaSpore>();
 	List<Farmer> farmer = new ArrayList<Farmer>();
 	
@@ -73,7 +78,9 @@ public class Data {
 	
 	
 		// TODO Auto-generated constructor stub
-
+		public static int getEc25(){
+			return ec25;
+		}
 		public static int getEc30(){
 			return ec30;
 		}
@@ -113,8 +120,14 @@ public class Data {
 		public static int getEc65(){
 			return ec65;
 		}
+		public static int getEc69(){
+			return ec69;
+		}
 		public static int getEc71(){
 			return ec71;
+		}
+		public static int getEc73(){
+			return ec73;
 		}
 		public static int getHarvest(){
 			return harvest;
@@ -147,13 +160,17 @@ public class Data {
 		public int getJahr(){
 			return jahr;
 		}
+		public static int getLocation(){
+			return location;
+		}
 
 
-	public Data(ContinuousSpace<Object> space, Grid<Object> grid, int zeit, int ec30, int ec31, int ec32, int ec33, int ec37, int ec39,	int ec43, int ec47,
-				int ec51, int ec55,	int ec59, int ec61,	int ec65, int ec69,	int ec71, int ec73,	int harvest){
+	public Data(ContinuousSpace<Object> space, Grid<Object> grid, int zeit, int ec25, int ec30, int ec31, int ec32, int ec33, int ec37, int ec39,	int ec43, int ec47,
+				int ec51, int ec55,	int ec59, int ec61,	int ec65, int ec69,	int ec71, int ec73,	int harvest, int location, int year){
 		this.grid = grid;
 		this.space = space;
 		this.zeit = zeit;
+		this.ec25 = ec25;
 		this.ec30 = ec30;
 		this.ec31 = ec31;
 		this.ec32 = ec32;
@@ -171,6 +188,8 @@ public class Data {
 		this.ec71 = ec71;
 		this.ec73 = ec73;
 		this.harvest = harvest;
+		this.location = location;
+		this.year = year;
 		
 		}
 
@@ -231,7 +250,8 @@ public class Data {
 			Random year = new Random();
 			jahr = year.nextInt(14) + 1; //eins von 15 Jahren wird ausgewählt
 		}*/
-		jahr = 17;
+		jahr = year;
+		System.out.println(year + "year");
 
 		rain = CropPestModelBuilder.weatherArray[jahr][zeit][2];
 		temp = CropPestModelBuilder.weatherArray[jahr][zeit][3];
@@ -331,6 +351,37 @@ public class Data {
 
 		}
 		
+		/*if(Data.getZeit() == (1+Farmer.getInDays())){
+			System.out.println("ich lebe");
+			Random live = new Random();
+			for(Pest pest : gelbrostTot){
+				int l = live.nextInt(100) + 1;
+				if (l >= 90){
+					pest.isAlive = true;
+					//pest.isInactive = false;
+					
+				}
+				
+			}
+		}
+		
+		if(Data.getZeit() == (1+Farmer.getInDaysST())){
+			System.out.println("ich lebe" + septoriaTot.size());
+			Random live = new Random();
+			for(Septoria septoria : septoriaTot){
+				int l = live.nextInt(100) + 1;
+				if (l >= 90){
+					septoria.isAlive = true;
+					septoria.isInactive = true;
+					System.out.println(septoriaTot.size() + " ich lebe" + septoria.getLeaf());
+				}
+				
+			}
+		}*/
+		
+		
+		
+		
 		pflanzen.clear();
 		gelbrost.clear();
 		pestSpore.clear();
@@ -351,19 +402,16 @@ public class Data {
 				gelbrost.add((Pest) obj);
 				
 			}
-			if (obj instanceof PestSpore) {
-				pestSpore.add((PestSpore) obj);
-			}
+		
 			if (obj instanceof Septoria) {
 				septoria.add((Septoria) obj);
-			}
-			if (obj instanceof SeptoriaSpore) {
-				septoriaSpore.add((SeptoriaSpore) obj);
 			}
 			if (obj instanceof Farmer) {
 				farmer.add((Farmer) obj);
 			}
 		}
+			
+		
 		
 		
 		for (Septoria septoria : septoria){
@@ -393,6 +441,19 @@ public class Data {
 					}
 				}
 			}
+		}
+		
+		for (Object obj : grid.getObjects()) { // befüllen der Listen
+				
+			if (obj instanceof SeptoriaSpore) {
+				septoriaSpore.add((SeptoriaSpore) obj);
+			}
+			if (obj instanceof PestSpore) {
+				pestSpore.add((PestSpore) obj);
+			}
+		}
+		
+		if (zeit <= ec73 ){
 			
 			if(septoriaSpore.isEmpty() == false){
 				for(SeptoriaSpore septoriaSpore : septoriaSpore){
@@ -404,9 +465,8 @@ public class Data {
 					pestSpore.start();
 				}
 			}
-
-			
 		}
+		
 		if(pflanzen.size() > 0){
 			for(Crop crop : pflanzen){
 				crop.start();

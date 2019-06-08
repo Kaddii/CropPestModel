@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
 					<parameter name="PestCount" displayName="PestCount" type="int" 
-						defaultValue="100" 
+						defaultValue="3000" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
@@ -61,13 +61,19 @@
 									
 		/>
 				<parameter name="septoria_count" displayName="Septoria count" type="int" 
-						defaultValue="2800" 
+						defaultValue="400" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
 				<parameter name="behaviour" displayName="Verhalten Landwirt" type="int" 
-						defaultValue="0" 
+						defaultValue="3" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>
+				<parameter name="location" displayName="Standort" type="int" 
+						defaultValue="1" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									

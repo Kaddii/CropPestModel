@@ -45,6 +45,18 @@
       </SeriesData>
     </entry>
     <entry>
+      <string>BefallSTENotVisible</string>
+      <SeriesData>
+        <label>BefallSTENotVisible</label>
+        <color>
+          <red>255</red>
+          <green>0</green>
+          <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
       <string>befallST</string>
       <SeriesData>
         <label>befallST</label>

@@ -58,7 +58,7 @@ public class PestSpore {
 			GridPoint pt = grid.getLocation(this);
 
 			// Crops in der Nachbarschaft bestimmen
-			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 10, 10); //alt 7,7
+			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 7, 7); //alt 10,10
 			List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true);
 
 			// speichert diese Crops in ArrayList
@@ -106,14 +106,14 @@ public class PestSpore {
 			die();
 		} else{
 			//Keimung ist Temperaturabhängig
-			if(Data.getTemp() >= 0 & Data.getTemp() <= 25 & Data.getRain() >= 1.5){
+			if(Data.getTemp() >= 0 & Data.getTemp() <= 25 & (Data.getRain() > 1)){ // >=1alt //| Data.getHumidity() >= 75)){ //alt rain1.5 
 				if (Data.getTemp() >= 9 & Data.getTemp() <= 11){
 					keimung();
 				} else{
 					//außerhalb der optimalen Keimtemperatur kommt es nur zufällig zur Keimung
 					Random keim = new Random();
 					int i = keim.nextInt(3);
-					if(i >=1){
+					if(i >=1){ //1
 						keimung();
 					}
 				}
@@ -141,6 +141,7 @@ public class PestSpore {
 
 		grid.moveTo(pest, pt.getX(), pt.getY());
 		
+		//System.out.println("ich bin geboren! Pest");
 		
 	}
 	
@@ -149,6 +150,8 @@ public class PestSpore {
 		Context<Object> context = ContextUtils.getContext(this);
 		context.remove(this);
 		isAlive = false;
+		
+		//System.out.println("ich sterbe!! PestSpore!" + Data.getZeit());
 	}
 }
 

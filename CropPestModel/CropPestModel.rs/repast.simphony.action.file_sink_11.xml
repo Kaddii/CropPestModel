@@ -13,6 +13,8 @@
     <string>SchaedenprzSTsicht</string>
     <string>Resistance</string>
     <string>Behaviour</string>
+    <string>AnzahlFungizidanw</string>
+    <string>Location</string>
   </sourceIds>
   <fileName>Calibration.txt</fileName>
   <addTimeStamp>true</addTimeStamp>

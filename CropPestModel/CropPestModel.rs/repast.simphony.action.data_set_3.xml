@@ -42,6 +42,60 @@
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
+    <entry>
+      <string>f0</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>f0</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF0</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>f1</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>f1</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF1</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>f2</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>f2</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF2</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>f3</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>f3</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF3</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>f4</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>f4</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF4</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>f5</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>f5</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF5</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
   </methodDataSources>
   <countSources class="linked-hash-map">
     <entry>

@@ -1,0 +1,2 @@
+"tick","SchadenprozGRsicht","SchaedenprozGR","SchaedenprozGRE","SchaedenprozST","SchaedenprozSTE","SchaedenprzSTsicht","Resistance","Behaviour"
+1.0,0.0,3.7884615384615383,0.0,75.53846153846155,75.53846153846155,75.53846153846155,1.0,0.0

@@ -25,6 +25,7 @@ public class Farmer {
 											// (Ertragspotential pro qm)
 	private double pflanzenAnzahl; // Anzahl an Ähren/Triebe in der Simulation
 	private boolean schwelleST; //gibt an, ob laut ST gespritzt werden sollte
+	private static int dayFungicideApplication;
 	
 	//private int gesamtGRAnzahl; // Anzahl an GR in der Simulation
 	//private int gesamtSTAnzahl; //Anzahl ST in der Simulation
@@ -40,6 +41,7 @@ public class Farmer {
 	
 	private double schaedenGRErtrag;
 	private double schaedenSTErtrag;
+	private double schaedenSTErtragNotVisible;
 	
 	
 	private static double schaedenprozSTsicht; //s.o.
@@ -52,9 +54,10 @@ public class Farmer {
 	private static double schaedenprozGR; // Befallshäufigkeit GR (%)
 	private static double schaedenprozST; // Befallshäufigkeit ST (%)
 	private static double schaedenprozGRErtrag;
-	private double schaedenprozSTErtrag;
+	private static double schaedenprozSTErtrag;
+	private static double schaedenprozSTErtragNotVisible;
 	
-	private int anzahlSpritzungen; // Anzahl an Spritzvorgängen
+	private int anzahlSpritzungen = 0; // Anzahl an Spritzvorgängen
 	private int grund; //Gibt Indikation aufgrund der gespritzt wird an (1:GR; 2:ST)
 	private int j = 0; // zählt Tage die seit letzter bonitur vergangen sind
 	private int i; //zählt Anzahl der Schwellenüberschreitungen und gibt Kommando für PSM
@@ -83,6 +86,8 @@ public class Farmer {
 	//private int inhDays; //Wirkzeit des Fungizids für GR
 	private static int inDays = 0; //Zeitpunkt bis zu dem Fungizid wirkt
 	private static int inDaysST = 0; //Wirkzeit Fungizid für ST
+	private int meanprotectiveGR = 0;
+	private int meanprotectiveST = 0;
 	
 	private List<PestSpore> pestSpore = new ArrayList<PestSpore>();
 	private List<SeptoriaSpore> septoriaSpore = new ArrayList<SeptoriaSpore>();
@@ -134,7 +139,13 @@ public class Farmer {
 	private int integralBHGRsicht2;
 	private int integralBHGRertrag2;
 	
-	
+	// Graphen zur Kalibrierung
+	private int f5 = 0;
+	private int f4 = 0;
+	private int f3 = 0;
+	private int f2 = 0;
+	private int f1 = 0;
+	private int f0 = 0;
 	//private int gr;
 	
 	// private int resistenz; --> wird benötigt, falls Saatgutkosten in
@@ -149,7 +160,11 @@ public class Farmer {
 
 	// -------------------------------------------- Aufrufe
 	// -------------------------------------------------------------------------------------\\
-
+	public static int getDayFungicideApplication(){
+		return dayFungicideApplication;
+	}
+	
+	
 	public int getSpritzwiederholung() {
 		return anzahlSpritzungen;
 	}
@@ -174,11 +189,14 @@ public class Farmer {
 		return schaedenprozST;
 	}
 	
-	public double getSchaedenprozSTE() {
+	public static double getSchaedenprozSTE() {
 		return schaedenprozSTErtrag;
 	}
+	public static double getSchaedenprozSTENotVisible() {
+		return schaedenprozSTErtragNotVisible;
+	}
 	
-	public double getSchaedenprozGRE() {
+	public static double getSchaedenprozGRE() {
 		return schaedenprozGRErtrag;
 	}
 	
@@ -277,6 +295,24 @@ public class Farmer {
 	public int getFungicide4(){
 		  return fungicide4;  
 	}
+	public int getF5(){
+		return f5;
+	}
+	public int getF4(){
+		return f4;
+	}
+	public int getF3(){
+		return f3;
+	}
+	public int getF2(){
+		return f2;
+	}
+	public int getF1(){
+		return f1;
+	}
+	public int getF0(){
+		return f0;
+	}
 	  
 	
 	// ------------------------------------ Konstruktor für Farmer
@@ -327,10 +363,10 @@ public class Farmer {
 			//Festlegen der Tage, an denen Fauler LW spritzt
 			Random spritz = new Random();
 			int n = (Data.getEc33() - Data.getEc31()) + 1;
-			int m = (Data.getEc65() - Data.getEc55()) + 1; 
+			int m = (Data.getEc65() - Data.getEc47()) + 1; 
 			
 			s1 = spritz.nextInt(n) + Data.getEc31();
-			s2 = spritz.nextInt(m) + Data.getEc55();
+			s2 = spritz.nextInt(m) + Data.getEc47();
 			
 			//System.out.println(s1 + "s1 und2" + s2);
 			/*int n = (Data.getEc33() + Data.getEc31()) / 2;
@@ -359,18 +395,27 @@ public class Farmer {
 
 	public void getInfo() {
 		
+		System.out.println("AnzahlSpritzungen " + anzahlSpritzungen);
+		
 		List<Crop> pflanzen = new ArrayList<Crop>();
 		
 		int allSeptoria = 0;
 		int visibleSeptoria = 0;
 		int yieldSeptoria = 0;
+		int yieldSeptoriaNotVisible = 0;
 		int infestationFsixST = 0;
 		int yieldGR = 0;
 		int allGR = 0;
 		int visibleGR = 0;
 		int FtoF2GR = 0;
 		double yieldPotential = 0;
-		
+		f5 = 0;
+		f4 = 0;
+		f3 = 0;
+		f2 = 0;
+		f1 = 0;
+		f0 = 0;
+
 		
 		
 		for (Object obj : grid.getObjects()) { // befüllen der Listen
@@ -417,10 +462,31 @@ public class Farmer {
 					FtoF2GR += 1;
 				}
 			}
+			if(crop.f5 == true){
+				f5 += 1;
+			}
+			if(crop.f4 == true){
+				f4 += 1;
+			}
+			if(crop.f3 == true){
+				f3 += 1;
+			}
+			if(crop.f2 == true){
+				f2 += 1;
+			}
+			if(crop.f1 == true){
+				f1 += 1;
+			}
+			if(crop.f0 == true){
+				f0 += 1;
+			}
 			
 			//Septoria
 			if(crop.yieldSeptoria == true){
 				yieldSeptoria += 1;
+			}
+			if(crop.yieldSeptoriaNotVisible == true){
+				yieldSeptoriaNotVisible += 1;
 			}
 			if(crop.visibleSeptoria == true){
 				visibleSeptoria += 1;
@@ -476,6 +542,7 @@ public class Farmer {
 		schaedenSTsicht = (double) visibleSeptoria; //n;
 		schaedenSTfSechs = (double) infestationFsixST; //f;
 		schaedenSTErtrag = (double) yieldSeptoria; //stErtrag.size();
+		schaedenSTErtragNotVisible = (double) yieldSeptoriaNotVisible;
 		//schaedenSTfFour = (double) fFourST.size();
 
 
@@ -485,6 +552,7 @@ public class Farmer {
 		schaedenprozSTsicht = (schaedenSTsicht /pflanzenAnzahl) * 100;
 		schaedenprozSTfSechs = (schaedenSTfSechs / pflanzenAnzahl) * 100;
 		schaedenprozSTErtrag = (schaedenSTErtrag /pflanzenAnzahl) * 100;
+		schaedenprozSTErtragNotVisible = (schaedenSTErtragNotVisible /pflanzenAnzahl) * 100;
 		//schaedenprozSTfFour = (schaedenSTfFour /pflanzenAnzahl) * 100;
 		
 
@@ -514,6 +582,9 @@ public class Farmer {
 			}
 			
 		}
+		
+		startBehavior();
+	}
 
 		
 			
@@ -521,7 +592,7 @@ public class Farmer {
 		// je nach Verhalten des Landwirts variiert sein Arbeitsablauf
 		// verhalten je nach Spritzmethode, festgelegt als Paramter in GUI Oberflueche
 		// FN // Zum Verständis: 0=UK, 1=F1=situationsbezogene Behandlung, 2=F2=praxisbezogene Behandlung
-
+	public void startBehavior(){
 		
 		if (verhalten == 0) {
 			// es wird nicht gespritzt
@@ -529,11 +600,11 @@ public class Farmer {
 			reasonST = false;
 			reasonGR = false;
 			reasonNotKnown = false;
-			if (Data.getZeit() >= Data.getEc30() & Data.getZeit() < Data.getEc65()) {
+			if (Data.getZeit() >= Data.getEc31() & Data.getZeit() < Data.getEc65()) {
 				faulerLandwirt();
 			}
 		} else if (verhalten == 2) {  //Fleissiger Landwirt
-			if (Data.getZeit() >= Data.getEc30() & Data.getZeit() < Data.getEc65()) {
+			if (Data.getZeit() >= Data.getEc31() & Data.getZeit() < Data.getEc65()) {
 				fleissigerLandwirt();
 				/*/schaue nach Wetter (jeden Tag)
 				//spritze falls ST Schwelle überschritten und schon detektiert!
@@ -581,19 +652,22 @@ public class Farmer {
 	public void faulerLandwirt() {
 		//System.out.println("ProS1" + fungicidesApplied1);
 		if (Data.getZeit() <= Data.getEc33() & Data.getZeit() >= Data.getEc31()){
-			
+		 //if(Data.getZeit() == 72){		
 			if(Data.getZeit() < s1 & Data.getRegen() >=3 & Data.getLuft() >= 75 & Data.getFeucht() >= 75 & fungicidesApplied1 == false) {
 
 				//grund = 2;
 				reasonST = true;
-				anzahlSpritzungen += 1;
+			
+				//anzahlSpritzungen += 1;
 				spritzvorgang();
 				//proS1 = 1;
 				fungicidesApplied1 = true;
+				
 			} else if (Data.getZeit() == s1 & fungicidesApplied1 == false){//proS1 == 0){
+			
 				reasonNotKnown = true;
 				//grund = 1;
-				anzahlSpritzungen += 1;
+				//anzahlSpritzungen += 1;
 				spritzvorgang();
 				//System.out.println("ich werde aufgerfue");
 				fungicidesApplied1 = true;
@@ -603,24 +677,28 @@ public class Farmer {
 			//System.out.println("proS1 nacher" + fungicidesApplied1);
 			
 			
-		} else if (Data.getZeit() < Data.getEc65() & Data.getZeit() >= Data.getEc55()){
+		}else if (Data.getZeit() < Data.getEc65() & Data.getZeit() >= Data.getEc47()){
+		//}else if(Data.getZeit() == 93){
+			//reasonNotKnown = true;
+			//spritzvorgang();
 			if (Data.getZeit() < s2 & Data.getRegen() >=3 & Data.getLuft() >= 75 & Data.getFeucht() >= 75){
 				reasonST = true;
 				//grund = 2;
-				anzahlSpritzungen += 1;
+				//anzahlSpritzungen += 1;
 				spritzvorgang();
 				proS2 = 1;
-			} else if (Data.getZeit() == s2 & proS2 == 0){
+			
+			}else if (Data.getZeit() == s2 & proS2 == 0){
 				//Random reason = new Random();
 				//grund = reason.nextInt(2) + 1; //zufällig 1 oder 2
 				reasonNotKnown = true;
-				anzahlSpritzungen += 1;
+				//anzahlSpritzungen += 1;
 				spritzvorgang();
 				proS2 = 1;
 			}
 		}
 		
-		/*if((Data.getZeit() == s1 & proS1 == 0) | (Data.getZeit() == s2 & proS2 == 0)){
+		/*ALT!!!!if((Data.getZeit() == s1 & proS1 == 0) | (Data.getZeit() == s2 & proS2 == 0)){
 			grund = 1;
 			if (Data.getZeit() > Data.getEc37()){
 				Random reason = new Random();
@@ -631,8 +709,13 @@ public class Farmer {
 		}*/
 	}
 
+	
+	
+	
 	// ----------------------------Spritzverhalten fleissiger
 	// Landwirt-----------------------------------------------------------------------------\\
+	
+	
 	public void fleissigerLandwirt() {
 		i = 0; //Anzahl der Schwellenüberschreitungen (ist Auslöser für Spritzentsscheidung)
 				//jeden Tag auf 0 setzen, damit nicht "ausversehen" doppelt gespritzt wird
@@ -642,10 +725,15 @@ public class Farmer {
 			//spritze falls ST Schwelle überschritten und schon detektiert jeden Tag
 			
 			if (schwelleST == true){
-				anzahlSpritzungen += 1;
+				//anzahlSpritzungen += 1;
 				reasonST = true;
 				//grund = 2;
 				i++; //gibt an, dass aufgrund diesen Faktors gespritzt werden soll
+			}
+			
+			if((anzahlSpritzungen >= 1) & (Data.getZeit() > meanprotectiveST)){
+				reasonST = true;
+				i++;
 			}
 			
 			//TODO: ÄNDERN!!!! ST SCHWELLE!!!
@@ -676,7 +764,7 @@ public class Farmer {
 			reasonGR = false;
 			reasonNotKnown = false;
 		//fleissigerLandwirtBon();
-			System.out.println("ich bnonitiere");
+			System.out.println("ich bnonitiere " + schaedenprozSTfSechs);
 			letzteBonitur = Data.getZeit();  //merkt sich tick der letzten Bonitur, damit überprüft werden kann, ob neue Sporenlager entstanden sind
 			j = 0; // Zaehler fuer Boniturhueufigkeit
 			
@@ -725,7 +813,7 @@ public class Farmer {
 				if(schaedenprozSTfSechs > 50){
 					//Schwelle überschritten
 					schwelleST = true;
-					reasonST = true;
+					//reasonST = true;
 					//wenn Wetter entsprechend wird sofort gespritzt
 					if (Data.getRegen() >=3 & Data.getLuft() >= 75 & Data.getFeucht() >= 75) { //3mm Regen und anschließend 2 Tage mit LF über 75 %
 						reasonST = true;
@@ -744,28 +832,41 @@ public class Farmer {
 
 		}else if (anzahlSpritzungen >= 1) {
 			//ST
+			//ST ausschließlich Witterungsorientiert (hier nochmal aufgeführt, da reasonST = false gesetzt zu Beginn der Bonitur 
+			if(Data.getRegen() >=3 & Data.getLuft() >= 75 & Data.getFeucht() >= 75){
+				if(Data.getZeit() > meanprotectiveST){
+					reasonST = true;
+					i++;
+				}
+			}
+				
+			/*/ALT	
 			//neue Sporen nach Ablauf der Protektiv Wirkung 
 			if (Data.getSchwelle2() > 0) {
 				//grund = 2;
 				reasonST = true;
 				i++;
-			}
+			}*/
 			
 			//GR
-			//gr: befall auf f-2, f-1, f
+			//gr: befall auf f-2, f-1, f sichtbar
 			if(schadenGRF2bF > 0){    //Schadschwelle für Folgebehandlung (erste Sporenlager in oberen 3 Blattetagen)
 				//grund = 1;
-				reasonGR = true;
-				i++;
+				System.out.println("schaedenFF2" +schadenGRF2bF);
+				if(Data.getZeit() > meanprotectiveGR){
+					reasonGR = true;
+					i++;
+				}
 			}
 		}
 
 			System.out.println(reasonST + " grund ST + grundGR " + reasonGR + "not known " + reasonNotKnown + " schwelleST " + schwelleST);
-		}
-		if (i >= 1 & (Data.getZeit() > inDays| Data.getZeit() > inDaysST)){
-			anzahlSpritzungen += 1; 
-			spritzvorgang();
-		}
+	}
+		
+	if (i >= 1){ //& (Data.getZeit() > inDays| Data.getZeit() > inDaysST)){
+		spritzvorgang();
+	}
+	
 	}
 	
 
@@ -777,6 +878,11 @@ public class Farmer {
 	// -------------------------------------------------------------------------------------\\
 
 	public void spritzvorgang() {
+		System.out.println(reasonST + " grund ST + grundGR " + reasonGR + "not known " + reasonNotKnown + " schwelleST " + schwelleST);
+		
+		dayFungicideApplication = Data.getZeit();
+		anzahlSpritzungen +=1;
+		
 		grund = 0;
 		schadenSTBonitur = 0; //damit nicht immer weiter gespritzt wird
 		//Auswahl Fungizid
@@ -788,6 +894,8 @@ public class Farmer {
 		int gp; //Protektivleistung Gelbrost
 		int sk; //Kurativleistung Septoria
 		int sp; //Protektivleistung Septoria
+		int gmp; //Durchschn. Protektivleistung Gelbrost
+		int smp; //Durchschn. Protektivleistung Septoria
 		
 		if ((reasonGR == true & reasonST == false) | (reasonGR == true & reasonST == true)){
 			if (Data.getZeit() < Data.getEc37()){
@@ -802,8 +910,12 @@ public class Farmer {
 			//Azol
 			grund = 1;
 		} else if(reasonNotKnown == true){
-			Random reason = new Random();
-			grund = reason.nextInt(2) + 1;
+			if(Data.getZeit() < Data.getEc37()){
+				grund = 1;
+			}else{
+				Random reason = new Random();
+				grund = reason.nextInt(2) + 1;
+			}
 		}
 		System.out.println("Es wird gespritzt" + grund);
 		
@@ -815,6 +927,8 @@ public class Farmer {
 			gp = (int) Math.round(kur.nextGaussian() * 3.16 + 27.57);//Protektivleistung 23-32 Tage
 			sk = (int) Math.round(kur.nextGaussian() * 0.55 + 5.86); //Kurativleistung 6-7 Tage
 			sp = (int) Math.round(kur.nextGaussian() * 1.47 + 24); //Protektivleistung 24 - 28 Tage
+			gmp = 28;
+			smp = 24;
 			useCarboxamide = true;
 			System.out.println(sk + "Carboxamid" + sp);
 		}else {
@@ -823,26 +937,64 @@ public class Farmer {
 			gp = (int) Math.round(kur.nextGaussian() * 3.6 + 16.83); //Protektivleistung 12 - 22 Tage
 			sk = (int) Math.round(kur.nextGaussian() * 0.75 + 2.83); //Kurativleistung 2-4 Tage
 			sp = (int) Math.round(kur.nextGaussian() * 4.04 + 11.5); //Protektivleistung 6 -16 Tage
+			gmp = 17;
+			smp = 12;
 			useAzole = true;
-			System.out.println(sk + "Azol + kur + prot" + sp);
+			System.out.println(gk + "Azol + kur + prot" + gp);
 	
 		}
 		
 
 		//kurative Wirkung (bis zu 4 Tage)
-
+		//Protektivleistung: 
+		
+		//Versuch: nur 90% sterben
+		Random die = new Random();
+		
 		//Kurativleistung
 		for(Pest pest : blattlauszahl) {
+			int d = die.nextInt(100) + 1; 
+			//stirbt wegen Kurativleistung
 			if(pest.getBirth() >= (Data.getZeit() - gk)) {
 				if(pest.isAlive){
-				pest.die();
+					//if(d >= 10){
+						pest.die();
+						pest.isAlive = false;
+					
+				}
+			//stirbt wg. Protektivleistung (kann wieder auferstehen nach Ablauf d. Protektivleistung)
+			}else{
+				if(pest.isAlive & pest.isVisible){
+					Data.gelbrostTot.add(pest);
+					//System.out.println("birthV" + pest.birthVisible);
+					pest.birthVisible += gp;
+					//System.out.println("birthV2" + pest.birthVisible);
+					pest.isInactive = true; 
+					pest.isAlive = false;
 				}
 			}
 		}
+		
+		System.out.println("SeptoriaArry" + septoriaanzahl.size());
 		for(Septoria septoria : septoriaanzahl) {
+			int d = die.nextInt(100) + 1; 
+			
+			//Stirbt wg. Kurativleistung
 			if(septoria.getBirth() >= (Data.getZeit() - sk)) {
 				if(septoria.isAlive){
-				septoria.die();
+					//if(d >= 10){
+						septoria.isAlive = false;
+						septoria.die();
+						
+					
+			
+				}
+			//Sterbe wg. Protektivleistung
+			}else{
+				if(septoria.isAlive & septoria.isVisible){
+					Data.septoriaTot.add(septoria);
+					septoria.isInactive = true; 
+					septoria.isAlive = false;
 				}
 			}
 				
@@ -864,13 +1016,20 @@ public class Farmer {
 		
 		
 		
+		
+		
+		//VAR ALT
 		//Wirkdauer (protektiv) 
 		//GR
 		inDays = Data.getZeit() + gp;
+		meanprotectiveGR = Data.getZeit() + gmp;
 		//ST
 		inDaysST = Data.getZeit() + sp;
+		meanprotectiveST = Data.getZeit() + smp;
+		
+		
 		i = 0; //Damit nächster Spritzvorgang erst aufgerufen werden kann, wenn die Schwelle wieder überschritten ist
-
+		
 		kostenberechnung();
 		//schwelleST = false;
 		
@@ -878,7 +1037,7 @@ public class Farmer {
 	
 	//schliesst sich direkt an jeden Spritzvorgang an
 	public void kostenberechnung() {
-		System.out.println("ich berechne die kosten" + schwelleST);
+		//System.out.println("ich berechne die kosten" + schwelleST);
 		int fungicide = 1; //falls Fehler auftritt wird Azol gespritzt (eig nur da, damit Arraylist erstellt werden kann)
 		Random fun = new Random(); //Random zur Auswahl des Fungizids
 		if (useCarboxamide){
@@ -900,7 +1059,7 @@ public class Farmer {
 			//wähle Input Classic o. Pronto Plus
 		}
 		
-		System.out.println(tox + fname + fpreis);
+		//System.out.println(tox + fname + fpreis);
 		
 		if (anzahlSpritzungen == 1){
 			fungicide1 = fungicide;

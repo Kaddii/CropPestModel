@@ -87,6 +87,24 @@
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
+    <entry>
+      <string>AnzahlFungizidanw</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>AnzahlFungizidanw</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getSpritzwiederholung</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Location</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Location</id>
+        <className>cropPestModel.Data</className>
+        <methodName>getLocation</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
   </methodDataSources>
   <countSources class="linked-hash-map"/>
   <customNADataSources class="linked-hash-map"/>

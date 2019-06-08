@@ -52,13 +52,13 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 					new RandomCartesianAdder<Object>(),
 					// repast.simphony.space.... legt die grenzen fest. Hier also 50 mal 50
 					// erstellt auch einen grid der "grid" heißt und verbindet ihn mit dem Context
-					new repast.simphony.space.continuous.WrapAroundBorders(), 200, 500);
+					new repast.simphony.space.continuous.WrapAroundBorders(), 200, 200);//200, 500);
 
 			GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 			Grid<Object> grid = gridFactory.createGrid("grid", context,
 					new GridBuilderParameters<Object>(new WrapAroundBorders(),
 							// der Adder legt fest wo im Grid oder space neue Objekte zu Beginn sind
-							new SimpleGridAdder<Object>(), true, 200, 500));
+							new SimpleGridAdder<Object>(), true, 200, 200)); //200, 500));
 			// GridBuilderParameters mit dem Wert true = es ist möglich mehrere Objekte
 			// einen Grid-Punkt besetzen können
 
@@ -122,6 +122,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 
 			int location = (Integer) params.getValue("location");
 			
+			int ec25;
 			int ec30;
 			int ec31;
 			int ec32;
@@ -142,6 +143,7 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			
 			if (location == 1){
 				//EC Werte für Data (Standort 1 / DAH)
+				ec25 = 34;
 				ec30 = 57;
 				ec31 = 60;
 				ec32 = 78;
@@ -161,29 +163,31 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 				harvest = 166;
 			} else {
 				//EC Werte für Data (Standort 2 / SOL)
-				ec30 = 57;
-				ec31 = 60;
-				ec32 = 78;
-				ec33 = 83;
-				ec37 = 84;
-				ec39 = 93;
-				ec43 = 94;
-				ec47 = 95;
-				ec51 = 96;
-				ec55 = 100;
-				ec59 = 101;
-				ec61 = 102;
-				ec65 = 105;
-				ec69 = 109;
-				ec71 = 114;
+				ec25 = 44;
+				ec30 = 55;
+				ec31 = 56;
+				ec32 = 66;
+				ec33 = 72;
+				ec37 = 73;
+				ec39 = 83;
+				ec43 = 84;
+				ec47 = 85;
+				ec51 = 87;
+				ec55 = 90;
+				ec59 = 91;
+				ec61 = 92;
+				ec65 = 95;
+				ec69 = 99;
+				ec71 = 103;
 				ec73 = 117;
 				harvest = 166;
 			} 
 			
 			int zeit = 0;
 			
+			int year = (Integer) params.getValue("Jahr");
 			
-			context.add(new Data(space, grid, zeit, ec30, ec31, ec32, ec33, ec37, ec39, ec43, ec47, ec51, ec55, ec59, ec61, ec65, ec69, ec71, ec73, harvest));
+			context.add(new Data(space, grid, zeit, ec25, ec30, ec31, ec32, ec33, ec37, ec39, ec43, ec47, ec51, ec55, ec59, ec61, ec65, ec69, ec71, ec73, harvest, location, year));
 			
 			
 
@@ -215,20 +219,34 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			// ---------------------------------- Pest
 			// --------------------------------------------------------
 		
-			int pestCount = (Integer) params.getValue("PestCount");
-			int STCount = (Integer) params.getValue("septoria_count");
+			//int pestCount = (Integer) params.getValue("PestCount");
+			//int STCount = (Integer) params.getValue("septoria_count");
 			int birth = 1;
 			int septoriaCount;
 			int rustCount;
 			
+			int STCount;
+			int pestCount;
+			
+			if(year == 17){
+				STCount = 2700;
+				pestCount = 80;
+			} else if(year == 16){
+				STCount = 400;
+				pestCount = 3000;
+			} else{
+				STCount = 2500;
+				pestCount = 700;
+			}
+			
 			
 			if (resistance == 2){
-				septoriaCount = (int) Math.ceil(0.9*STCount);
-				rustCount = (int) Math.ceil(0.9*pestCount);
+				septoriaCount = (int) Math.ceil(0.8*STCount); //alt 0.9 0.8 0,75
+				rustCount = (int) Math.ceil(0.13*pestCount);
 			}
 			else if(resistance == 3) {
-				septoriaCount = (int) Math.ceil(0.8*STCount);
-				rustCount = (int) Math.ceil(0.8*pestCount);
+				septoriaCount = (int) Math.ceil(0.7*STCount); //alt 0,6
+				rustCount = (int) Math.ceil(0.09*pestCount);
 			}else{
 				septoriaCount = STCount;
 				rustCount = pestCount;

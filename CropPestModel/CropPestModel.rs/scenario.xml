@@ -19,5 +19,6 @@
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_16.xml" />
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_17.xml" />
 <repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_18.xml" />
-<repast.simphony.action.display context="CropPestModel" file="repast.simphony.action.display_19.xml" />
+<repast.simphony.action.time_series_chart context="CropPestModel" file="repast.simphony.action.time_series_chart_19.xml" />
+<repast.simphony.action.display context="CropPestModel" file="repast.simphony.action.display_20.xml" />
 </Scenario>

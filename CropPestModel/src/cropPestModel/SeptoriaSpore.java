@@ -52,7 +52,7 @@ public class SeptoriaSpore {
 			GridPoint pt = grid.getLocation(this);
 
 			// Crops in der Nachbarschaft bestimmen
-			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 10, 10); //alt 10,10
+			GridCellNgh<Crop> nghCreator = new GridCellNgh<Crop>(grid, pt, Crop.class, 13, 13); //alt 10,10
 			List<GridCell<Crop>> gridCells = nghCreator.getNeighborhood(true);
 
 			// speichert diese Crops in ArrayList
@@ -99,9 +99,9 @@ public class SeptoriaSpore {
 	
 	
 	public void keimung(){
-
+		//System.out.println("stspore keimt?");
 		if(Data.getTemp() >= 2 & Data.getTemp() <= 30 & Data.getHumidity() >= 75){
-			
+			//System.out.println("stspore keimt? - JAAAAAAAAAAAAAAAAAAAAAAA");
 			//Ort der Spore bestimmen
 			GridPoint pt = grid.getLocation(this); // speichert Standort der Pest
 			NdPoint spacePt = space.getLocation(this);

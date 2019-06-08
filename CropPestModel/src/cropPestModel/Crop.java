@@ -38,12 +38,20 @@ public class Crop {
 	public boolean fFourST;
 	public boolean visibleSeptoria = false;
 	public boolean yieldSeptoria = false;
+	public boolean yieldSeptoriaNotVisible = false;
 	public boolean allSeptoria = false;
 	public boolean infestationFsixST = false;
 	public boolean visibleGR = false;
 	public boolean yieldGR = false;
 	public boolean allGelbrost = false;
 	public boolean FtoF2GR = false;
+	public boolean f5 = false;
+	public boolean f4 = false;
+	public boolean f3 = false;
+	public boolean f2 = false;
+	public boolean f1 = false;
+	public boolean f0 = false;
+
 	
 	
 	
@@ -262,6 +270,7 @@ public class Crop {
 		allSeptoria = false;
 		visibleSeptoria = false;
 		yieldSeptoria = false;
+		yieldSeptoriaNotVisible = false;
 		infestationFsixST = false;
 		
 		
@@ -285,16 +294,14 @@ public class Crop {
 
 		
 		for (Pest pest : GR){
-			if(pest.isAlive == true){
+			if(pest.isAlive == true & pest.isInactive == false){
 				allGelbrost = true;
 				allGR += 1;
 				
 				if(pest.getLeaf() <= a){             
 					befallGR++;
 				}
-				if(pest.getLeaf() <= 2){
-					FtoF2GR = true;
-				}
+				
 				if (pest.getLeaf() <= 0){		
 					// TODO: noch benötigt??
 					befallFahnenblatt++;	
@@ -305,6 +312,31 @@ public class Crop {
 					if(pest.getLeaf() <= a){
 						befallGRErtrag++;
 						yieldGR = true;
+					}
+					if(pest.getLeaf() <= 2){
+						if (pest.getBirthVisible() > Farmer.getDayFungicideApplication()){
+							FtoF2GR = true;
+						}
+					}
+					
+					//für Graphen
+					if(pest.getLeaf() == 5){
+						f5 = true;
+					}
+					if(pest.getLeaf() == 4){
+						f4 = true;
+					}
+					if(pest.getLeaf() == 3){
+						f3 = true;
+					}
+					if(pest.getLeaf() == 2){
+						f2 = true;
+					}
+					if(pest.getLeaf() == 1){
+						f1 = true;
+					}
+					if(pest.getLeaf() == 0){
+						f0 = true;
 					}
 				}
 			}
@@ -330,6 +362,7 @@ public class Crop {
 		int befallFahnenblattST = 0;
 		int befallST = 0;
 		int befallSTErtrag = 0;
+		int befallSTErtragNichtSichtbar = 0;
 		int allST = 0;
 		int visibleST = 0;
 
@@ -337,18 +370,16 @@ public class Crop {
 		
 		//alle ST
 		for (Septoria septoria : ST){
-			if(septoria.isAlive == true){
+			if(septoria.isAlive == true & septoria.isInactive == false){
 				allST += 1;
 				allSeptoria = true;
 				
 				
-				if(septoria.getLeaf() <= a){             
+				if(septoria.getLeaf() <= (a+1)){             
 					befallST++;
+					yieldSeptoriaNotVisible = true;
 				}
-				if(septoria.getLeaf() == 6){;
-					infestationFsixST = true;
-
-				}
+				
 
 					/*TODO: noch benötigt???if (septoria.getLeaf() <= 0){
 						//System.out.println("Halloooooo");
@@ -361,11 +392,15 @@ public class Crop {
 						befallSTErtrag++;
 						yieldSeptoria = true;
 					}
+					if(septoria.getLeaf() == 6){
+						infestationFsixST = true;
+
+					}
 					
 					
-				}else {
-					//visibleSeptoria = false;
 				}
+					//visibleSeptoria = false;
+				
 			}else {
 				//allSeptoria = false;
 			}
@@ -374,7 +409,7 @@ public class Crop {
 		
 
 		septoriaAnzahl = allST; // Schädlingsanzahl(gesamt) auf private variable übertragen
-		befallSTE = befallST;            //Schädlingsanzahl die ertrag beeinflusst
+		befallSTE = befallST;            //Schädlingsanzahl die ertrag beeinflusst !!ACHTUNG!!STIMMT NICHT MEHR = ERTRAG + 1Blatt
 		befallFST = befallFahnenblattST;   //Schädlinge auf Fahnenblatt
 		infestationYieldST = befallSTErtrag; //zur Übersicht während Kalibrierung genutzt
 		infestationVisibleST = visibleST;

@@ -40,12 +40,14 @@ public class Septoria {
 	private int resistenz; // gibt Resistenzgrad der Crop an
 	public boolean isVisible; //bevor erste inkubationszeit abgelaufen ist, kann pilz nicht entdeckt werden
 	public boolean isAlive; 
+	public boolean isInactive = false;
 	private boolean hasInfected;
 	int a; //gibt an, an welcher crop die Pest sitzt
 	private int leaf;
 	
 	
-	private boolean canInfect; //gibt an ob pflanze durch spritzmittel geschützt ist
+	private boolean canInfect;   //gibt an, ob ST aufgrund seiner Position erfolgreiche Neuinfektionen verursachen kann
+	private boolean noProtection;  //gibt an ob pflanze durch spritzmittel geschützt ist
 	private int blatt; //gibt an auf welchem blatt sich ST befindet
 	private int geburt;
 	private double latenttime = 0;
@@ -111,7 +113,7 @@ public class Septoria {
 	public void start() {
 
 		zaehler++; //zählt tage seit geburt
-
+		canInfect = true;
 
 		
 		
@@ -123,39 +125,7 @@ public class Septoria {
 			
 			geburt = Data.getZeit() - 1;
 
-			Random ort = new Random();
-			
-			if (Data.getZeit() < 3){ //erste Infektionen (überwintert) befinden sich auf f-6
-				blatt = ort.nextInt(2) + 5;
-				isVisible = true;
-				//System.out.println("ich werde aufgerufen" + blatt);
-			}else if (Data.getZeit() < Data.getEc31()){
-				blatt = ort.nextInt(4)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
-												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
-
-			} else if (Data.getZeit() < Data.getEc32()){
-				blatt = ort.nextInt(4) + 2;
-
-			}else if (Data.getZeit() < Data.getEc37()){
-				blatt = ort.nextInt(4) + 1;
-
-			} else if (Data.getZeit() < Data.getEc47()){
-				blatt = ort.nextInt(4);
-
-			} else if (Data.getZeit() < Data.getEc59()){
-				blatt = ort.nextInt(4);
-
-			} else if (Data.getZeit() < Data.getEc71()){
-				blatt = ort.nextInt(4);
-
-			} else {
-				blatt = ort.nextInt(4);
-			}
-			//leaf = blatt;
-			/*if(blatt > leaf){
-				blatt = leaf - ort.nextInt(2);
-			}*/
-		
+	
 		
 		
 				// Anzahl Weizenpflanzen im Umfeld des Pilzes detektieren
@@ -188,50 +158,112 @@ public class Septoria {
 				Random ag = new Random();
 				a = ag.nextInt(agenten.size());        // wenn Crop vorhanden, Inkubationszeit nicht abgelaufen, dann wird pest in arraylist von 
 				agenten.get(a).ST.add(this);             //einem der crops in der umgebung gespeichert
-			
+				start2();
 			} else {
 				allocation();
 			}
+		} else {
+			start2();
+		}
+	}
+	
+	public void start2(){
+		//Pilzen wird Ort hier zugewiesen
+		if(zaehler <= 1){
+			
+			Random ort = new Random();
+			
+			if (Data.getZeit() < 3){ //erste Infektionen (überwintert) befinden sich auf f-6
+				blatt = ort.nextInt(3) + 5; //5; es gibt nur 6 Blattetagen zur Auswahl (30.05.2019)
+				//isVisible = true;
+				//System.out.println("ich werde aufgerufen" + blatt);
+				if(blatt == 7){ 		//Blatt 7 entspricht auch 6.. wird nur zur Verteilung der Infektionen auf den Blättern genutzt. Da Befall Blatt 6 höher als Blatt 5, da Blatt 6 älter
+					blatt = 6;
+				}
+			/*}else if (Data.getZeit() < Data.getEc30()){
+				blatt = ort.nextInt(4)+3;*/
+			}else if (Data.getZeit() < Data.getEc31()){
+				blatt = ort.nextInt(4)+3;   //nach Anzahl der Blätter welche laut Abb.223 vorhanden sind
+												// hier mgl.: f-9(9), f-8(8), f-7(7), f-6(6), f-5(5), f-4(4), f-3 (3) 
+	
+			} else if (Data.getZeit() < Data.getEc32()){
+				blatt = ort.nextInt(4) + 2;
+	
+			}else if (Data.getZeit() < Data.getEc37()){
+				blatt = ort.nextInt(4) + 1;
+	
+			} else if (Data.getZeit() < Data.getEc47()){
+				blatt = ort.nextInt(4);
+	
+			} else if (Data.getZeit() < Data.getEc59()){
+				blatt = ort.nextInt(4);
+	
+			} else if (Data.getZeit() < Data.getEc71()){
+				blatt = ort.nextInt(4);
+	
+			} else {
+				blatt = ort.nextInt(4);
+			}
+			
+			leaf = blatt;
+			/*if(blatt > leaf){
+				blatt = leaf - ort.nextInt(2);
+			}*/
+			
 		}
 		
 		
 
 		//ST überprüft, ob Sie sich weiterentwickeln kann
 		if (Data.getZeit() > Farmer.getInDaysST() | Farmer.getInDaysST() == 0) {    // erst wenn Wirkzeit Fungizid abgelaufen ist, kann sich Pilz weiter vermehren
-			canInfect = true;  
+			noProtection = true;  
 		}else{
-			canInfect = false;
+			noProtection = false;
 		}
 		
 		//Latenzzeit des Pilzes ist Temperaturabhängig
 		latenttime += (Data.getTemp() + 2.4);
 		
-		//Untere Septoria können nicht mehr zu neuen Infektionen führen (Annahme: Weg ist zu weit)
-		if (Data.getZeit() >= Data.getEc37()){
-			if (leaf > 4){
-				canInfect = false;
-			}
-		} else if (Data.getZeit() >= Data.getEc32()){
-			if(leaf > 5){
-				canInfect = false;
-			}
-		}else if(Data.getZeit() >= Data.getEc31()){
-			if (leaf > 6){
-				canInfect = false;
-			}
-		}
 		
-		if(Data.getZeit() >= (geburt + 14)){
-			if (latenttime > inkubation){                     // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
-														// Schädling fort
-				isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
-	
-				if(canInfect == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung				
-					fortpflanzung1();
+		//Untere Septoria können nicht mehr zu neuen Infektionen führen (Annahme: Weg ist zu weit)
+		//Ausnahme: wenn sonst keine Ertragsrel. Sporen vorhanden, können untere Sporen die oberen infizieren -> bildet Zuflug von außen/Zufall... ab!!
+		//NOCH EINBAUEN!!!!!!!!!!!!!!!!!!!!!
+		if (Farmer.getSchaedenprozSTE() > 0){
+			if (Data.getZeit() >= Data.getEc37()){
+				if (leaf >= 4){
+					canInfect = false;
+				}
+			} else if (Data.getZeit() >= Data.getEc32()){
+				if(leaf >= 5){
+					canInfect = false;
+				}
+			}else if(Data.getZeit() >= Data.getEc31()){
+				if (leaf >= 6){
+					canInfect = false;
 				}
 			}
+		} else {
+			canInfect = true;
+		}
+		
+		if(isVisible == false){
+			int zeit = Data.getZeit();
+		if(zeit >= Data.getEc25()){
+			if(zeit >= (geburt + 25)){
+				isVisible = true;
+			}else if((zeit >= (geburt + 17)) & (latenttime > inkubation)){
+				                   // wenn Crops vorhanden und inkubationszeit abgelaufen ist, dann pflanzt sich
+															// Schädling fort
+					isVisible = true;                           //sobald Inkubationszeit abgelaufen ist, wird schadorg. sichtbar und farmer spritzt dementsprechend
+				
+			}
 	
 		}
+		}
+		if(canInfect == true & isVisible == true & noProtection == true) { // Idee: vermehrung nur wenn zähler größer als die protektive Wirkung				
+			fortpflanzung1();
+		}
+			
 		
 	
 	}
@@ -268,24 +300,26 @@ public class Septoria {
 			// Platz an einer Crop findet und somit die Wahrscheinlichkeit die Pflanze zu
 			// befallen sinkt
 			//j = 0;
-			if (Farmer.getSchaedenprozST() < 90){//95)      //niedriger Resistenzstatus
+			if (Farmer.getSchaedenprozSTENotVisible() < 95){//95)      //niedriger Resistenzstatus
 				j = 0;
 			} else {
-				j = 85; 
+				j = 80; 
 			}
 
 		} else if (resistenz == 2) {						//mittlerer Resistenzstatus
-			if (Farmer.getSchaedenprozST() < 80) {
-				j = 60; 
+			if (Farmer.getSchaedenprozSTENotVisible() < 85) { //80
+				j = 65; //50
 			} else {
-				j = 90;
+				j = 88;
 			}
 
 		} else if (resistenz == 3) {						//hoher Resistenzstatus
-			if (Farmer.getSchaedenprozST() < 80) {
-				j = 80; 
+			if (Farmer.getSchaedenprozSTENotVisible() < 75){//65){//55) {
+				j = 80;//65; //50;//65;
+			}else if (Farmer.getSchaedenprozSTENotVisible() < 80) {
+				j = 90;//88; //65*/
 			} else {
-				j = 96;
+				j = 99;
 			}
 
 			// Falls falsche Zahl in GUI Oberfläche eingegeben wird bricht die Simulation ab
@@ -309,7 +343,7 @@ public class Septoria {
 		// wird irgendeine Pest getötet und nicht die neue! == nicht gewollt)
 		for (int i = 0; i < s; i++) {
 			Random tot = new Random();
-			int wahrscheinlichkeit = tot.nextInt(99) + 1; // zufällige zahl zwischen 1 und 100 (entsprechen %)
+			int wahrscheinlichkeit = tot.nextInt(100) + 1; // zufällige zahl zwischen 1 und 100 (entsprechen %)
 
 			// Wenn die Zufallszahl höher ist, als der oben festgelegte Wert für j, dann
 			// überlebt die neue Pest
@@ -422,6 +456,7 @@ public class Septoria {
 				//Septoria noch dem ST Array zuordnen 
 				((Crop) wei).ST.add(this);
 			}
+			start2();
 		} 
 	}
 //}

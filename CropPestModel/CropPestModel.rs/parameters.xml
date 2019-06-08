@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
-					<parameter name="PestCount" displayName="PestCount" type="int" 
-						defaultValue="180" 
+					<parameter name="Jahr" displayName="Jahr" type="int" 
+						defaultValue="17" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>
+				<parameter name="PestCount" displayName="PestCount" type="int" 
+						defaultValue="3000" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
@@ -13,7 +19,7 @@
 									
 		/>
 				<parameter name="cropCount" displayName="Anzahl Pflanzen" type="int" 
-						defaultValue="4680" 
+						defaultValue="2080" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
@@ -61,13 +67,13 @@
 									
 		/>
 				<parameter name="septoria_count" displayName="Septoria count" type="int" 
-						defaultValue="6300" 
+						defaultValue="400" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
 				<parameter name="behaviour" displayName="Verhalten Landwirt" type="int" 
-						defaultValue="0" 
+						defaultValue="3" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
