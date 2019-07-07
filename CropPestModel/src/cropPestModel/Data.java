@@ -61,7 +61,7 @@ public class Data {
 	private static double temp;
 	private static double rain;
 	private static double humidity;
-	private int year;
+	private static int year;
 	
 	//VERSUCH121118
 	List<Crop> pflanzen = new ArrayList<Crop>();
@@ -129,6 +129,9 @@ public class Data {
 		public static int getEc73(){
 			return ec73;
 		}
+		public static int getYear(){
+			return year;
+		}
 		public static int getHarvest(){
 			return harvest;
 		}
@@ -166,7 +169,7 @@ public class Data {
 
 
 	public Data(ContinuousSpace<Object> space, Grid<Object> grid, int zeit, int ec25, int ec30, int ec31, int ec32, int ec33, int ec37, int ec39,	int ec43, int ec47,
-				int ec51, int ec55,	int ec59, int ec61,	int ec65, int ec69,	int ec71, int ec73,	int harvest, int location, int year){
+				int ec51, int ec55,	int ec59, int ec61,	int ec65, int ec69,	int ec71, int ec73,	int harvest, int location/*, int year*/){
 		this.grid = grid;
 		this.space = space;
 		this.zeit = zeit;
@@ -189,7 +192,7 @@ public class Data {
 		this.ec73 = ec73;
 		this.harvest = harvest;
 		this.location = location;
-		this.year = year;
+		//this.year = year;
 		
 		}
 
@@ -244,13 +247,13 @@ public class Data {
 		}
 		
 		//alle 10 Tage (i) wird ausgewählt aus welchem Jahr die Witterungsdaten stammen
-		/*if(i >= 10)
+		if(i >= 10)
 		{
 			i = 0;
 			Random year = new Random();
-			jahr = year.nextInt(14) + 1; //eins von 15 Jahren wird ausgewählt
-		}*/
-		jahr = year;
+			jahr = year.nextInt(3) + 16; //eins von 3 Jahren wird ausgewählt
+		}
+		year = jahr;
 		System.out.println(year + "year");
 
 		rain = CropPestModelBuilder.weatherArray[jahr][zeit][2];

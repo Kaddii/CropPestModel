@@ -16,9 +16,17 @@ public class Farmer {
 	private ContinuousSpace<Object> space; // Standort des Farmers (hypothetisch, da nicht auf Feld angezeigt)
 	private Grid<Object> grid; // hypothetische Koordinaten des Farmers
 	//private int zeit; // gibt tick/zeitpunkt an
-	private double wpreis; // Erzeugerpreis Weizen (€/dt)
-	private double ausbringKosten; // Kosten für Überfahrt,Schlepper.. (€/ha)
+	private double wheatPrice; // Erzeugerpreis Weizen (€/dt)
+	private double performance; //Erlös/Leistung des Weizenfeldes
+	private double constantProfitContribution; //DB-Konstante
+	private double costsForEnvironment; //Umweltkosten
+	//ALT?private double ausbringKosten; // Kosten für Überfahrt,Schlepper.. (€/ha)
 	private double fpreis; // Kosten für Fungizid (€/ha)
+	private double fprice1;
+	private double fprice2;
+	private double fprice3;
+	private double fprice4;
+	
 	private int verhalten; // Info, ob man gerade faulen oder fleißigen Landwirt betrachtet
 
 	private double gesamtErtragsPot = 0; // Summe der Ertragspotentiale der einzelnen Crops zum jeweiligen Zeitpunkt
@@ -69,13 +77,23 @@ public class Farmer {
     private boolean useCarboxamide;
     private boolean useAzole;
     private String fname;
-    private int fungicide1;
-    private int fungicide2;
-    private int fungicide3;
-    private int fungicide4;
-    private int fungicideCost;
+    private int fungicide1 = 0;
+    private int fungicide2 = 0;
+    private int fungicide3 = 0;
+    private int fungicide4 = 0;
+    private String fname1;
+    private String fname2;
+    private String fname3;
+    private String fname4;
+    private int groupFungicide1 = 0;
+    private int groupFungicide2 = 0;
+    private int groupFungicide3 = 0;
+    private int groupFungicide4 = 0;
+    
+    private double sumFungicideCost;
     private double externalCost;
-    private int applicationCost;
+    private double applicationCost;
+    private double sumApplicationCost;
     
 	private boolean reasonST;
 	private boolean reasonGR;
@@ -95,7 +113,8 @@ public class Farmer {
 	List<Septoria> septoriaanzahl = new ArrayList<Septoria>();
 	List<Integer> fungicides = new ArrayList<Integer>();
     
-	private double gewinn; // erechneter Gewinn in €/qm
+	private double profit; // erechneter Gewinn in €/qm
+	private double profitEcol;
 	private double output; // gesamtErtragsPot konvertiert in kg/qm
 	private double a; // Konversionsfaktor gesamtErtragsPot zu output
 	private double pflanzenschutzKosten; // Kosten für Pflanzenschutz (€/qm)
@@ -103,10 +122,23 @@ public class Farmer {
 	private int saatgutk; //saatgutkosten je nach resistenz in Euro pro ha (exkl. beizkosten)
 	private int noCarboxamide; //Anzahl an Carboxamiden, die dem Landwirt zur Verfügung stehen
 	private int noAzole; //Anzahl an Azolen, die dem Landwirt zur Verfügung stehen
+	private double costsSowing;
 	
-	private double tox; // Maß für die Toxizität
+	private double tox; //ALT Nandico
+	private double toxCosts; // Maß für die Toxizität
 	private int risktoxi;
-
+	private int riskAversion;
+	
+	private double fungicideApplicationEcol;
+	private double costsClimate;
+	private double CO2ApplicationCostEQ;
+	private double famountActiveIngredient;
+	private double sumFamountActiveIngredient;
+	private double fungicideEcol;
+	private double priceCO2;
+	private double costsExternal;
+	private double costsClimateEQ;
+	
 	private double schadenSTBonitur = 0;
 	private int letzteBonitur; //merkt sich tick der letzten Bonitur, damit farmer unterscheiden kann ob es zu neuen infektionen gekommen ist
 
@@ -139,6 +171,13 @@ public class Farmer {
 	private int integralBHGRsicht2;
 	private int integralBHGRertrag2;
 	
+	private double yield;
+	private double yield1;
+	private double yield2;
+	private double yield3;
+	private double yield4;
+	private double yield5;
+	
 	// Graphen zur Kalibrierung
 	private int f5 = 0;
 	private int f4 = 0;
@@ -164,22 +203,53 @@ public class Farmer {
 		return dayFungicideApplication;
 	}
 	
+	public double getPerformance(){
+		return performance;
+	}
+	
+	public double getProfit(){
+		return profit; 
+	}
+	public double getPriceCO2() {
+		return priceCO2;
+	}
+	
+	public double getProfitInclEcol(){
+		return profitEcol;
+	}
+	public int getRiskAversion(){
+		return riskAversion;
+	}
+	public double getCostsExternal() {
+		return costsExternal;
+	}
+	public double getCostsClimate(){
+		return costsClimate;
+	}
+	public double getCostsClimateEQ(){
+		return costsClimateEQ;
+	}
+	
+	public double getCostsForEnvironment(){
+		return costsForEnvironment;
+	}
 	
 	public int getSpritzwiederholung() {
 		return anzahlSpritzungen;
 	}
 
 	public double getGewinn() {
-		return gewinn;
+		return profit;
 	}
 
 	public double getApplkosten() {
-		return ausbringKosten;
+		return applicationCost;
 	}
 
 	public double getWPreis() {
-		return wpreis;
+		return wheatPrice;
 	}
+	
 
 	public static double getSchaedenprozGR() {
 		return schaedenprozGR;
@@ -209,7 +279,7 @@ public class Farmer {
 
 
 	public double gettoxi() {
-		return tox;
+		return toxCosts;
 	}	
 	public static int getInDays() {
 		return inDays;
@@ -218,7 +288,6 @@ public class Farmer {
 	public static int getInDaysST() {
 		return inDaysST;
 	}
-	
 	public int getResistance() {
 		return resistance;
 	}
@@ -283,6 +352,24 @@ public class Farmer {
 	public int getIntegralBHGRErtrag2(){
 		return integralBHGRertrag2;
 	}
+	public double getYield(){
+		return yield;
+	}
+	public double getYield1(){
+		return yield1;
+	}
+	public double getYield2(){
+		return yield2;
+	}
+	public double getYield3(){
+		return yield3;
+	}
+	public double getYield4(){
+		return yield4;
+	}
+	public double getYield5(){
+		return yield5;
+	}
 	public int getFungicide1(){
 		  return fungicide1;  
 	}
@@ -294,6 +381,18 @@ public class Farmer {
 	}
 	public int getFungicide4(){
 		  return fungicide4;  
+	}
+	public int getF1group(){
+		return groupFungicide1;
+	}
+	public int getF2group(){
+		return groupFungicide2;
+	}
+	public int getF3group(){
+		return groupFungicide3;
+	}
+	public int getF4group(){
+		return groupFungicide4;
 	}
 	public int getF5(){
 		return f5;
@@ -318,13 +417,13 @@ public class Farmer {
 	// ------------------------------------ Konstruktor für Farmer
 	// ------------------------------------------------------------------------------\\
 
-	public Farmer(ContinuousSpace<Object> space, Grid<Object> grid, double preis, double price, double fpreis,
-			double tox, int behaviour, int saatgutk, int risktox, int resistance, int noAzole, int noCarboxamide) {
+	public Farmer(ContinuousSpace<Object> space, Grid<Object> grid, double wheatPrice,
+			double tox, int behaviour, int saatgutk, int risktox, int resistance, int noAzole, int noCarboxamide, double costsSowing,
+			double constantProfitContribution, double applicationCost, int riskAversion, double fungicideApplicationEcol, double fungicideEcol,
+			double priceCO2) {
 		this.grid = grid;
 		this.space = space;
-		this.wpreis = price;
-		this.ausbringKosten = preis;
-		this.fpreis = fpreis;
+		this.wheatPrice = wheatPrice;
 		this.verhalten = behaviour;
 		this.tox = tox;
 		this.risktoxi =risktox;
@@ -333,6 +432,13 @@ public class Farmer {
 		this.noAzole = noAzole;
 		this.noCarboxamide = noCarboxamide;
 		this.fungicidesApplied1 = false;
+		this.costsSowing = costsSowing;
+		this.constantProfitContribution = constantProfitContribution;
+		this.applicationCost = applicationCost;
+		this.riskAversion = riskAversion;
+		this.fungicideApplicationEcol = fungicideApplicationEcol;
+		this.fungicideEcol = fungicideEcol;
+		this.priceCO2 = priceCO2;
 	}
 
 // ------------------------------------ Beginn des "täglichen" Ablaufs
@@ -362,8 +468,8 @@ public class Farmer {
 			
 			//Festlegen der Tage, an denen Fauler LW spritzt
 			Random spritz = new Random();
-			int n = (Data.getEc33() - Data.getEc31()) + 1;
-			int m = (Data.getEc65() - Data.getEc47()) + 1; 
+			int n = (Data.getEc33() - Data.getEc31());
+			int m = (Data.getEc65() - Data.getEc47()); 
 			
 			s1 = spritz.nextInt(n) + Data.getEc31();
 			s2 = spritz.nextInt(m) + Data.getEc47();
@@ -378,6 +484,28 @@ public class Farmer {
 			inDays = 0;
 			//ST
 			inDaysST = 0;
+			
+			
+			integralBHST = 0;
+			integralBHSTsicht= 0;
+			integralBHSTertrag= 0;
+			integralBHGR= 0;
+			integralBHGRsicht= 0;
+			integralBHGRertrag= 0;
+			
+			integralBHST1= 0;
+			integralBHSTsicht1= 0;
+			integralBHSTertrag1= 0;
+			integralBHGR1= 0;
+			integralBHGRsicht1= 0;
+			integralBHGRertrag1= 0;
+			
+			integralBHST2= 0;
+			integralBHSTsicht2= 0;
+			integralBHSTertrag2= 0;
+			integralBHGR2= 0;
+			integralBHGRsicht2= 0;
+			integralBHGRertrag2= 0;
 		}
 
 			
@@ -396,6 +524,7 @@ public class Farmer {
 	public void getInfo() {
 		
 		System.out.println("AnzahlSpritzungen " + anzahlSpritzungen);
+		System.out.println(anzahlSpritzungen);
 		
 		List<Crop> pflanzen = new ArrayList<Crop>();
 		
@@ -558,14 +687,15 @@ public class Farmer {
 
 		
 		//Berechnen des BH Integrals, evtl. für Ertragsabschätzung genutzt
-		if(Data.getZeit() > Data.getEc30()){
+		int time = Data.getZeit();
+		if(time > Data.getEc30()){
 			integralBHST += schaedenprozST;
 			integralBHSTsicht += schaedenprozSTsicht;
 			integralBHSTertrag += schaedenprozSTErtrag;
 			integralBHGR += schaedenprozGR;
 			integralBHGRsicht += schaedenprozGRsicht;
 			integralBHGRertrag += schaedenprozGRErtrag;
-			if (Data.getZeit() < Data.getEc61()){
+			if (time < Data.getEc73()){
 				integralBHST1 += schaedenprozST;
 				integralBHSTsicht1 += schaedenprozSTsicht;
 				integralBHSTertrag1 += schaedenprozSTErtrag;
@@ -657,11 +787,11 @@ public class Farmer {
 
 				//grund = 2;
 				reasonST = true;
-			
+				fungicidesApplied1 = true;
 				//anzahlSpritzungen += 1;
 				spritzvorgang();
 				//proS1 = 1;
-				fungicidesApplied1 = true;
+				
 				
 			} else if (Data.getZeit() == s1 & fungicidesApplied1 == false){//proS1 == 0){
 			
@@ -1038,22 +1168,26 @@ public class Farmer {
 	//schliesst sich direkt an jeden Spritzvorgang an
 	public void kostenberechnung() {
 		//System.out.println("ich berechne die kosten" + schwelleST);
+		int group = 0;
 		int fungicide = 1; //falls Fehler auftritt wird Azol gespritzt (eig nur da, damit Arraylist erstellt werden kann)
 		Random fun = new Random(); //Random zur Auswahl des Fungizids
 		if (useCarboxamide){
 			//nutze Ceriax
+			group = 1;
 			fungicide = fun.nextInt(noCarboxamide) + 1;
-			tox = CropPestModelBuilder.carboxamideArray[fungicide][1];
+			toxCosts = CropPestModelBuilder.carboxamideArray[fungicide][1];
 			fpreis = CropPestModelBuilder.carboxamideArray[fungicide][2];
 			fname = "carboxamide";
+			famountActiveIngredient = CropPestModelBuilder.carboxamideArray[fungicide][3];
 			
 			useCarboxamide = false; //auf false setzen, damit bei nächstem Spritzvorgang wieder ausgewählt werden kann, was gespritzt wird
 		}else if (useAzole){
-			
+			group = 2;
 			fungicide = fun.nextInt(noAzole) + 1; 
-			tox = CropPestModelBuilder.azoleArray[fungicide][1];
+			toxCosts = CropPestModelBuilder.azoleArray[fungicide][1];
 			fpreis = CropPestModelBuilder.azoleArray[fungicide][2];
 			fname = "azole";
+			famountActiveIngredient = CropPestModelBuilder.azoleArray[fungicide][3];
 		
 			useAzole = false;
 			//wähle Input Classic o. Pronto Plus
@@ -1063,23 +1197,42 @@ public class Farmer {
 		
 		if (anzahlSpritzungen == 1){
 			fungicide1 = fungicide;
+			groupFungicide1 = group;
+			fprice1 = fpreis;
+			fname1 = fname;
 		}else if (anzahlSpritzungen == 2){
 			fungicide2 = fungicide;
+			groupFungicide2 = group;
+			fprice2 = fpreis;
+			fname2 = fname;
 		}else if (anzahlSpritzungen == 3){
 			fungicide3 = fungicide;
+			groupFungicide3 = group;
+			fprice3 = fpreis;
+			fname3 = fname;
 		}else if (anzahlSpritzungen == 4){
 			fungicide4 = fungicide;
+			groupFungicide4 = group;
+			fprice4 = fpreis;
+			fname4 = fname;
 		}
 	
-		//Externe Kosten
-		externalCost += tox;
+		//Umweltkosten
+		externalCost += toxCosts;
+		
+		//Klimakosten Ausbringung
+		CO2ApplicationCostEQ += fungicideApplicationEcol;
+		
+		//Klimakosten Fungizid
+		sumFamountActiveIngredient += famountActiveIngredient;
 		
 		
 		//Spritzmittelaufwand
-		fungicideCost += fpreis;
+		sumFungicideCost += fpreis;
 		
 		//Ausbringkosten
-		applicationCost += ausbringKosten;
+		sumApplicationCost += applicationCost;
+		
 	}
 
 // FN // Messung der Umweltbelastung //risktoxi soll Risiko darstellen
@@ -1109,23 +1262,181 @@ public class Farmer {
 		// MONITORING noch einberechen???
 		//NOCH ANPASSEN!!!!!!!!!!!!!!!!!
 		
-		//je nach Exposition  wird Risiko berechnet
+		//ERTRAG BERECHHNEN //ERTRAG//ERTRAG//------------------------------------------------------
+		
+		//Dummy Jahr
+		 
+		int y18 = 0;
+		int y17 = 0;
+		/*evtl einbauen, dass verschiedene Jahre angenommen werden können, bisher immer 2016
+		 * if (Data.getYear() == 18){
+			y18 = 1;
+		}else {
+			y18 =0;
+		}
+		if (Data.getYear() == 17){
+			y17 = 1;
+		}else {
+			y17 =0;
+		}*/
+		
+		//Dummy Behaviour
+		int b2;
+		int b3;
+		
+		if(verhalten == 2){
+			b2 = 1;
+		}else{
+			b2 = 0;
+		}
+		
+		if(verhalten == 3){
+			b3 = 1;
+		} else {
+			b3 = 0;
+		}
+		
+		
+		//Dummy Resistenz
+		int r2;
+		int r3;
+		
+		if(resistance == 2){
+			r2 = 1;
+		} else {
+			r2 = 0;
+		}
+		
+		if(resistance == 3){
+			r3 =1;
+		} else {
+			r3 = 0;
+		}
+		
+		int days = Data.getEc73() - Data.getEc30();
+		
+		//Ertragsfunktion
+		yield = 97.56087 - (0.0023545 * integralBHGRertrag) - (0.000374 * integralBHSTertrag) - (22.02364* y17) - (49.19065 * y18) + (3.154035 * b2) 
+				+ (5.802879 * b3) - (1.514237 * r2) - (6.299234 * r3);
+		
+		/*/normiert aus DAH AWECOS
+		yield = 78.38872 - (0.2140884 * integralBHGRertrag1/days) - (0.044225 * integralBHSTertrag1/days) - (4.476795* y17) - (17.37714 * y18) + (3.241628 * b2) 
+				+ (5.781289 * b3) - (0.6724489 * r2) - (2.821258 * r3);
+		//ALT!!LÖSCHEN!!!!!/Formel Ertrag
+		//Quad
+		yield1 = 91.93559 + (0.0025801 * integralBHGRertrag) + (-0.0024847 * integralBHSTertrag) + 
+				(-0.000000306 * 0.5 * integralBHGRertrag * integralBHGRertrag) + (0.000000521 * 0.5 * integralBHSTertrag * integralBHSTertrag)
+				+ (-0.000000676 * integralBHGRertrag * integralBHSTertrag) + (-51.57776 * y18) + (-22.1062 * y17) + (3.886501 * b2) + (6.690113 * b3)
+				+ (2.425785 * r2) + (-0.6960828 * r3);
+		
+		//Lin_Normal
+		yield2 = 97.48544 - (0.0022996 * integralBHGRertrag) - (0.0003964 * integralBHSTertrag) - (22.0585* y17) - (49.32927 * y18) + (3.270251 * b2) 
+				+ (6.002133 * b3) - (1.498593 * r2) - (6.280062 * r3);
+		
+		//Lin_MW
+		yield3 = 97.73783 - (0.0023357* integralBHGRertrag) - (0.0003638 * integralBHSTertrag) - (22.3922 * y17) - (49.33163 * y18) + (3.030614 * b2) 
+				+ (5.991676 * b3) - (1.772778 * r2) - (6.352903 * r3);
+		
+		//ERTRÄGEEC73
+		
+		
+		//Lin_Norm (BHST != Ertrag!!!!!!!)
+		yield4 = 100.9002 - (0.002957 * integralBHGR1) - (0.0009522 * integralBHST1) - (22.53764 * y17) - (50.45071 * y18) + (5.01987 *b2) + (7.420395 * b3)
+				- (2.315314 * r2) - (7.82031* r3);
+		
+		//Lin_MW (BHST != ERTRAG!!!!)
+		yield5 = 100.9139 - (0.0029642 * integralBHGR1) - (0.0009461 * integralBHST1) -(22.54269 * y17) - (50.45281 * y18) + (5.006598 *b2) + (7.408826 * b3)
+				- (2.311958 * r2) - (7.833003 * r3);
+		*/
+		
+		//System.out.println("IntegralGR" + integralBHGRertrag);
+		//System.out.println("IntegralST" + integralBHSTertrag);
+		System.out.println("ErtragLIN" + yield);
+		//System.out.println("ErtragLIN" + yield2);
+		
+		
+		//von Nandico -- nicht mehr aktuell
+		/*/je nach Exposition  wird Risiko berechnet
 		if(risktoxi == 1){
 			externalCost = externalCost * 0.5;
 		} else if(risktoxi == 2){
 			externalCost = externalCost * 1;
 		} else if (risktoxi == 3){
 			externalCost = externalCost * 2;
-		}
+		}*/
 		
 		
 		//NOCH ANPASSEN!!!!!!!!!!!!!!!!!
-
+		
+		//LEISTUNG//LEISTUNG//LEISTUNG
+		
+		performance = yield * wheatPrice;
+		
+		System.out.println("Erlös" + performance);
+		
+		
+		
+		
+		//KOSTEN//KOSTEN//KOSTEN
+		
+		//DB KONSTANTE constantProfitContribution
+		
+		//AUSSAAT
 		double seedCost = CropPestModelBuilder.seedArray[resistance][1];
 		double seedTreatmentCost = (CropPestModelBuilder.seedArray[resistance][3]);
 		double seedAmount = (CropPestModelBuilder.seedArray[resistance][2]);
-		saatgutkosten = ((seedCost + seedTreatmentCost) * seedAmount)/ 10000; //pro m2
 		
+		//Saatgutkosten
+		saatgutkosten = ((seedCost + seedTreatmentCost) * seedAmount);
+		//Kosten Aussaat = costsSowing
+		
+		//FUNGIZID
+		//Ausbringung Fungizid sumApplicationCost
+		//Fungizidkosten sumFungicideCost
+		
+		
+		//DB//DB//DB//DB//DB//DB
+		
+		profit = performance - constantProfitContribution - saatgutkosten - costsSowing - sumApplicationCost - sumFungicideCost;
+		
+		
+	
+		
+		
+		//ÖKOLOGISCH//ÖKOLOGISCH//ÖKOLOGISCH
+		
+		
+		//UMWELT
+		costsForEnvironment = externalCost * riskAversion;
+		
+		//KLIMA
+		
+		costsClimateEQ = (CO2ApplicationCostEQ + (sumFamountActiveIngredient *  fungicideEcol));
+		
+		costsClimate =  costsClimateEQ * priceCO2/1000; 
+		
+		//EXTERNE KOSTEN
+		
+		costsExternal = costsForEnvironment + costsClimate;
+		
+		
+		
+		//PROFIT INKL EXTERNE KOSTEN
+		
+		profitEcol = profit - costsExternal;
+		
+		System.out.println("DBKonst" + constantProfitContribution);
+		System.out.println("saatgutkosten" + saatgutkosten);
+		System.out.println("costsSowing" + costsSowing);
+		System.out.println("sumApplicationCost" + sumApplicationCost);
+		System.out.println("sumFungicideCost" + sumFungicideCost);
+		System.out.println("CO2ApplicationCostEQ" + CO2ApplicationCostEQ);
+		System.out.println("sumFamountActiveIngredient" + sumFamountActiveIngredient);
+		System.out.println("fungicideEcol" + fungicideEcol);
+		System.out.println("costsClimateEQ" + costsClimateEQ);
+		
+		
+		/* alte Variante aus FP 2018
 		pflanzenschutzKosten = ((ausbringKosten + fpreis) / 10000); // von €/ha zu €/qm
 		
 		wpreis = wpreis / 100; // in €/kg
@@ -1133,7 +1444,7 @@ public class Farmer {
 		output = gesamtErtragsPot * a;
 		gewinn = (output * wpreis) - (anzahlSpritzungen * pflanzenschutzKosten) - saatgutkosten;
 		// System.out.println("Das ist der Gewinn" + gewinn);
-		//System.out.println("Das ist der Gewinn" + gewinn);
+		//System.out.println("Das ist der Gewinn" + gewinn);*/
 	}
 
 }

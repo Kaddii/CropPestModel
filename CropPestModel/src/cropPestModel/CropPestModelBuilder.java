@@ -185,9 +185,9 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			
 			int zeit = 0;
 			
-			int year = (Integer) params.getValue("Jahr");
+			//int year = (Integer) params.getValue("Jahr");
 			
-			context.add(new Data(space, grid, zeit, ec25, ec30, ec31, ec32, ec33, ec37, ec39, ec43, ec47, ec51, ec55, ec59, ec61, ec65, ec69, ec71, ec73, harvest, location, year));
+			context.add(new Data(space, grid, zeit, ec25, ec30, ec31, ec32, ec33, ec37, ec39, ec43, ec47, ec51, ec55, ec59, ec61, ec65, ec69, ec71, ec73, harvest, location /*,year*/));
 			
 			
 
@@ -222,23 +222,59 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			//int pestCount = (Integer) params.getValue("PestCount");
 			//int STCount = (Integer) params.getValue("septoria_count");
 			int birth = 1;
-			int septoriaCount;
-			int rustCount;
 			
-			int STCount;
-			int pestCount;
 			
-			if(year == 17){
+			
+			
+			/*if(year == 17){
 				STCount = 2700;
 				pestCount = 80;
 			} else if(year == 16){
 				STCount = 400;
-				pestCount = 3000;
-			} else{
-				STCount = 2500;
-				pestCount = 700;
-			}
+				pestCount = 2300;//3000;
+			} else if(year == 18){
+				STCount = 300;//1500;//2500;
+				pestCount = 450; //1000;//700;
+			}*/
 			
+			//ANZAHL ST BESTIMMEN
+			//Bestimmt benötigte Temperatursumme
+			
+			//DREECKSVERTEILUNG mit a = min; b = max; c =modalwert
+			int STCount = 1;
+			int pestCount = 1;
+			
+			//ST
+			double a = 300;
+			double b = 2700;
+			double c = 400;
+			 
+			double F = (c - a) / (b - a);
+			double rand = Math.random();
+			if (rand < F) {
+			 STCount = (int) (a + Math.sqrt(rand * (b - a) * (c - a)));
+			 } else {
+			 STCount = (int) (b - Math.sqrt((1-rand) * (b - a) * (b - c)));
+			 }
+			
+			//Pest
+			double d = 80;
+			double er = 2300;
+			double f = 450;
+			 
+			double G = (f - d) / (er - d);
+			double rand2 = Math.random();
+			if (rand2 < G) {
+			 pestCount = (int) (d + Math.sqrt(rand2 * (er - d) * (f - d)));
+			 } else {
+			 pestCount = (int) (er - Math.sqrt((1-rand2) * (er - d) * (er - f)));
+			 }
+			
+			System.out.println("STCount" + STCount + "pestCount" + pestCount);
+			
+			
+			int septoriaCount;
+			int rustCount;
 			
 			if (resistance == 2){
 				septoriaCount = (int) Math.ceil(0.8*STCount); //alt 0.9 0.8 0,75
@@ -282,19 +318,19 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 				//DREECKSVERTEILUNG mit a = min; b = max; c =modalwert
 				
 				int reproductionST;
-				double a = 175;
-				double b = 440;
-				double c = 280;
+				double g = 175;
+				double h = 440;
+				double k = 280;
 				 
-				double F = (c - a) / (b - a);
-				double rand = Math.random();
+				double H = (k - g) / (h - g);
+				double rand3 = Math.random();
 				
 				for (int i = 0; i < septoriaCount; i++) {
 					//Bestimmt benötigte Temperatursumme
-					if (rand < F) {
-					 reproductionST = (int) (a + Math.sqrt(rand * (b - a) * (c - a)));
+					if (rand3 < H) {
+					 reproductionST = (int) (g + Math.sqrt(rand3 * (h - g) * (k - g)));
 					 } else {
-					 reproductionST = (int) (b - Math.sqrt((1-rand) * (b - a) * (b - c)));
+					 reproductionST = (int) (h - Math.sqrt((1-rand3) * (h - g) * (h - k)));
 					 }
 				Septoria septoria = new Septoria(space, grid, resistance, leaf);
 				context.add(septoria);
@@ -322,19 +358,31 @@ public class CropPestModelBuilder implements ContextBuilder<Object> {
 			// ---------------------------------------------
 			
 			int behaviour = (Integer) params.getValue("behaviour");
-			double preis = (Double) params.getValue("applicationcost");
-			double price = (Double) params.getValue("erzeugerpreis");
-			double fpreis = (Double) params.getValue("fungizid");	
-			double tox = (Double) params.getValue("tox");
+			double applicationCost = (Double) params.getValue("applicationcost");
+			double wheatPrice = (Double) params.getValue("erzeugerpreis");
+				
+			
 			int risktox = (Integer) params.getValue("risktox");
 			int noAzole = (Integer) params.getValue("noAzole");
 			int noCarboxamide = (Integer) params.getValue("noCarboxamide");
+			double costsSowing = (Double) params.getValue("costsSowing");
+			double constantProfitContribution = (Double) params.getValue("constantProfitContribution");
+			int riskAversion = (Integer) params.getValue("riskAversion");
+			double fungicideApplicationEcol = (Double) params.getValue("fungicideApplicationEcol");
+			double fungicideEcol = (Double) params.getValue("fungicideEcol");
+			double priceCO2 = (Double) params.getValue("priceCO2");
+			
+			//ALT??
+			int sprice = 40; //saatgutpreis!! noch anpassen 
+			double fpreis = (Double) params.getValue("fungizid");
+			double tox = (Double) params.getValue("tox");
 			
 			//int farmerCount = 1;
 			///for (int i = 0; i < farmerCount; i++) {
 				// double preis = weizenPreis / 10000; //von dt/ha auf dt/m2 umrechnen
 
-				context.add(new Farmer(space, grid, preis, price, fpreis, tox, behaviour, resistance, risktox, resistance, noAzole, noCarboxamide));
+				context.add(new Farmer(space, grid, wheatPrice, tox, behaviour, sprice, risktox, resistance, noAzole, noCarboxamide, costsSowing, 
+						constantProfitContribution, applicationCost, riskAversion, fungicideApplicationEcol, fungicideEcol, priceCO2));
 			//}
 			for (Object obj : context) {
 				NdPoint pt = space.getLocation(obj);

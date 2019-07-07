@@ -1,212 +1,89 @@
-INFO  [Thread-5] 2019-06-08 14:58:04,080 repast.simphony.batch.ssh.LocalSession - zeit100
-INFO  [Thread-5] 2019-06-08 14:58:04,080 repast.simphony.batch.ssh.LocalSession - EC55!!!
-INFO  [Thread-5] 2019-06-08 14:58:04,081 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,149 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,150 repast.simphony.batch.ssh.LocalSession - zeit101
-INFO  [Thread-5] 2019-06-08 14:58:04,150 repast.simphony.batch.ssh.LocalSession - EC59!!!!
-INFO  [Thread-5] 2019-06-08 14:58:04,150 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,157 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,159 repast.simphony.batch.ssh.LocalSession - zeit102
-INFO  [Thread-5] 2019-06-08 14:58:04,159 repast.simphony.batch.ssh.LocalSession - EC61!!!
-INFO  [Thread-5] 2019-06-08 14:58:04,159 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,160 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,162 repast.simphony.batch.ssh.LocalSession - zeit103
-INFO  [Thread-5] 2019-06-08 14:58:04,162 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,163 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,164 repast.simphony.batch.ssh.LocalSession - zeit104
-INFO  [Thread-5] 2019-06-08 14:58:04,164 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,166 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,167 repast.simphony.batch.ssh.LocalSession - zeit105
-INFO  [Thread-5] 2019-06-08 14:58:04,167 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,168 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,169 repast.simphony.batch.ssh.LocalSession - zeit106
-INFO  [Thread-5] 2019-06-08 14:58:04,169 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,175 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,177 repast.simphony.batch.ssh.LocalSession - zeit107
-INFO  [Thread-5] 2019-06-08 14:58:04,177 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,186 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,187 repast.simphony.batch.ssh.LocalSession - zeit108
-INFO  [Thread-5] 2019-06-08 14:58:04,187 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,196 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,197 repast.simphony.batch.ssh.LocalSession - zeit109
-INFO  [Thread-5] 2019-06-08 14:58:04,198 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,207 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,208 repast.simphony.batch.ssh.LocalSession - zeit110
-INFO  [Thread-5] 2019-06-08 14:58:04,209 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,218 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,220 repast.simphony.batch.ssh.LocalSession - zeit111
-INFO  [Thread-5] 2019-06-08 14:58:04,220 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,231 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,233 repast.simphony.batch.ssh.LocalSession - zeit112
-INFO  [Thread-5] 2019-06-08 14:58:04,233 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,235 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,236 repast.simphony.batch.ssh.LocalSession - zeit113
-INFO  [Thread-5] 2019-06-08 14:58:04,236 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,274 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,275 repast.simphony.batch.ssh.LocalSession - zeit114
-INFO  [Thread-5] 2019-06-08 14:58:04,275 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,296 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,298 repast.simphony.batch.ssh.LocalSession - zeit115
-INFO  [Thread-5] 2019-06-08 14:58:04,298 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,311 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,312 repast.simphony.batch.ssh.LocalSession - zeit116
-INFO  [Thread-5] 2019-06-08 14:58:04,312 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,350 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,352 repast.simphony.batch.ssh.LocalSession - zeit117
-INFO  [Thread-5] 2019-06-08 14:58:04,352 repast.simphony.batch.ssh.LocalSession - EC73!!!!
-INFO  [Thread-5] 2019-06-08 14:58:04,352 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,372 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,375 repast.simphony.batch.ssh.LocalSession - zeit118
-INFO  [Thread-5] 2019-06-08 14:58:04,375 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,377 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,379 repast.simphony.batch.ssh.LocalSession - zeit119
-INFO  [Thread-5] 2019-06-08 14:58:04,379 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,381 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,383 repast.simphony.batch.ssh.LocalSession - zeit120
-INFO  [Thread-5] 2019-06-08 14:58:04,383 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,385 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,387 repast.simphony.batch.ssh.LocalSession - zeit121
-INFO  [Thread-5] 2019-06-08 14:58:04,387 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,389 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,392 repast.simphony.batch.ssh.LocalSession - zeit122
-INFO  [Thread-5] 2019-06-08 14:58:04,392 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,394 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,396 repast.simphony.batch.ssh.LocalSession - zeit123
-INFO  [Thread-5] 2019-06-08 14:58:04,396 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,398 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,400 repast.simphony.batch.ssh.LocalSession - zeit124
-INFO  [Thread-5] 2019-06-08 14:58:04,400 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,401 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,403 repast.simphony.batch.ssh.LocalSession - zeit125
-INFO  [Thread-5] 2019-06-08 14:58:04,403 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,404 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,405 repast.simphony.batch.ssh.LocalSession - zeit126
-INFO  [Thread-5] 2019-06-08 14:58:04,405 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,407 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,409 repast.simphony.batch.ssh.LocalSession - zeit127
-INFO  [Thread-5] 2019-06-08 14:58:04,409 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,410 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,412 repast.simphony.batch.ssh.LocalSession - zeit128
-INFO  [Thread-5] 2019-06-08 14:58:04,412 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,413 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,414 repast.simphony.batch.ssh.LocalSession - zeit129
-INFO  [Thread-5] 2019-06-08 14:58:04,414 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,416 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,417 repast.simphony.batch.ssh.LocalSession - zeit130
-INFO  [Thread-5] 2019-06-08 14:58:04,417 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,418 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,419 repast.simphony.batch.ssh.LocalSession - zeit131
-INFO  [Thread-5] 2019-06-08 14:58:04,419 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,421 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,422 repast.simphony.batch.ssh.LocalSession - zeit132
-INFO  [Thread-5] 2019-06-08 14:58:04,422 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,423 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,425 repast.simphony.batch.ssh.LocalSession - zeit133
-INFO  [Thread-5] 2019-06-08 14:58:04,425 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,427 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,428 repast.simphony.batch.ssh.LocalSession - zeit134
-INFO  [Thread-5] 2019-06-08 14:58:04,428 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,429 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,431 repast.simphony.batch.ssh.LocalSession - zeit135
-INFO  [Thread-5] 2019-06-08 14:58:04,431 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,432 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,434 repast.simphony.batch.ssh.LocalSession - zeit136
-INFO  [Thread-5] 2019-06-08 14:58:04,434 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,436 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,438 repast.simphony.batch.ssh.LocalSession - zeit137
-INFO  [Thread-5] 2019-06-08 14:58:04,438 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,439 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,442 repast.simphony.batch.ssh.LocalSession - zeit138
-INFO  [Thread-5] 2019-06-08 14:58:04,442 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,444 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,445 repast.simphony.batch.ssh.LocalSession - zeit139
-INFO  [Thread-5] 2019-06-08 14:58:04,445 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,447 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,448 repast.simphony.batch.ssh.LocalSession - zeit140
-INFO  [Thread-5] 2019-06-08 14:58:04,448 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,450 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,451 repast.simphony.batch.ssh.LocalSession - zeit141
-INFO  [Thread-5] 2019-06-08 14:58:04,451 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,452 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,454 repast.simphony.batch.ssh.LocalSession - zeit142
-INFO  [Thread-5] 2019-06-08 14:58:04,454 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,455 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,457 repast.simphony.batch.ssh.LocalSession - zeit143
-INFO  [Thread-5] 2019-06-08 14:58:04,457 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,458 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,460 repast.simphony.batch.ssh.LocalSession - zeit144
-INFO  [Thread-5] 2019-06-08 14:58:04,460 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,462 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,463 repast.simphony.batch.ssh.LocalSession - zeit145
-INFO  [Thread-5] 2019-06-08 14:58:04,463 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,464 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,466 repast.simphony.batch.ssh.LocalSession - zeit146
-INFO  [Thread-5] 2019-06-08 14:58:04,466 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,467 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,468 repast.simphony.batch.ssh.LocalSession - zeit147
-INFO  [Thread-5] 2019-06-08 14:58:04,468 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,470 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,472 repast.simphony.batch.ssh.LocalSession - zeit148
-INFO  [Thread-5] 2019-06-08 14:58:04,472 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,473 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,474 repast.simphony.batch.ssh.LocalSession - zeit149
-INFO  [Thread-5] 2019-06-08 14:58:04,474 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,475 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,476 repast.simphony.batch.ssh.LocalSession - zeit150
-INFO  [Thread-5] 2019-06-08 14:58:04,476 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,477 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,479 repast.simphony.batch.ssh.LocalSession - zeit151
-INFO  [Thread-5] 2019-06-08 14:58:04,479 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,480 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,481 repast.simphony.batch.ssh.LocalSession - zeit152
-INFO  [Thread-5] 2019-06-08 14:58:04,481 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,482 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,484 repast.simphony.batch.ssh.LocalSession - zeit153
-INFO  [Thread-5] 2019-06-08 14:58:04,484 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,484 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,485 repast.simphony.batch.ssh.LocalSession - zeit154
-INFO  [Thread-5] 2019-06-08 14:58:04,485 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,487 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,488 repast.simphony.batch.ssh.LocalSession - zeit155
-INFO  [Thread-5] 2019-06-08 14:58:04,488 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,489 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,490 repast.simphony.batch.ssh.LocalSession - zeit156
-INFO  [Thread-5] 2019-06-08 14:58:04,490 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,491 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,493 repast.simphony.batch.ssh.LocalSession - zeit157
-INFO  [Thread-5] 2019-06-08 14:58:04,493 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,494 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,496 repast.simphony.batch.ssh.LocalSession - zeit158
-INFO  [Thread-5] 2019-06-08 14:58:04,496 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,497 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,498 repast.simphony.batch.ssh.LocalSession - zeit159
-INFO  [Thread-5] 2019-06-08 14:58:04,499 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,500 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,501 repast.simphony.batch.ssh.LocalSession - zeit160
-INFO  [Thread-5] 2019-06-08 14:58:04,501 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,503 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,504 repast.simphony.batch.ssh.LocalSession - zeit161
-INFO  [Thread-5] 2019-06-08 14:58:04,504 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,505 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,507 repast.simphony.batch.ssh.LocalSession - zeit162
-INFO  [Thread-5] 2019-06-08 14:58:04,507 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,509 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,510 repast.simphony.batch.ssh.LocalSession - zeit163
-INFO  [Thread-5] 2019-06-08 14:58:04,510 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,511 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,512 repast.simphony.batch.ssh.LocalSession - zeit164
-INFO  [Thread-5] 2019-06-08 14:58:04,512 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,514 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,516 repast.simphony.batch.ssh.LocalSession - zeit165
-INFO  [Thread-5] 2019-06-08 14:58:04,516 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,517 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [Thread-5] 2019-06-08 14:58:04,518 repast.simphony.batch.ssh.LocalSession - zeit166
-INFO  [Thread-5] 2019-06-08 14:58:04,518 repast.simphony.batch.ssh.LocalSession - harvest!!!
-INFO  [Thread-5] 2019-06-08 14:58:04,518 repast.simphony.batch.ssh.LocalSession - 16year
-INFO  [Thread-5] 2019-06-08 14:58:04,519 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 0
-INFO  [pool-3-thread-1] 2019-06-08 14:58:30,270 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\Katrin\AppData\Local\Temp\simphony_model_1559998585270 for DONE:  yes
-INFO  [SwingWorker-pool-2-thread-1] 2019-06-08 14:58:30,273 repast.simphony.batch.ssh.SessionsDriver - Run Time: 2,0135
-INFO  [SwingWorker-pool-2-thread-1] 2019-06-08 14:58:30,381 repast.simphony.batch.ssh.LocalSession - Finding output on localhost in C:\Users\Katrin\AppData\Local\Temp\simphony_model_1559998585270
-INFO  [SwingWorker-pool-2-thread-1] 2019-06-08 14:58:30,411 repast.simphony.batch.ssh.SessionsDriver - Aggregating output into C:/Users/Katrin/git/CropPestModel/CropPestModel/output
-INFO  [SwingWorker-pool-2-thread-1] 2019-06-08 14:58:30,436 repast.simphony.batch.ssh.SessionsDriver - Get Output Time: 0,0027
-INFO  [SwingWorker-pool-2-thread-1] 2019-06-08 14:58:30,437 repast.simphony.batch.ssh.SessionsDriver - Finished. Elapsed Time: 2,0863
+INFO  [Thread-5] 2019-07-07 14:53:36,938 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,941 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,942 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,944 repast.simphony.batch.ssh.LocalSession - zeit150
+INFO  [Thread-5] 2019-07-07 14:53:36,944 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,949 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,949 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,952 repast.simphony.batch.ssh.LocalSession - zeit151
+INFO  [Thread-5] 2019-07-07 14:53:36,952 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,954 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,954 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,956 repast.simphony.batch.ssh.LocalSession - zeit152
+INFO  [Thread-5] 2019-07-07 14:53:36,956 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,959 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,959 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,961 repast.simphony.batch.ssh.LocalSession - zeit153
+INFO  [Thread-5] 2019-07-07 14:53:36,962 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,966 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,966 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,968 repast.simphony.batch.ssh.LocalSession - zeit154
+INFO  [Thread-5] 2019-07-07 14:53:36,968 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,971 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,971 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,974 repast.simphony.batch.ssh.LocalSession - zeit155
+INFO  [Thread-5] 2019-07-07 14:53:36,975 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,979 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,979 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,983 repast.simphony.batch.ssh.LocalSession - zeit156
+INFO  [Thread-5] 2019-07-07 14:53:36,984 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,986 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,986 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:36,988 repast.simphony.batch.ssh.LocalSession - zeit157
+INFO  [Thread-5] 2019-07-07 14:53:36,988 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:36,994 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:36,994 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,000 repast.simphony.batch.ssh.LocalSession - zeit158
+INFO  [Thread-5] 2019-07-07 14:53:37,001 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,007 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,008 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,020 repast.simphony.batch.ssh.LocalSession - zeit159
+INFO  [Thread-5] 2019-07-07 14:53:37,020 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,023 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,023 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,026 repast.simphony.batch.ssh.LocalSession - zeit160
+INFO  [Thread-5] 2019-07-07 14:53:37,026 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,032 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,034 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,037 repast.simphony.batch.ssh.LocalSession - zeit161
+INFO  [Thread-5] 2019-07-07 14:53:37,038 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,040 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,040 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,043 repast.simphony.batch.ssh.LocalSession - zeit162
+INFO  [Thread-5] 2019-07-07 14:53:37,044 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,049 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,050 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,054 repast.simphony.batch.ssh.LocalSession - zeit163
+INFO  [Thread-5] 2019-07-07 14:53:37,055 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,057 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,058 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,077 repast.simphony.batch.ssh.LocalSession - zeit164
+INFO  [Thread-5] 2019-07-07 14:53:37,085 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,088 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,089 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,093 repast.simphony.batch.ssh.LocalSession - zeit165
+INFO  [Thread-5] 2019-07-07 14:53:37,093 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,099 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,100 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,120 repast.simphony.batch.ssh.LocalSession - zeit166
+INFO  [Thread-5] 2019-07-07 14:53:37,121 repast.simphony.batch.ssh.LocalSession - harvest!!!
+INFO  [Thread-5] 2019-07-07 14:53:37,121 repast.simphony.batch.ssh.LocalSession - 16year
+INFO  [Thread-5] 2019-07-07 14:53:37,124 repast.simphony.batch.ssh.LocalSession - AnzahlSpritzungen 2
+INFO  [Thread-5] 2019-07-07 14:53:37,124 repast.simphony.batch.ssh.LocalSession - 2
+INFO  [Thread-5] 2019-07-07 14:53:37,126 repast.simphony.batch.ssh.LocalSession - ErtragLIN96.95741500000001
+INFO  [Thread-5] 2019-07-07 14:53:37,127 repast.simphony.batch.ssh.LocalSession - Erlös1488.2963202500002
+INFO  [Thread-5] 2019-07-07 14:53:37,127 repast.simphony.batch.ssh.LocalSession - DBKonst574.9
+INFO  [Thread-5] 2019-07-07 14:53:37,128 repast.simphony.batch.ssh.LocalSession - saatgutkosten103.86999999999999
+INFO  [Thread-5] 2019-07-07 14:53:37,128 repast.simphony.batch.ssh.LocalSession - costsSowing45.74
+INFO  [Thread-5] 2019-07-07 14:53:37,128 repast.simphony.batch.ssh.LocalSession - sumApplicationCost10.28
+INFO  [Thread-5] 2019-07-07 14:53:37,128 repast.simphony.batch.ssh.LocalSession - sumFungicideCost100.225
+INFO  [Thread-5] 2019-07-07 14:53:37,129 repast.simphony.batch.ssh.LocalSession - CO2ApplicationCostEQ6.36
+INFO  [Thread-5] 2019-07-07 14:53:37,133 repast.simphony.batch.ssh.LocalSession - sumFamountActiveIngredient1.1495
+INFO  [Thread-5] 2019-07-07 14:53:37,133 repast.simphony.batch.ssh.LocalSession - fungicideEcol3.9
+INFO  [Thread-5] 2019-07-07 14:53:37,133 repast.simphony.batch.ssh.LocalSession - costsClimateEQ10.84305
+INFO  [pool-3-thread-1] 2019-07-07 14:54:15,386 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\Katrin\AppData\Local\Temp\simphony_model_1562503982326 for DONE:  yes
+INFO  [SwingWorker-pool-2-thread-1] 2019-07-07 14:54:15,389 repast.simphony.batch.ssh.SessionsDriver - Run Time: 1,1367
+INFO  [SwingWorker-pool-2-thread-1] 2019-07-07 14:54:15,483 repast.simphony.batch.ssh.LocalSession - Finding output on localhost in C:\Users\Katrin\AppData\Local\Temp\simphony_model_1562503982326
+INFO  [SwingWorker-pool-2-thread-1] 2019-07-07 14:54:15,508 repast.simphony.batch.ssh.SessionsDriver - Aggregating output into C:/Users/Katrin/git/CropPestModel/CropPestModel/output
+INFO  [SwingWorker-pool-2-thread-1] 2019-07-07 14:54:15,518 repast.simphony.batch.ssh.SessionsDriver - Get Output Time: 0,0021
+INFO  [SwingWorker-pool-2-thread-1] 2019-07-07 14:54:15,518 repast.simphony.batch.ssh.SessionsDriver - Finished. Elapsed Time: 1,2201

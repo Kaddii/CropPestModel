@@ -1,13 +1,21 @@
 <repast.simphony.data2.engine.FileSinkDescriptor>
-  <name>gr</name>
-  <dataSet>Agent_Count</dataSet>
+  <name>Calibration</name>
+  <dataSet>All_Data</dataSet>
   <delimiter>,</delimiter>
   <format>TABULAR</format>
   <sourceIds class="linked-hash-set">
     <string>tick</string>
-    <string>GRCount</string>
-    <string>STCount</string>
+    <string>SchadenprozGRsicht</string>
+    <string>SchaedenprozGR</string>
+    <string>SchaedenprozGRE</string>
+    <string>SchaedenprozST</string>
+    <string>SchaedenprozSTE</string>
+    <string>SchaedenprzSTsicht</string>
+    <string>Resistance</string>
+    <string>Behaviour</string>
+    <string>AnzahlFungizidanw</string>
+    <string>Location</string>
   </sourceIds>
-  <fileName>pestcount.txt</fileName>
+  <fileName>Calibration.txt</fileName>
   <addTimeStamp>true</addTimeStamp>
 </repast.simphony.data2.engine.FileSinkDescriptor>

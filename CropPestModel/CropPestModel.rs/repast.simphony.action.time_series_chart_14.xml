@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>ErtragsCount</name>
-  <dataSet>All_Data</dataSet>
+  <name>PestuSpore</name>
+  <dataSet>PestSpore</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
-  <chartTitle>Ertrag</chartTitle>
+  <chartTitle>Pest und PestSpore</chartTitle>
   <type>TIME_SERIES</type>
   <background>
     <red>192</red>
@@ -21,13 +21,85 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>Ertrag</string>
+      <string>SeptoriaVisible</string>
       <SeriesData>
-        <label>Ertrag</label>
+        <label>SeptoriaVisible</label>
         <color>
-          <red>0</red>
+          <red>204</red>
+          <green>0</green>
+          <blue>204</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>pestCount</string>
+      <SeriesData>
+        <label>pestCount</label>
+        <color>
+          <red>255</red>
+          <green>0</green>
+          <blue>51</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>SeptoriaSpore</string>
+      <SeriesData>
+        <label>SeptoriaSpore</label>
+        <color>
+          <red>102</red>
+          <green>255</green>
+          <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>SeptoriaYield</string>
+      <SeriesData>
+        <label>SeptoriaYield</label>
+        <color>
+          <red>51</red>
           <green>255</green>
           <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>Septoria</string>
+      <SeriesData>
+        <label>Septoria</label>
+        <color>
+          <red>51</red>
+          <green>51</green>
+          <blue>255</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>SeptoriaSporeReal</string>
+      <SeriesData>
+        <label>SeptoriaSporeReal</label>
+        <color>
+          <red>255</red>
+          <green>255</green>
+          <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>pestSporeCount</string>
+      <SeriesData>
+        <label>pestSporeCount</label>
+        <color>
+          <red>255</red>
+          <green>153</green>
+          <blue>153</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>

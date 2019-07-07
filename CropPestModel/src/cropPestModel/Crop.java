@@ -417,15 +417,15 @@ public class Crop {
 		
 		//----FÜR AUSWERTUNG: Ermittleln der Anzahl an Pathogenen im jew. Stadium der Simulation
 		//-----------------------------------------
-	
-		if(Data.getZeit() > Data.getEc30()){
+		int time = Data.getZeit();
+		if(time > Data.getEc30() & time < Data.getEc73()){
 		GRsichtCount += befallGRsicht;
 		GRertragCount += befallGRErtrag;
 		STsichtCount += visibleST;
 		STertragCount += befallSTErtrag;
 		GRCount += allGR;
 		STCount += allST;
-		if (Data.getZeit() < Data.getEc61()){
+		if (time < Data.getEc61()){
 			GRsichtCount1 += befallGRsicht;
 			GRertragCount1 += befallGRErtrag;
 			STsichtCount1 += visibleST;

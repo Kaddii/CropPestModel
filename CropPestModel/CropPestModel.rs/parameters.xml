@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
 					<parameter name="Jahr" displayName="Jahr" type="int" 
-						defaultValue="17" 
+						defaultValue="18" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>
+				<parameter name="fungicideApplicationEcol" displayName="Fungizidmassnahme (CO2-eq./Ueberfahrt)" type="double" 
+						defaultValue="3.18" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
+				<parameter name="riskAversion" displayName="Risikoaversionskoeffizient" type="int" 
+						defaultValue="1" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
 				<parameter name="PestCount" displayName="PestCount" type="int" 
-						defaultValue="3000" 
+						defaultValue="700" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>
+				<parameter name="priceCO2" displayName="CO2 Preis (Eur/t CO2-eq.)" type="double" 
+						defaultValue="185.91" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
 				<parameter name="noAzole" displayName="Anzahl Azole" type="int" 
@@ -36,8 +54,14 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
-				<parameter name="applicationcost" displayName="Kosten Fungizidapplikation" type="double" 
-						defaultValue="5.14" 
+				<parameter name="constantProfitContribution" displayName="Konstante Deckungsbeitrag (Eur/ha)" type="double" 
+						defaultValue="574.9" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
+				<parameter name="applicationcost" displayName="Kosten Fungizidapplikation (Eur/ha)" type="double" 
+						defaultValue="8.78" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
@@ -54,8 +78,8 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
-				<parameter name="erzeugerpreis" displayName="Erzeuger Preis" type="double" 
-						defaultValue="23.34" 
+				<parameter name="erzeugerpreis" displayName="Erzeuger Preis (Eur/dt)" type="double" 
+						defaultValue="15.35" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
@@ -73,7 +97,7 @@
 									
 		/>
 				<parameter name="behaviour" displayName="Verhalten Landwirt" type="int" 
-						defaultValue="3" 
+						defaultValue="0" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
@@ -86,6 +110,18 @@
 		/>
 				<parameter name="tox" displayName="(Neg) Externalitaeten von 1 kg Wirkstoff (Eur/kg)" type="double" 
 						defaultValue="7.5" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
+				<parameter name="fungicideEcol" displayName="Klimakosten Fungizid (CO2-eq/kg Wirkstoff)" type="double" 
+						defaultValue="3.9" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
+				<parameter name="costsSowing" displayName="Kosten Aussaat (Eur/ha)" type="double" 
+						defaultValue="45.74" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									

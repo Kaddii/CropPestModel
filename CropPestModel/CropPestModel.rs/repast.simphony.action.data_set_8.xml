@@ -16,29 +16,128 @@
   <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>IntegralBHGR</string>
+      <string>Verhalten</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGR</id>
+        <id>Verhalten</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGR</methodName>
+        <methodName>getBehaviour</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>IntegralBHGR1</string>
+      <string>Klimakosten</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGR1</id>
+        <id>Klimakosten</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGR1</methodName>
+        <methodName>getCostsClimate</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>IntegralBHGR2</string>
+      <string>KlimakEQ</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGR2</id>
+        <id>KlimakEQ</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGR2</methodName>
+        <methodName>getCostsClimateEQ</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Externekosten</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Externekosten</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getCostsExternal</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Umweltkosten</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Umweltkosten</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getCostsForEnvironment</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>F1Wirkstoffgr</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>F1Wirkstoffgr</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF1group</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>F2Wirkstoffgr</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>F2Wirkstoffgr</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF2group</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>F3Wirkstoffgr</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>F3Wirkstoffgr</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF3group</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>F4Wirkstoffgr</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>F4Wirkstoffgr</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getF4group</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Fungizid1</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Fungizid1</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getFungicide1</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Fungizid2</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Fungizid2</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getFungicide2</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Fungizid3</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Fungizid3</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getFungicide3</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Fungizid4</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Fungizid4</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getFungicide4</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Deckungsbeitrag</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Deckungsbeitrag</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getProfit</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
@@ -52,263 +151,83 @@
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>IntegralBHGRErtrag1</string>
+      <string>IntegralBHSTErtrag</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGRErtrag1</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGRErtrag1</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHGRErtrag2</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGRErtrag2</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGRErtrag2</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHGRsicht</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGRsicht</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGRsicht</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHGRsicht1</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGRsicht1</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGRsicht1</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHGRsicht2</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHGRsicht2</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHGRsicht2</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHST</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHST</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHST</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHST1</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHST1</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHST1</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHST2</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHST2</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHST2</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHSTertrag</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHSTertrag</id>
+        <id>IntegralBHSTErtrag</id>
         <className>cropPestModel.Farmer</className>
         <methodName>getIntegralBHSTertrag</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>IntegralBHSTertrag1</string>
+      <string>Erloes</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHSTertrag1</id>
+        <id>Erloes</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHSTertrag1</methodName>
+        <methodName>getPerformance</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>IntegralBHSTertrag2</string>
+      <string>PreisCO2</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHSTertrag2</id>
+        <id>PreisCO2</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHSTertrag2</methodName>
+        <methodName>getPriceCO2</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>IntegralBHSTsicht</string>
+      <string>DBinkExternekosten</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHSTsicht</id>
+        <id>DBinkExternekosten</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHSTsicht</methodName>
+        <methodName>getProfitInclEcol</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>IntegralBHSTsicht1</string>
+      <string>Resistenz</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHSTsicht1</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHSTsicht1</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>IntegralBHSTsicht2</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>IntegralBHSTsicht2</id>
-        <className>cropPestModel.Farmer</className>
-        <methodName>getIntegralBHSTsicht2</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>GRCount</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRCount</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>GRertragCount</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRertragCount</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRertragCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>GRsichtCount</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRsichtCount</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRsichtCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>STCount</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>STCount</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getSTCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>STertragCount</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>STertragCount</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getSTertragCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>STsichtCount</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>STsichtCount</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getSTsichtCount</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>Resistance</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Resistance</id>
+        <id>Resistenz</id>
         <className>cropPestModel.Farmer</className>
         <methodName>getResistance</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>Behaviour</string>
+      <string>Risikoaversionskoeffizient</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Behaviour</id>
+        <id>Risikoaversionskoeffizient</id>
         <className>cropPestModel.Farmer</className>
-        <methodName>getBehaviour</methodName>
+        <methodName>getRiskAversion</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>Jahr</string>
+      <string>AnzahlFungizide</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Jahr</id>
-        <className>cropPestModel.Data</className>
-        <methodName>getJahr</methodName>
+        <id>AnzahlFungizide</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getSpritzwiederholung</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>GRCount1</string>
+      <string>Erzeugerpreis</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRCount1</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRCount1</methodName>
+        <id>Erzeugerpreis</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getWPreis</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>GRCount2</string>
+      <string>Ertrag</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRCount2</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRCount2</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>GRertragCount1</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRertragCount1</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRertragCount1</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>GRertragCount2</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRertragCount2</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRertragCount2</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>GRsichtCount1</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRsichtCount1</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRsichtCount1</methodName>
-        <aggType>SUM</aggType>
-      </repast.simphony.data2.engine.MethodDataSourceDefinition>
-    </entry>
-    <entry>
-      <string>GRsichtCount2</string>
-      <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>GRsichtCount2</id>
-        <className>cropPestModel.Crop</className>
-        <methodName>getGRsichtCount2</methodName>
+        <id>Ertrag</id>
+        <className>cropPestModel.Farmer</className>
+        <methodName>getYield</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>

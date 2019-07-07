@@ -5,5 +5,5 @@ poll.frequency = 60.0
 model.output = C:/Users/Katrin/git/CropPestModel/CropPestModel/output
 
 vm.arguments = -Xmx512M
-local.0.instances = 1
+local.0.instances = 2
 local.0.working_directory = C:/Users/Katrin/AppData/Local/Temp/

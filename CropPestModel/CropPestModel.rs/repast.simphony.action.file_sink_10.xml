@@ -4,41 +4,40 @@
   <delimiter>,</delimiter>
   <format>TABULAR</format>
   <sourceIds class="linked-hash-set">
-    <string>run</string>
-    <string>tick</string>
-    <string>IntegralBHGR</string>
-    <string>IntegralBHGR1</string>
-    <string>IntegralBHGR2</string>
     <string>IntegralBHGRErtrag</string>
-    <string>IntegralBHGRErtrag1</string>
-    <string>IntegralBHGRErtrag2</string>
-    <string>IntegralBHGRsicht</string>
-    <string>IntegralBHGRsicht1</string>
-    <string>IntegralBHGRsicht2</string>
-    <string>IntegralBHST</string>
-    <string>IntegralBHST1</string>
-    <string>IntegralBHST2</string>
     <string>IntegralBHSTertrag</string>
-    <string>IntegralBHSTertrag1</string>
-    <string>IntegralBHSTertrag2</string>
-    <string>IntegralBHSTsicht</string>
-    <string>IntegralBHSTsicht1</string>
-    <string>IntegralBHSTsicht2</string>
-    <string>GRCount</string>
-    <string>GRertragCount</string>
-    <string>GRsichtCount</string>
-    <string>STCount</string>
-    <string>STertragCount</string>
-    <string>STsichtCount</string>
     <string>Resistance</string>
     <string>Behaviour</string>
-    <string>Jahr</string>
-    <string>GRsichtCount2</string>
-    <string>GRCount1</string>
-    <string>GRCount2</string>
-    <string>GRertragCount1</string>
-    <string>GRertragCount2</string>
-    <string>GRsichtCount1</string>
+    <string>Fungizid1</string>
+    <string>Fungizid2</string>
+    <string>Fungizid3</string>
+    <string>Fungizid4</string>
+    <string>Klimakosten</string>
+    <string>Externe Kosten</string>
+    <string>Umweltkosten</string>
+    <string>F1Wirkstoffgr</string>
+    <string>F2Wirkstoffgr</string>
+    <string>F3Wirkstoffgr</string>
+    <string>F4Wirkstoffgr</string>
+    <string>ErtragYield</string>
+    <string>Deckungsbeitrag</string>
+    <string>PreisCO2</string>
+    <string>tick</string>
+    <string>run</string>
+    <string>NoFungizidmassn</string>
+    <string>Klima EQ</string>
+    <string>Risikoaversionskoeffizient</string>
+    <string>Erzeugerpreis</string>
+    <string>DeckungsbInklExterneK</string>
+    <string>Erloes</string>
+    <string>Verhalten</string>
+    <string>KlimakEQ</string>
+    <string>Externekosten</string>
+    <string>IntegralBHSTErtrag</string>
+    <string>DBinkExternekosten</string>
+    <string>Resistenz</string>
+    <string>AnzahlFungizide</string>
+    <string>Ertrag</string>
   </sourceIds>
   <fileName>runweise.txt</fileName>
   <addTimeStamp>true</addTimeStamp>

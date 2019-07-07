@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>Vergleich GR Count</name>
-  <dataSet>Data_ALL</dataSet>
+  <name>GR_Blatt</name>
+  <dataSet>PestSpore</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
-  <chartTitle></chartTitle>
+  <chartTitle>GR</chartTitle>
   <type>TIME_SERIES</type>
   <background>
     <red>192</red>
@@ -21,25 +21,73 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>GRCountCrop</string>
+      <string>f0</string>
       <SeriesData>
-        <label>GRCountCrop</label>
+        <label>f0</label>
+        <color>
+          <red>102</red>
+          <green>255</green>
+          <blue>204</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>f1</string>
+      <SeriesData>
+        <label>f1</label>
+        <color>
+          <red>204</red>
+          <green>255</green>
+          <blue>204</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>f2</string>
+      <SeriesData>
+        <label>f2</label>
+        <color>
+          <red>153</red>
+          <green>255</green>
+          <blue>102</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>f3</string>
+      <SeriesData>
+        <label>f3</label>
         <color>
           <red>255</red>
-          <green>0</green>
+          <green>255</green>
           <blue>0</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>
     </entry>
     <entry>
-      <string>GRCount</string>
+      <string>f4</string>
       <SeriesData>
-        <label>GRCount</label>
+        <label>f4</label>
         <color>
-          <red>0</red>
-          <green>0</green>
-          <blue>255</blue>
+          <red>153</red>
+          <green>153</green>
+          <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
+    <entry>
+      <string>f5</string>
+      <SeriesData>
+        <label>f5</label>
+        <color>
+          <red>51</red>
+          <green>102</green>
+          <blue>0</blue>
           <alpha>255</alpha>
         </color>
       </SeriesData>

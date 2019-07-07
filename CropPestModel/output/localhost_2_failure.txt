@@ -1,0 +1,21 @@
+Error while running model
+repast.simphony.data2.DataException: Error creating MethodDataSource
+	at repast.simphony.data2.MethodDataSource.<init>(MethodDataSource.java:60)
+	at repast.simphony.data2.builder.AggregateDataSetBuilder.defineMethodDataSource(AggregateDataSetBuilder.java:84)
+	at repast.simphony.data2.engine.DataSetComponentControllerAction.createAggregateBuilder(DataSetComponentControllerAction.java:96)
+	at repast.simphony.data2.engine.DataSetComponentControllerAction.batchInitialize(DataSetComponentControllerAction.java:75)
+	at repast.simphony.engine.controller.DefaultController$1.visit(DefaultController.java:192)
+	at repast.simphony.engine.controller.DefaultController$1.visit(DefaultController.java:1)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
+	at repast.simphony.engine.controller.DefaultController.batchInitialize(DefaultController.java:190)
+	at repast.simphony.engine.controller.DefaultController.batchInitialize(DefaultController.java:349)
+	at repast.simphony.batch.OneRunBatchRunner.batchInit(OneRunBatchRunner.java:89)
+	at repast.simphony.batch.InstanceRunner.run(InstanceRunner.java:185)
+	at repast.simphony.batch.InstanceRunner.main(InstanceRunner.java:217)
+Caused by: java.lang.NoSuchMethodException: cropPestModel.Farmer.getYield2()
+	at java.lang.Class.getMethod(Unknown Source)
+	at repast.simphony.data2.MethodDataSource.<init>(MethodDataSource.java:43)
+	... 14 more

@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>Agents</name>
-  <dataSet>Agent_Count</dataSet>
+  <name>ErtragsCount</name>
+  <dataSet>All_Data</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
-  <chartTitle>AgentCounts</chartTitle>
+  <chartTitle>Ertrag</chartTitle>
   <type>TIME_SERIES</type>
   <background>
     <red>192</red>
@@ -21,35 +21,11 @@
   <showLegend>true</showLegend>
   <seriesIds>
     <entry>
-      <string>GRCount</string>
+      <string>Ertrag</string>
       <SeriesData>
-        <label>GRCount</label>
-        <color>
-          <red>255</red>
-          <green>0</green>
-          <blue>0</blue>
-          <alpha>255</alpha>
-        </color>
-      </SeriesData>
-    </entry>
-    <entry>
-      <string>cropCount</string>
-      <SeriesData>
-        <label>cropCount</label>
+        <label>Ertrag</label>
         <color>
           <red>0</red>
-          <green>255</green>
-          <blue>0</blue>
-          <alpha>255</alpha>
-        </color>
-      </SeriesData>
-    </entry>
-    <entry>
-      <string>STCount</string>
-      <SeriesData>
-        <label>STCount</label>
-        <color>
-          <red>255</red>
           <green>255</green>
           <blue>0</blue>
           <alpha>255</alpha>
